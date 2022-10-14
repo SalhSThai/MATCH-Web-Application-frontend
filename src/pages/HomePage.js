@@ -1,7 +1,12 @@
 import React from 'react'
-
+import {Button} from 'flowbite-react'
 export default function HomePage() {
   return (
-    <div>HomePage</div>
+    <div >
+      
+      <Button>
+      Default
+    </Button>
+      HomePage</div>
   ) 
 }
