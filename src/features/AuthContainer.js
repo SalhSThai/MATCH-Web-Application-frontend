@@ -10,8 +10,8 @@ function AuthContainer() {
   const handleCloseRegister = (e) => setIsRegisteShow(false);
 
   return (
-    <div className='flex flex-col items-center gap-2'>
-      <div className='w-1/4'>
+    <div className="flex flex-col items-center gap-2">
+      <div className="w-1/4">
         <Button>Fackbook</Button>
       </div>
       <LoginModal
@@ -20,10 +20,10 @@ function AuthContainer() {
         handleClickRegister={handleClickRegister}
       />
 
-      <div className='text-sm font-medium text-gray-500 dark:text-gray-300'>
+      <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
         Not registered?{' '}
         <span
-          className='text-blue-700 hover:underline dark:text-blue-500'
+          className="text-blue-700 hover:underline dark:text-blue-500"
           onClick={handleClickRegister}
         >
           Create account
