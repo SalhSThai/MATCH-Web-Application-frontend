@@ -1,18 +1,15 @@
-import { Modal } from 'flowbite-react';
 import RegisterForm from './RegisterForm';
 import logo from '../asset/logo/match.png';
+import Modal, { ModalHeader } from '../reuseComponent/Modal';
 
 export default function RegisterModal({ isRegisterShow, handleCloseRegister }) {
   return (
     <>
       <Modal
         show={isRegisterShow}
-        size="md"
-        popup={true}
-        onClose={handleCloseRegister}
       >
-        <Modal.Header />
-        <Modal.Body>
+    <ModalHeader onClose={handleCloseRegister}>
+    </ModalHeader>
           <div className="flex justify-center">
             <img className="h-20 w-20 mb-3" src={logo}></img>
           </div>
@@ -23,7 +20,6 @@ export default function RegisterModal({ isRegisterShow, handleCloseRegister }) {
 
             <RegisterForm />
           </div>
-        </Modal.Body>
       </Modal>
     </>
   );

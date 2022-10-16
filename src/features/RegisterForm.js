@@ -1,7 +1,8 @@
-import { Button, Label, Select, TextInput } from 'flowbite-react';
+import { Label, Select, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkRegister } from '../redux/Slice/AuthSlice';
+import Button from '../reuseComponent/Button';
 
 export default function RegisterForm() {
   const initialUserInfo = {
@@ -132,21 +133,21 @@ export default function RegisterForm() {
           <option value="Female">Female</option>
           <option value="Undefined">Undefined</option>
         </Select>
-        <label htmlFor="birthday">Birthday: </label>
-        <input
-          type="date"
-          id="birthday"
-          name="birthday"
-          value={userInfo.birthDate}
-          onChange={(e) =>
-            setUserInfo({ ...userInfo, birthDate: e.target.value })
-          }
-        />
+        <div className="mb-2 block">
+          <Label htmlFor="birthday">Birthday</Label>
+          <TextInput
+            type="date"
+            id="birthday"
+            name="birthday"
+            value={userInfo.birthDate}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, birthDate: e.target.value })
+            }
+          />
+        </div>
       </div>
 
-      <div className="pt-5">
-        <Button type="submit">Create Account</Button>
-      </div>
+      <Button type="submit">Create Account</Button>
     </form>
   );
 }

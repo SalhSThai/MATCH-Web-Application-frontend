@@ -1,10 +1,11 @@
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Checkbox, Label, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkLogin } from '../redux/Slice/AuthSlice';
+import Button from '../reuseComponent/Button';
 
 export default function LoginForm() {
-  const initialLogin = { email: '', password: '' };
+  const initialLogin = { username: '', password: '' };
   const [loginInfo, setLoginInfo] = useState(initialLogin);
 
   const state = useSelector((state) => state);
@@ -18,27 +19,27 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmitForm}>
       <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email" value="Your email" />
+        <div className="mb-2 block ">
+          <Label htmlFor="username" value="Username" />
         </div>
         <TextInput
-          id="email"
-          placeholder="your@gmail.com"
+          id="username"
+          placeholder="username"
           required={true}
-          value={loginInfo.email}
+          value={loginInfo.username}
           onChange={(e) =>
-            setLoginInfo({ ...loginInfo, email: e.target.value })
+            setLoginInfo({ ...loginInfo, username: e.target.value })
           }
         />
       </div>
       <div>
-        <div className="mb-2 block">
-          <Label htmlFor="password" value="Your password" />
+        <div className="mb-2 block my-2">
+          <Label htmlFor="password" value="Password" />
         </div>
         <TextInput
           id="password"
           type="password"
-          placeholder="your password"
+          placeholder="xxxxxx"
           required={true}
           value={loginInfo.password}
           onChange={(e) =>
@@ -53,14 +54,12 @@ export default function LoginForm() {
         </div>
         <a
           href=""
-          className="text-sm text-blue-700 hover:underline dark:text-blue-500"
+          className="text-sm text-blue-700 hover:underline dark:text-blue-500 my-5"
         >
           Forget Password?
         </a>
       </div>
-      <div className="pt-5">
-        <Button type="submit">Log in to your account</Button>
-      </div>
+      <Button type="submit" className="my-2">Log in to your account</Button>
     </form>
   );
 }

@@ -4,7 +4,7 @@ import Text from './components/Text';
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App translate-x-1/2'>
       <Button text='Button' color='red' fontSize={20} />
 
       <Text h1>5555</Text>
