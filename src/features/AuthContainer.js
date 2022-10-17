@@ -1,7 +1,5 @@
-import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import LoginModal from './LoginModal';
 import LoginWithGoogle from './LoginWithGoogle';
 import RegisterModal from './RegisterModal';
 
@@ -14,12 +12,7 @@ function AuthContainer() {
   return (
     <>
       <div className="flex flex-col items-center gap-2">
-        <LoginModal
-          isRegisterShow={isRegisterShow}
-          handleCloseRegister={handleCloseRegister}
-          handleClickRegister={handleClickRegister}
-        />
-
+        <LoginForm />
         <LoginWithGoogle />
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?{' '}

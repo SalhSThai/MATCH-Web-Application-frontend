@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const DivContainer = styled.div`
-  background-color:pink ;
+  background-color:white ;
   display: flex;
   flex-direction:column;
   align-items: center;

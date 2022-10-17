@@ -7,6 +7,7 @@ import {
 } from '../../utils/localStorage';
 import { loading } from './LoadingSlice';
 
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: { loginState: false, userInfo: {} },
@@ -14,6 +15,7 @@ const authSlice = createSlice({
     login: (state, action) => {
       state.loginState = true;
       state.userInfo = action.payload;
+      console.log(action.payload)
     },
     logout: (state, action) => {
       removeAccessToken();
@@ -41,6 +43,7 @@ export const thunkLogin = (loginInfo) => async (dispatch) => {
     const res = await loginApi(loginInfo);
     addAccessToken(res.data.token);
     dispatch(login(res.data.user));
+    console.log(res.data)
   } catch (error) {
     throw error;
   } finally {
