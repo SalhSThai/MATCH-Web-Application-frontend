@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import LoginWithGoogle from './LoginWithGoogle';
 import RegisterModal from './RegisterModal';
 
 function AuthContainer() {
@@ -13,7 +12,6 @@ function AuthContainer() {
     <>
       <div className="flex flex-col items-center h-full justify-center gap-2">
         <LoginForm />
-        <LoginWithGoogle />
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?{' '}
           <span

@@ -6,6 +6,7 @@ import GoldMemberPage from './pages/GoldMemberPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
 
+
 function App() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function App() {
     return (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/swipe" element={<SwipePage />} />
+          <Route path="/" element={<SwipePage />} />
         </Route>
       </Routes>
     );
@@ -32,7 +33,7 @@ function App() {
     return (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/swipe" element={<SwipePage />} />
+          <Route path="/" element={<SwipePage />} />
           <Route path="/likeyou" elemet={<GoldMemberPage />} />
         </Route>
       </Routes>
