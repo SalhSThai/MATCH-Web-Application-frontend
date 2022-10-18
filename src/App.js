@@ -6,6 +6,8 @@ import AdminPage from './pages/AdminPage';
 import GoldMemberPage from './pages/GoldMemberPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
+import ChatAppPage from './pages/ChatAppPage';
+
 import {  thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from "./utils/localStorage";
 
@@ -19,14 +21,6 @@ function App() {
   getAccessToken() && dispatch(thunkRemember())
 
  },[])
- 
- 
- 
-
-
-
-
-
 
 console.log(state?.auth?.userInfo?.role);
   if (state?.auth?.userInfo?.role === 'member') {
@@ -34,6 +28,7 @@ console.log(state?.auth?.userInfo?.role);
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<SwipePage />} />
+          <Route path="/chatapp" element={<ChatAppPage />} /> 
         </Route>
       </Routes>
     );
