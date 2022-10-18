@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
 const DivContainer = styled.div`
-  background-color:white ;
+  background-color: white;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   position: relative;
   top: 50%;
@@ -11,15 +11,13 @@ const DivContainer = styled.div`
   transform: translateX(-50%);
   /* transform: translateY(-50%); */
 
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 428px;
   height: 100vh;
 
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
 `;
 
-export default function ContainerComponent({children}) {
-  return (
-    <DivContainer>{children}</DivContainer>
-  )
+export default function ContainerComponent({ children }) {
+  return <DivContainer>{children}</DivContainer>;
 }

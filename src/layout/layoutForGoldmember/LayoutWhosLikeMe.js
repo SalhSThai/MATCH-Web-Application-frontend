@@ -1,22 +1,21 @@
-import Navbar from './Navbar';
 import { Outlet } from 'react-router-dom';
-import Header from './Header';
+import HeaderWhosLikeMe from './HeaderWhosLikeMe';
 import { useDispatch, useSelector } from 'react-redux';
-import Container from '../components/Container';
+import Container from '../../components/Container';
 
 function Layout() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  if (state?.auth?.userInfo?.role) {
+
+  if (state?.auth?.userInfo?.role === 'goldmember') {
     return (
       <>
-        <Header />
-        <Outlet />
-        <Navbar />
+        <Container>
+          <HeaderWhosLikeMe />
+          <Outlet />
+        </Container>
       </>
     );
-  } else {
-    return <Outlet />;
   }
 }
 export default Layout;
