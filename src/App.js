@@ -46,7 +46,7 @@ console.log(state?.auth?.userInfo?.role);
     return (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<SwipePage />} />
+          <Route path="/swipe" element={<SwipePage />} />
           <Route path="/likeyou" elemet={<GoldMemberPage />} />
         </Route>
       </Routes>
