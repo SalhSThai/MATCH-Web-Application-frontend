@@ -26,12 +26,11 @@ export default function SwipePage() {
           onClick={handleClickUserDetail}
         >
           <MoreUesrDetail />
-          
         </button>
-        <UserDetailModal 
-        isProfileShow={isProfileShow}
-        handleCloseUserDetail={handleCloseUserDetail}/>
-
+        <UserDetailModal
+          isProfileShow={isProfileShow}
+          handleCloseUserDetail={handleCloseUserDetail}
+        />
       </div>
       <div className="flex justify-center gap-10 h-full w-full items-end translate-y-8">
         <div className="bg-white w-[60px] h-[60px] rounded-full flex justify-center items-center">
