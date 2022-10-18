@@ -53,7 +53,7 @@ export const thunkLogin = (loginInfo) => async (dispatch) => {
 export const thunkRemember = () => async (dispatch) => {
   try {
     dispatch(loading(true));
-    const user = await rememberMeApi(getAccessToken());
+    const user = await rememberMeApi();
     user && dispatch(login(user?.data));
   } catch (error) {
     throw error;
