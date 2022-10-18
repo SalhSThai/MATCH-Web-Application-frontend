@@ -11,5 +11,13 @@ const currentChatSlice = createSlice({
 });
 
 export default currentChatSlice.reducer;
-const { loading } = currentChatSlice.actions;
-export { loading };
+export const { setChat } = currentChatSlice.actions;
+
+const setChatByOtherId = () => {
+  return async (dispatch) => {
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
