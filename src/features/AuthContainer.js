@@ -11,7 +11,7 @@ function AuthContainer() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center h-full justify-center gap-2">
         <LoginForm />
         <LoginWithGoogle />
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
