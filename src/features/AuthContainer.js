@@ -13,7 +13,7 @@ function AuthContainer() {
     <>
       <div className="flex flex-col items-center gap-2">
         <LoginForm />
-        <LoginWithGoogle />
+        {/* <LoginWithGoogle /> */}
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
           Not registered?{' '}
           <span

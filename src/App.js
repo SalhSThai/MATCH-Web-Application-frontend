@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import AdminPage from './pages/AdminPage';
+import ChatAppPage from './pages/ChatAppPage';
 import GoldMemberPage from './pages/GoldMemberPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
@@ -15,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<SwipePage />} />
+          <Route path="/chatapp" element={<ChatAppPage />} /> 
+
         </Route>
       </Routes>
     );
