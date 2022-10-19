@@ -14,7 +14,7 @@ export default function SwipePage() {
   const handleClickUserDetail = (e) => setIsProfileShow(true);
   const handleCloseUserDetail = (e) => setIsProfileShow(false);
   return (
-    <div className='pt-20'>
+    <div className='pt-20 max-h-full overflow-y-scroll scrollbar-hide'>
       <div className='bg-cover bg-[url("/src/asset/profileUser/iu.png")] w-[400px] h-[500px] rounded-3xl relative'>
         <div className=' bg-gray-600 w-full h-[130px] bg-opacity-30 absolute bottom-0 flex justify-between px-5 pt-5 rounded-3xl'>
           <div>
