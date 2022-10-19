@@ -13,6 +13,7 @@ import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
 import UserLikedPage from './pages/UserLikedPage';
 import ExplorePage from './pages/ExplorePage';
+import UserProfilePage from './pages/UserProfilePage';
 
 function App() {
   const state = useSelector((state) => state);
@@ -31,6 +32,7 @@ function App() {
           <Route path='/' element={<SwipePage />} />
           <Route path='/chatapp' element={<ChatAppPage />} />
           <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/userprofile' element={<UserProfilePage />} />
         </Route>
       </Routes>
     );
@@ -42,6 +44,7 @@ function App() {
           <Route path='/' element={<SwipePage />} />
           <Route path='/chatapp' element={<ChatAppPage />} />
           <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/userprofile' element={<UserProfilePage />} />
 
           <Route path='/' element={<LayoutWhosLikeMe />}>
             <Route path='/likeyou' element={<WhosLikeMePage />} />
