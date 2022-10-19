@@ -6,10 +6,6 @@ export default function UserLikedPage() {
       <UserCard />
       <UserCard />
       <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
     </div>
   );
 }

@@ -12,6 +12,8 @@ import { thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
 import UserLikedPage from './pages/UserLikedPage';
+import ExplorePage from './pages/ExplorePage';
+import UserProfilePage from './pages/UserProfilePage';
 
 function App() {
   const state = useSelector((state) => state);
@@ -29,15 +31,8 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<SwipePage />} />
           <Route path='/chatapp' element={<ChatAppPage />} />
-        </Route>
-      </Routes>
-    );
-  }
-  if (state?.auth?.userInfo?.role === 'admin') {
-    return (
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<AdminPage />} />
+          <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/userprofile' element={<UserProfilePage />} />
         </Route>
       </Routes>
     );
@@ -47,11 +42,23 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<SwipePage />} />
+          <Route path='/chatapp' element={<ChatAppPage />} />
+          <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/userprofile' element={<UserProfilePage />} />
 
           <Route path='/' element={<LayoutWhosLikeMe />}>
             <Route path='/likeyou' element={<WhosLikeMePage />} />
             <Route path='/youlike' element={<UserLikedPage />} />
           </Route>
+        </Route>
+      </Routes>
+    );
+  }
+  if (state?.auth?.userInfo?.role === 'admin') {
+    return (
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<AdminPage />} />
         </Route>
       </Routes>
     );
