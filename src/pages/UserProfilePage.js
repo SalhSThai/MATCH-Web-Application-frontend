@@ -1,6 +1,6 @@
 import { Back } from '../asset/iconForSwipePage.js/IconOnProfile';
-import LogoutButton from '../components/LogoutButton';
-import UserInfo from '../features/UserProfile/UserInfo';
+import LogoutButton from '../components/userProfileComponents/LogoutButton';
+import UserInfo from '../components/userProfileComponents/UserInfo';
 
 export default function UserProfilePage() {
   return (
