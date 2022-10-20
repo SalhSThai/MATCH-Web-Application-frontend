@@ -1,4 +1,4 @@
-import InterestCard from '../features/Explore/InterestCard';
+import InterestCard from '../components/exploreComponents/InterestCard';
 
 export default function ExplorePage() {
   return (
