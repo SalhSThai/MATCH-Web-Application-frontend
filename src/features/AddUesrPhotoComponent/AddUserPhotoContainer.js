@@ -1,5 +1,6 @@
 import React from 'react';
 import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
+import Button from '../../reuseComponent/Button';
 import AddPhotoCard from './AddPhotoCard';
 
 export default function AddUserPhotoContainer() {
@@ -13,7 +14,7 @@ export default function AddUserPhotoContainer() {
         Add your best photos to get a higher amount of daily matches.
       </div>
 
-      <div className="grid grid-cols-2 grid-flow-row gap-2 p-3 mt-4 max-h-full overflow-y-scroll scrollbar-hide">
+      <div className="grid grid-cols-2 grid-flow-row gap-2.5 p-3 mt-4 max-h-full overflow-y-scroll scrollbar-hide">
         <AddPhotoCard />
         <AddPhotoCard />
         <AddPhotoCard />
@@ -21,6 +22,7 @@ export default function AddUserPhotoContainer() {
         <AddPhotoCard />
         <AddPhotoCard />
       </div>
+      <Button className="w-full ">Next</Button>
     </>
   );
 }
