@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import iu from '../asset/profileUser/iu.png';
 import SwipeBar from '../components/SwipeComponents/SwipeBar';
-import UserDescriptionContainer from '../components/SwipeComponents/UserDescriptionContainer';
+import UserCardForSwipe from '../components/SwipeComponents/UserCardForSwipe';
 
 export default function SwipePage() {
   const [isProfileShow, setIsProfileShow] = useState(false);
@@ -11,14 +10,12 @@ export default function SwipePage() {
 
   return (
     <div className='pt-20 max-h-full overflow-y-scroll scrollbar-hide'>
-      <div className='rounded-3xl relative'>
-        <UserDescriptionContainer
-          handleClickUserDetail={handleClickUserDetail}
-          handleCloseUserDetail={handleCloseUserDetail}
-          isProfileShow={isProfileShow}
-        />
-        <img className='rounded-2xl' src={iu} alt='user card' />
-      </div>
+      <UserCardForSwipe
+        handleClickUserDetail={handleClickUserDetail}
+        handleCloseUserDetail={handleCloseUserDetail}
+        isProfileShow={isProfileShow}
+      />
+
       <SwipeBar />
     </div>
   );
