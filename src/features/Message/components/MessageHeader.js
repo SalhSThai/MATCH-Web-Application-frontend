@@ -1,4 +1,4 @@
-import { Avatar, Label, TextInput } from 'flowbite-react';
+import { Avatar, Label } from 'flowbite-react';
 import React from 'react';
 import {
   SearchIcon,
