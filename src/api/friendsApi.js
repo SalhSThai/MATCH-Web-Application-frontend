@@ -1,3 +1,3 @@
 import axios from '../config/axios';
 
-export const friendsApi = userId => axios.post('/chatapp/fetchFriends', {userId}); 
+export const friendsApi = userId => axios.get('/chat/getFriendsRoom');  

@@ -20,7 +20,7 @@ export default function Navbar() {
       <Link to='/likeyou'>
         <WhosLikeMeIcon />
       </Link>
-      <Link to='/chatapp'>
+      <Link to='/message'>
         <ChatIcon />
       </Link>
       <Link to='/userProfile'>

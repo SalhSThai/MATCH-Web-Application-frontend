@@ -9,7 +9,9 @@ import SendBoxChatRoom from './SendBoxChatRoom';
 
 
 export default function ChatAppModal(props) {
-    const { status, close, recent, info } = props
+    const { status, close, recent } = props
+    const { chatMessage,friendsInfo,roomname,lowerCheck,info } = props.info
+
     const [arrMessage, setArrMessage] = useState([])
 
     const userInfo = useSelector((state) => state?.auth?.userInfo);

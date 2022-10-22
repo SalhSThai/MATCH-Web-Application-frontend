@@ -4,10 +4,10 @@ import { friendsApi } from "../../api/friendsApi";
 
 const FriendsSlice = createSlice({
     name: 'friends',
-    initialState: { allFriends: [] },
+    initialState: { allChatRooms: [] },
     reducers: {
         fetchFriends: (state, action) => {
-            state.allFriends = action.payload
+            state.allChatRooms = action.payload
         },
     }
 })
@@ -16,6 +16,7 @@ const FriendsSlice = createSlice({
 export const thunkFetchFriends = (userId) => async dispatch => {
   try {
     const res = await friendsApi(userId)
+    console.log(res.data);
     dispatch(fetchFriends(res.data))
   } catch (error) {
     

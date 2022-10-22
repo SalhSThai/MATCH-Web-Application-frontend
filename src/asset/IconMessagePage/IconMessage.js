@@ -4,15 +4,15 @@ function SearchIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="icon icon-tabler icon-tabler-search text-white"
+      className="icon icon-tabler icon-tabler-search text-white"
       width="30"
       height="30"
       viewBox="0 0 24 24"
-      stroke-width="5"
+      strokeWidth="5"
       stroke="currentColor"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <circle cx="10" cy="10" r="7"></circle>
@@ -25,15 +25,15 @@ function MapIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="icon icon-tabler icon-tabler-map-pin text-white"
+      className="icon icon-tabler icon-tabler-map-pin text-white"
       width="30"
       height="30"
       viewBox="0 0 24 24"
-      stroke-width="3"
+      strokeWidth="3"
       stroke="currentColor"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <circle cx="12" cy="11" r="3"></circle>
