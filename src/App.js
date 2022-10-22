@@ -17,6 +17,7 @@ import UserProfilePage from './pages/UserProfilePage';
 import InterestPage from './pages/InterestPage';
 import AddPhotoOnRegisPage from './pages/AddPhotoOnRegisPage';
 import MessagePage from './pages/MessagePage';
+import Test from './pages/Test';
 
 function App() {
   const state = useSelector((state) => state);
@@ -31,14 +32,14 @@ function App() {
   if (state?.auth?.userInfo?.role === 'member') {
     return (
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<SwipePage />} />
-          <Route path="/chatapp" element={<ChatAppPage />} />
-          <Route path="/interest" element={<InterestPage />} />
-          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/message" element={<MessagePage />} />
-          <Route path="/userprofile" element={<UserProfilePage />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<SwipePage />} />
+          <Route path='/chatapp' element={<ChatAppPage />} />
+          <Route path='/interest' element={<InterestPage />} />
+          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
+          <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/message' element={<MessagePage />} />
+          <Route path='/userprofile' element={<UserProfilePage />} />
         </Route>
       </Routes>
     );
@@ -46,16 +47,17 @@ function App() {
   if (state?.auth?.userInfo?.role === 'goldmember') {
     return (
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<SwipePage />} />
-          <Route path="/chatapp" element={<ChatAppPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/interest" element={<InterestPage />} />
-          <Route path="/userprofile" element={<UserProfilePage />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<SwipePage />} />
+          <Route path='/chatapp' element={<ChatAppPage />} />
+          <Route path='/explore' element={<ExplorePage />} />
+          <Route path='/interest' element={<InterestPage />} />
+          <Route path='/userprofile' element={<UserProfilePage />} />
+          <Route path='/test' element={<Test />} />
 
-          <Route path="/" element={<LayoutWhosLikeMe />}>
-            <Route path="/likeyou" element={<WhosLikeMePage />} />
-            <Route path="/youlike" element={<UserLikedPage />} />
+          <Route path='/' element={<LayoutWhosLikeMe />}>
+            <Route path='/likeyou' element={<WhosLikeMePage />} />
+            <Route path='/youlike' element={<UserLikedPage />} />
           </Route>
         </Route>
       </Routes>
@@ -64,17 +66,17 @@ function App() {
   if (state?.auth?.userInfo?.role === 'admin') {
     return (
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<AdminPage />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<AdminPage />} />
         </Route>
       </Routes>
     );
   } else {
     return (
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="*" element={<WelcomePage />} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<WelcomePage />} />
+          <Route path='*' element={<WelcomePage />} />
         </Route>
       </Routes>
     );
