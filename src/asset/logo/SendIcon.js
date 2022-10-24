@@ -6,7 +6,7 @@ export default function SendIcon(props) {
     <div
       role="button"
       onClick={onClick}
-      className="relative h-[50px] w-[50px] mx-5  "
+      className="relative h-[50px] w-[50px]"
     >
       <svg
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#fe5e75]"

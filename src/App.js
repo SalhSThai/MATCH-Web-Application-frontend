@@ -17,6 +17,9 @@ import UserProfilePage from './pages/UserProfilePage';
 import InterestPage from './pages/InterestPage';
 import AddPhotoOnRegisPage from './pages/AddPhotoOnRegisPage';
 import MessagePage from './pages/MessagePage';
+import UserPostPage from './pages/UserPostPage';
+import SeeYourProfilePage from './pages/SeeYourProfilePage';
+
 
 function App() {
   const state = useSelector((state) => state);
@@ -34,6 +37,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<SwipePage />} />
           <Route path="/chatapp" element={<ChatAppPage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost" element={<SeeYourProfilePage/>} />
           <Route path="/interest" element={<InterestPage />} />
           <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
           <Route path="/explore" element={<ExplorePage />} />
