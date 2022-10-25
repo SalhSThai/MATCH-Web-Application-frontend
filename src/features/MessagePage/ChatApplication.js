@@ -5,6 +5,7 @@ import { thunkFetchFriends } from '../../redux/Slice/FriendsSlice';
 import MatchChatRoom from './components/MatchChatRoom';
 import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import useMeasure from 'react-use-measure';
 
 
 // import FriendsCard from '../../ChatAppComponent/FriendsCard';
@@ -20,6 +21,7 @@ import { useDrag } from '@use-gesture/react'
 export default function ChatApplication() {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
+    const [ref , bounds] = useMeasure()
     const [isConected, setIsConnected] = useState(false)
     const [isOpenChat,setIsOpenChat] = useState(false);
     const [isopenProfilePicture,setIsOpenProfilePicture] = useState(false)
@@ -48,28 +50,15 @@ export default function ChatApplication() {
 
 
     function SlideMatchCard(props) {
-        const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
-
-        // Set the drag hook and define component movement based on gesture data
-        const bind = useDrag(({ down, movement, offset: [ox, oy], velocity, moving, cancel }) => {
-            // console.log(movement[0], 'sx', movement[1], 'sy');
-            
-            api.start({
-                y: down ? movement[1] :
-                    movement[1] >= 0 ? movement[1] : movement[1],
-                // config: { duration: 1000 }
-            })
-        }
-            , { bounds: {  bottom: -100 }, rubberband: true }
-        )
-        return <animated.div className="relative w-full h-full " {...bind()} style={{ x, y }} >{props.children}</animated.div>
+        const [{ y }, api] = useSpring(() => ({  y:0 }))
+        const bind = useDrag(({ offset: [ox, oy]}) => { api.start({ y: oy }) } , { bounds: { top:-(bounds.bottom-bounds.height), bottom: 0 }, rubberband: true } )
+        return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
     }
 
     return <div className='absolute top-[200px]  w-full grow '>
         <div className={`relative w-full h-full p-3 overflow-y-scroll scrollbar-hide ${isOpenChat}`}>
             <SlideMatchCard>
             {allChatRooms?.map?.((i,d)=><MatchChatRoom key={d} friendsInfo={i} friendId={myId===i?.userLowerId ? i?.userHigherId:i?.userLowerId } openChat={e=>setIsOpenChat} userOnline={userOnline} openProfilePicture={e=>setIsOpenProfilePicture(true)}/>)}
-            
 
             </SlideMatchCard>
         </div>
