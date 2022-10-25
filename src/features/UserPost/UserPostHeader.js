@@ -1,5 +1,6 @@
 import { Avatar, Dropdown } from 'flowbite-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   GridIcon,
   LogoutIcon,
@@ -20,12 +21,14 @@ function UserPostHeader() {
             </span>
           </Dropdown.Header>
           <Dropdown.Item icon={GridIcon}>Dashboard</Dropdown.Item>
-          <Dropdown.Item icon={SettingIcon}>Settings</Dropdown.Item>
+          <Link to="/userProfile">
+            <Dropdown.Item icon={SettingIcon}>Settings</Dropdown.Item>
+          </Link>
           <Dropdown.Divider />
           <Dropdown.Item icon={LogoutIcon}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
-      <textarea className="rounded-2xl bg-slate-200 w-[410px] h-[130px] overflow-y-scroll scrollbar-hide mt-3" />
+      <textarea className="rounded-2xl bg-slate-200 w-full h-[150px] overflow-y-scroll scrollbar-hide mt-3" />
       <div className="flex  w-[400px] items-center justify-around mt-3">
         <button type="button">
           <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">

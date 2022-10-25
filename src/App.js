@@ -37,7 +37,7 @@ function App() {
           <Route path="/" element={<SwipePage />} />
           <Route path="/chatapp" element={<ChatAppPage />} />
           <Route path="/post" element={<UserPostPage />} />
-          <Route path="/seepost" element={<SeeYourProfilePage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
           <Route path="/interest" element={<InterestPage />} />
           <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
           <Route path="/explore" element={<ExplorePage />} />

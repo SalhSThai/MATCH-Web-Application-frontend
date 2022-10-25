@@ -23,7 +23,7 @@ export default function Navbar() {
       <Link to='/message'>
         <ChatIcon />
       </Link>
-      <Link to='/userProfile'>
+      <Link to='/post'>
         <UserProfilesIcon />
       </Link>
     </div>
