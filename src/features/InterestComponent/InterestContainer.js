@@ -62,9 +62,14 @@ export default function InterestContainer() {
             type="button"
             className="border-4 rounded-xl bg-white py-2 px-2 font-semibold text-gray-400 active:text-[#ed663e] active:border-[#ed663e]"
           >
-            Shopping2222
+            Shopping
           </button>
-
+          <button
+            type="button"
+            className="border-4 rounded-xl bg-white py-2 px-2 font-semibold text-gray-400 active:text-[#ed663e] active:border-[#ed663e]"
+          >
+            Cycling
+          </button>
           <button
             type="button"
             className="border-4 rounded-xl bg-white py-2 px-2 font-semibold text-gray-400 active:text-[#ed663e] active:border-[#ed663e]"
