@@ -6,7 +6,7 @@ import SendBoxChatRoom from '../features/ChatAppComponent/SendBoxChatRoom';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-const socket = io.connect('http://localhost:8080');
+const socket = io.connect(`http://localhost:8080`);
 
 export default function ChatAppPage(props) {
   const { myId2 = 1, friendId = 2 } = props;

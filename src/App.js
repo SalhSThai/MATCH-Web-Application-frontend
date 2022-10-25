@@ -7,7 +7,6 @@ import AdminPage from './pages/AdminPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
 import ChatAppPage from './pages/ChatAppPage';
-
 import { thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
@@ -17,8 +16,10 @@ import UserProfilePage from './pages/UserProfilePage';
 import InterestPage from './pages/InterestPage';
 import AddPhotoOnRegisPage from './pages/AddPhotoOnRegisPage';
 import MessagePage from './pages/MessagePage';
-import Test from './pages/Test';
-import AlertMatchPage from './pages/AlertMatchPage';
+import UserPostPage from './pages/UserPostPage';
+import SeeYourProfilePage from './pages/SeeYourProfilePage';
+
+
 
 function App() {
   const state = useSelector((state) => state);
@@ -33,14 +34,16 @@ function App() {
   if (state?.auth?.userInfo?.role === 'member') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/chatapp' element={<ChatAppPage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/message' element={<MessagePage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/chatapp" element={<ChatAppPage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost" element={<SeeYourProfilePage/>} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/message" element={<MessagePage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
           <Route path='/matching' element={<AlertMatchPage />} />
         </Route>
       </Routes> 
