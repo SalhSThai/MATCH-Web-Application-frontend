@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { friendsApi } from "../../api/friendsApi";
+import { addMessageApi, friendsApi } from "../../api/friendsApi";
 
 
 const FriendsSlice = createSlice({
@@ -16,13 +16,18 @@ const FriendsSlice = createSlice({
 export const thunkFetchFriends = (userId) => async dispatch => {
   try {
     const res = await friendsApi(userId)
-    console.log(res.data);
     dispatch(fetchFriends(res.data))
   } catch (error) {
     
   }
 }
-
+export const thunkAddMessage = (message,senderId,chatRoomId) => async dispatch => {
+  try {
+    const res = await addMessageApi(message,senderId,chatRoomId)
+  } catch (error) {
+    
+  }
+}
 
 export default FriendsSlice.reducer
 const { fetchFriends } = FriendsSlice.actions;

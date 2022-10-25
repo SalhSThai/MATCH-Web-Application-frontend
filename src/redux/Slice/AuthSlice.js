@@ -15,7 +15,6 @@ const authSlice = createSlice({
     login: (state, action) => {
       state.loginState = true;
       state.userInfo = action.payload;
-      console.log(action.payload);
     },
     logout: (state, action) => {
       removeAccessToken();
@@ -43,7 +42,6 @@ export const thunkLogin = (loginInfo) => async (dispatch) => {
     const res = await loginApi(loginInfo);
     addAccessToken(res.data.token);
     dispatch(login(res.data.user));
-    console.log(res.data);
   } catch (error) {
     throw error;
   } finally {
@@ -65,7 +63,6 @@ export const thunkUpdateUser = () => async (dispatch) => {
   try {
     dispatch(loading(true));
     const res = await updateMeApi();
-    console.log(res);
     dispatch(updateProfile(res.data.uesr.id));
   } catch (error) {
     throw error;

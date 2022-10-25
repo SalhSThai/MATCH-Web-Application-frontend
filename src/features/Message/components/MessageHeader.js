@@ -1,16 +1,20 @@
 import { Avatar, Label } from 'flowbite-react';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   SearchIcon,
   MapIcon
 } from '../../../asset/IconMessagePage/IconMessage';
 
 export default function MessageHeader() {
+
+  const userInfo = useSelector(state=>state?.auth?.userInfo)
   return (
     <div className=" w-full">
       <div className="flex-grow flex items-center gap-5 py-3">
-        <Avatar rounded={true} />
-        <div>USER NAME</div>
+        <div className={`h-[50px] aspect-square  rounded-full  overflow-hidden`}  ><img src={userInfo?.profileImage} /></div>
+
+        <div>{userInfo?.username}</div>
       </div>
       <div className="w-full flex ">
         <div className="flex justify-around w-full h-[42px] gap-2">

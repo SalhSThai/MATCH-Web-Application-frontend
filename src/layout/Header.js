@@ -6,7 +6,7 @@ import logo from '../../src/asset/logo/match-hight.png';
 
 export default function Header() {
   return (
-    <div className='flex items-center justify-start w-full py-5 gap-5 px-5 drop-shadow-lg rounded-b-lg'>
+    <div className='flex items-center justify-center w-full py-5 gap-5 px-5 drop-shadow-lg rounded-b-lg mb-2'>
       <div>
         <img className='h-[40px] w-full' src={logo} alt='logo' />
       </div>

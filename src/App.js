@@ -16,7 +16,7 @@ import ExplorePage from './pages/ExplorePage';
 import UserProfilePage from './pages/UserProfilePage';
 import InterestPage from './pages/InterestPage';
 import AddPhotoOnRegisPage from './pages/AddPhotoOnRegisPage';
-import MessagePage from './pages/MessagePage';
+import MessagePage2 from './pages/MessagePage2';
 import Test from './pages/Test';
 
 function App() {
@@ -24,11 +24,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('remmember');
     getAccessToken() && dispatch(thunkRemember());
   }, []);
 
-  console.log(state?.auth?.userInfo?.role);
   if (state?.auth?.userInfo?.role === 'member') {
     return (
       <Routes>
@@ -38,7 +36,7 @@ function App() {
           <Route path='/interest' element={<InterestPage />} />
           <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
           <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/message' element={<MessagePage />} />
+          <Route path='/message' element={<MessagePage2 />} />
           <Route path='/userprofile' element={<UserProfilePage />} />
         </Route>
       </Routes>
