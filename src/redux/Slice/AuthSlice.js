@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginApi, registerApi, rememberMeApi } from '../../api/authApi';
 import {
-  addAccessToken,
-  getAccessToken,
-  removeAccessToken
-} from '../../utils/localStorage';
+  loginApi,
+  registerApi,
+  rememberMeApi,
+  updateMeApi
+} from '../../api/authApi';
+import { addAccessToken, removeAccessToken } from '../../utils/localStorage';
 import { loading } from './LoadingSlice';
-
 
 const authSlice = createSlice({
   name: 'auth',
@@ -15,7 +15,7 @@ const authSlice = createSlice({
     login: (state, action) => {
       state.loginState = true;
       state.userInfo = action.payload;
-      console.log(action.payload)
+      console.log(action.payload);
     },
     logout: (state, action) => {
       removeAccessToken();
@@ -43,7 +43,7 @@ export const thunkLogin = (loginInfo) => async (dispatch) => {
     const res = await loginApi(loginInfo);
     addAccessToken(res.data.token);
     dispatch(login(res.data.user));
-    console.log(res.data)
+    console.log(res.data);
   } catch (error) {
     throw error;
   } finally {
@@ -61,7 +61,19 @@ export const thunkRemember = () => async (dispatch) => {
     dispatch(loading(false));
   }
 };
+export const thunkUpdateUser = () => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await updateMeApi();
+    console.log(res);
+    dispatch(updateProfile(res.data.uesr.id));
+  } catch (error) {
+    throw error;
+  } finally {
+    dispatch(loading(false));
+  }
+};
 
 export default authSlice.reducer;
-const { login, register, rememberLogin } = authSlice.actions;
-export { login, register, rememberLogin };
+const { login, register, rememberLogin, updateProfile } = authSlice.actions;
+export { login, register, rememberLogin, updateProfile };
