@@ -46,8 +46,8 @@ function ListIcon() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="icon icon-tabler icon-tabler-list text-[#fe5e75]"
-      width="24"
-      height="24"
+      width="32"
+      height="32"
       viewBox="0 0 24 24"
       stroke-width="2"
       stroke="currentColor"
