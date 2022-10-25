@@ -1,18 +1,11 @@
 import { Avatar } from 'flowbite-react';
 import React from 'react';
+import SendIcon from '../../asset/logo/SendIcon';
 import { CommentIcon, LikeIcon } from '../../asset/SeeYourProfile/Icon';
-import SeeYourProfileFooter from './SeeYourProfileFooter';
 
-function SeeYourProfileContent() {
+function UserPostFooter() {
   return (
-    <div className=" border border-groove">
-      <div className="flex gap-3 items-center mt-2 py-2 px-3">
-        <Avatar rounded={true} />
-        <div>OTHER USERNAME</div>
-      </div>
-      <div className="bg-[#ff99e0] w-full h-[350px] mt-3 py-3 px-2">
-        Post Content
-      </div>
+    <>
       <div className="flex justify-between items-center mx-7 border-b-2">
         <button type="button">
           <div className="mt-2 mb-2">...Like</div>
@@ -21,7 +14,7 @@ function SeeYourProfileContent() {
           <div className="mt-2 mb-2">...Comments</div>
         </button>
       </div>
-      <div className="flex justify-around mt-3 mb-3">
+      <div className="flex justify-around items-center mt-1 mb-1 ">
         <button type="button">
           <LikeIcon />
         </button>
@@ -29,11 +22,13 @@ function SeeYourProfileContent() {
           <CommentIcon />
         </button>
       </div>
-      <div className="border border-groove">
-        <SeeYourProfileFooter />
+      <div className="w-full h-[50px] flex items-center gap-3 px-2">
+        <Avatar rounded={true} />
+        <input className="bg-[#ffeef0] w-full h-[30px] rounded-xl"></input>
+        <SendIcon />
       </div>
-    </div>
+    </>
   );
 }
 
-export default SeeYourProfileContent;
+export default UserPostFooter;
