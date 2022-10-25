@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import HambergerMenu from '../asset/logo/HambergerMenu';
-import SendIcon from '../asset/logo/SendIcon';
-import TextInputBarChatApp from '../asset/logo/TextInputBarChatApp';
-import UserIcon from '../asset/logo/UserIcon';
 import io from 'socket.io-client';
 import HeaderChatRoom from '../features/ChatAppComponent/HeaderChatRoom';
 import MessageBoxChatRoom from '../features/ChatAppComponent/MessageBoxChatRoom';
@@ -23,7 +19,6 @@ export default function ChatAppPage(props) {
   const myId = useSelector((state) => state?.auth?.useInfo?.id);
   const dispatch = useDispatch();
 
-  console.log(process.env.PORT);
   console.log('chatApp');
   useEffect(() => {
     socket.on('connect', () => {

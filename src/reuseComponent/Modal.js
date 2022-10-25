@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import XMask from '../asset/logo/XMask';
 export default function Modal(props) {
   const { children, className, show } = props;
