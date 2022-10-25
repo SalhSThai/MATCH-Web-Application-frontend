@@ -25,9 +25,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('remmember');
+    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, []);
+  console.log(state);
 
   console.log(state?.auth?.userInfo?.role);
   if (state?.auth?.userInfo?.role === 'member') {
