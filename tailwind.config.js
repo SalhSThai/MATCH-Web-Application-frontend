@@ -8,6 +8,10 @@ module.exports = {
     extend: {
       fontFamily: {
         mali: ['Mali', 'cursive']
+      },
+      colors: {
+        'match-dark': '#ED663E',
+        'match-ligth': '#FD9A7C'
       }
     }
   },
