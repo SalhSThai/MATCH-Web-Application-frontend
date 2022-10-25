@@ -6,7 +6,6 @@ import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
 import AdminPage from './pages/AdminPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
-import ChatAppPage from './pages/ChatAppPage';
 import { thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
@@ -35,7 +34,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<SwipePage />} />
-          <Route path="/chatapp" element={<ChatAppPage />} />
           <Route path="/post" element={<UserPostPage />} />
           <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
           <Route path="/interest" element={<InterestPage />} />
@@ -53,7 +51,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<SwipePage />} />
-          <Route path="/chatapp" element={<ChatAppPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/interest" element={<InterestPage />} />
           <Route path="/userprofile" element={<UserProfilePage />} />
