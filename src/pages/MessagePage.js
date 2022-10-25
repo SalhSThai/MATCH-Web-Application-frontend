@@ -1,8 +1,9 @@
-import React from 'react';
 import MessageContainer from '../features/Message/MessageContainer';
 
-function MessagePage() {
-  return <MessageContainer />;
-}
+export default function MessagePage(props) {
+ 
 
-export default MessagePage;
+    return (
+      <MessageContainer />
+    )
+}

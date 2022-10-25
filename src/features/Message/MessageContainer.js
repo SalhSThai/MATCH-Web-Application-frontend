@@ -6,7 +6,7 @@ function MessageContainer() {
   return (
     <>
       <MessageHeader />
-      <MessageList />;
+      <MessageList />
     </>
   );
 }

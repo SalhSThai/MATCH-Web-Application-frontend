@@ -1,35 +1,33 @@
-import ChatAppModal from './ChatAppModal';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import socket from '../../config/socket';
+import ChatAppModal from './ChatAppModal';
 
 export default function FriendsCard(props) {
-    const { info,  roomName } = props
+    const { chatMessage, friendsInfo, roomname, lowerCheck, info } = props.info
     const [openChat, setOpenChat] = useState(false)
-    const [recentMessage,setRecentMessage] = useState('')
+    const [recentMessage, setRecentMessage] = useState('')
+    const [newMessageTriger, setNewMessageTriger] = useState(false)
     useEffect(() => {
-        // socket.emit('join_room', roomName);
-        
-        // socket.on('receiveMessage', (input) => {
-        //     console.log(input,"input");
-        //     setRecentMessage(p=>input.message)
-        // });
-        
+        setRecentMessage(p => chatMessage[chatMessage?.length - 1]?.message)
         return () => {
             // socket.off('join_room');
             // socket.off('receiveMessage');
         }
     }, [])
 
-
+    // shadow-[4px_5px_4px_2px_rgba(0,0,0,0.1)
     return (
-        <div className='w-full h-[100px] flex justify-between items-center bg-slate-200  rounded-xl'>
-             <ChatAppModal status={openChat} info={info} close={e => setOpenChat(false)} recent={message=>setRecentMessage(p=>message)} roomName={roomName}/> 
+        <div className='w-full h-[100px] flex justify-center items-center'>
+            <div className={`w-[95%]  h-[95%] flex justify-between items-center bg-white  rounded-xl mt-3 shadow-[4px_5px_4px_2px_rgba(0,0,0,0.1)]  ${newMessageTriger ? ' shake ' : ""}`}>
+                <ChatAppModal status={openChat} info={props.info} close={e => setOpenChat(false)} recent={message => setRecentMessage(p => message)} setNewMessageTriger={triger => setNewMessageTriger(triger)} />
 
-            <div className={`h-full aspect-square  rounded-full  overflow-hidden`}  ><img src={info?.profileImage} /></div>
-            <div className='grow h-full flex-col flex justify-evenly items-start ml-2' onClick={e => setOpenChat(true)}>
-                <h1 className='text-2xl font-medium'>{info?.username}</h1>
-                <p className='text-xl'>{recentMessage}</p>
+                <div className={`h-full aspect-square  rounded-full  overflow-hidden  shadow-[2px_2px_8px_4px_rgba(0,0,0,0.2)]`}  ><img src={friendsInfo?.profileImage} /></div>
+                <div className=' grow h-full flex-col flex justify-evenly items-start ml-2' onClick={e => setOpenChat(true)}>
+                    <h1 className='text-2xl font-medium'>{friendsInfo?.username}</h1>
+                    <p className='text-xl'>{recentMessage}</p>
+
+                </div>
             </div>
         </div>
     )

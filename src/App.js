@@ -15,7 +15,7 @@ import ExplorePage from './pages/ExplorePage';
 import UserProfilePage from './pages/UserProfilePage';
 import InterestPage from './pages/InterestPage';
 import AddPhotoOnRegisPage from './pages/AddPhotoOnRegisPage';
-import MessagePage from './pages/MessagePage';
+import MessagePage2 from './pages/MessagePage2';
 import UserPostPage from './pages/UserPostPage';
 import SeeYourProfilePage from './pages/SeeYourProfilePage';
 import AlertMatchPage from './pages/AlertMatchPage';
@@ -30,7 +30,6 @@ function App() {
   }, []);
   console.log(state);
 
-  console.log(state?.auth?.userInfo?.role);
   if (state?.auth?.userInfo?.role === 'member') {
     return (
       <Routes>
@@ -42,7 +41,7 @@ function App() {
           <Route path="/interest" element={<InterestPage />} />
           <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
           <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/message" element={<MessagePage />} />
+          <Route path="/message" element={<MessagePage2 />} />
           <Route path="/userprofile" element={<UserProfilePage />} />
           <Route path="/matching" element={<AlertMatchPage />} />
         </Route>

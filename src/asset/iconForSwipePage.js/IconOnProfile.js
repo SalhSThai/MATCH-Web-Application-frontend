@@ -8,11 +8,11 @@ function RejectIcon() {
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <line x1='18' y1='6' x2='6' y2='18'></line>
@@ -29,11 +29,11 @@ function SuperLikeIcon() {
       width='48'
       height='48'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='#ED663E'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <path d='M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572'></path>
@@ -48,11 +48,11 @@ function LikeIcon() {
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <path d='M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z'></path>
@@ -67,11 +67,11 @@ function MoreUesrDetailIcon() {
       width='35'
       height='35'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <circle cx='12' cy='12' r='1'></circle>
@@ -83,22 +83,9 @@ function MoreUesrDetailIcon() {
 
 function Back() {
   return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='icon icon-tabler icon-tabler-arrow-left text-[#ED663E]'
-      width='35'
-      height='35'
-      viewBox='0 0 24 24'
-      stroke-width='2'
-      stroke='currentColor'
-      fill='#ED663E'
-      stroke-linecap='round'
-      stroke-linejoin='round'
-    >
-      <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-      <line x1='5' y1='12' x2='19' y2='12'></line>
-      <line x1='5' y1='12' x2='11' y2='18'></line>
-      <line x1='5' y1='12' x2='11' y2='6'></line>
+    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left font-black" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <polyline points="15 6 9 12 15 18"></polyline>
     </svg>
   );
 }
@@ -111,11 +98,11 @@ function ChatOnUserProfile() {
       width='30'
       height='30'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <path d='M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1'></path>

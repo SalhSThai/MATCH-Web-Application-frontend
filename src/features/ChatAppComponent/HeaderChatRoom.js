@@ -3,13 +3,14 @@ import React from 'react';
 import { ListIcon } from '../../asset/IconForChatRoom/Icon';
 import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
 
-export default function HeaderChatRoom() {
+export default function HeaderChatRoom(props) {
+  const {onClick} = props
   return (
     <div className="h-[80px] w-full">
       <div className="h-full w-full flex justify-between items-center">
         <div className="flex-grow">
           <div className="flex items-center gap-4 px-3">
-            <button type="button">
+            <button type="button" onClick={onClick}>
               <Back />
             </button>
             <Avatar rounded={true} />

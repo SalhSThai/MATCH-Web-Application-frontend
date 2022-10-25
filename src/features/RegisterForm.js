@@ -32,10 +32,10 @@ export default function RegisterForm() {
     <form onSubmit={handleSubmitForm}>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="user" value="Username" />
+          <Label htmlFor="userRegis" value="Username" />
         </div>
         <TextInput
-          id="user"
+          id="userRegis"
           type="text"
           placeholder="Username"
           required={true}
@@ -47,10 +47,10 @@ export default function RegisterForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="email1" value="Your emailOrMobile" />
+          <Label htmlFor="emailRegis" value="Your emailOrMobile" />
         </div>
         <TextInput
-          id="email1"
+          id="emailRegis"
           type="email"
           placeholder="YourEmail@gmail.com"
           required={true}
@@ -62,10 +62,10 @@ export default function RegisterForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="password1" value="Your password" />
+          <Label htmlFor="passwordRegis" value="Your password" />
         </div>
         <TextInput
-          id="password1"
+          id="passwordRegis"
           type="password"
           required={true}
           placeholder="Your Password"
@@ -77,10 +77,10 @@ export default function RegisterForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="password2" value="Confirm password" />
+          <Label htmlFor="cPasswordRegis" value="Confirm password" />
         </div>
         <TextInput
-          id="password2"
+          id="cPasswordRegis"
           type="password"
           required={true}
           placeholder="Confirm password"
@@ -92,10 +92,10 @@ export default function RegisterForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="Firstname" value="First Name" />
+          <Label htmlFor="firstNameRegis" value="First Name" />
         </div>
         <TextInput
-          id="Firstname"
+          id="firstNameRegis"
           type="text"
           required={true}
           placeholder="Your Password"

@@ -8,11 +8,11 @@ function HomeIcon() {
       width='30'
       height='30'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <polyline points='5 12 3 12 12 3 21 12 19 12'></polyline>
@@ -30,11 +30,11 @@ function ExploreIcon() {
       width='30'
       height='30'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <circle cx='15' cy='15' r='4'></circle>
@@ -53,11 +53,11 @@ function WhosLikeMeIcon() {
       width='30'
       height='30'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <path d='M14.017 18.001l-2.017 1.999l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 0 1 8.153 5.784'></path>
@@ -73,11 +73,11 @@ function ChatIcon() {
       width='30'
       height='30'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <path d='M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1'></path>
@@ -92,11 +92,11 @@ function UserProfilesIcon() {
       width='30'
       height='30'
       viewBox='0 0 24 24'
-      stroke-width='2'
+      strokeWidth='2'
       stroke='currentColor'
       fill='none'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
       <circle cx='12' cy='12' r='9'></circle>

@@ -5,3 +5,19 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+.shake{
+  background-color: aquamarine;
+  animation:shake .3s;
+}
+@keyframes shake {
+  25%{transform: translateX(4px)}
+  50%{transform: translateX(-4px)}
+  75%{transform: translateX(4px)}
+
+
+}
+
+/* .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+} */

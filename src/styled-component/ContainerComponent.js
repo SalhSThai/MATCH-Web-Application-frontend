@@ -12,8 +12,12 @@ const DivContainer = styled.div`
   /* transform: translateY(-50%); */
 
   /* justify-content: space-between; */
-  width: 428px;
+  width: 390px;
   height: 100vh;
+  overflow: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+
 
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
 `;
