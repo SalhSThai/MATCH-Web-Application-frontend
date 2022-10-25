@@ -3,7 +3,7 @@ import {
   loginApi,
   registerApi,
   rememberMeApi,
-  updateMeApi
+  updateMeApi,
 } from '../../api/authApi';
 import { addAccessToken, removeAccessToken } from '../../utils/localStorage';
 import { loading } from './LoadingSlice';
@@ -20,8 +20,8 @@ const authSlice = createSlice({
       removeAccessToken();
       state.loginState = false;
       state.userInfo = {};
-    }
-  }
+    },
+  },
 });
 
 export const thunkRegister = (registerInfo) => async (dispatch) => {
@@ -50,13 +50,13 @@ export const thunkLogin = (loginInfo) => async (dispatch) => {
 };
 export const thunkRemember = () => async (dispatch) => {
   try {
-    dispatch(loading(true));
+    await dispatch(loading(true));
     const user = await rememberMeApi();
-    user && dispatch(login(user?.data));
+    user && (await dispatch(login(user?.data)));
   } catch (error) {
     throw error;
   } finally {
-    dispatch(loading(false));
+    await dispatch(loading(false));
   }
 };
 export const thunkUpdateUser = () => async (dispatch) => {

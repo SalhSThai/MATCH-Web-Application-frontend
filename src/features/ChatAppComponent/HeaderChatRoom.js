@@ -1,10 +1,6 @@
 import { Avatar } from 'flowbite-react';
 import React from 'react';
-import {
-  ListIcon,
-  PhoneIcon,
-  VideoIcon
-} from '../../asset/IconForChatRoom/Icon';
+import { ListIcon } from '../../asset/IconForChatRoom/Icon';
 import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
 
 export default function HeaderChatRoom(props) {
