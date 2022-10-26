@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
+import { Back } from '../../asset/iconForSwipePage/IconOnProfile';
 import SeeYourProfileContent from './SeeYourProfileContent';
 
 function SeeYourProfileBody() {

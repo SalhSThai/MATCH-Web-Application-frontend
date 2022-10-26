@@ -1,6 +1,6 @@
 import { Carousel } from 'flowbite-react';
 import React from 'react';
-import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
+import { Back } from '../../asset/iconForSwipePage/IconOnProfile';
 import UserModal from '../../reuseComponent/UserModal';
 import iu2 from '../../asset/profileUser/iu2.jpg';
 import iu1 from '../../asset/profileUser/iu1.jpg';

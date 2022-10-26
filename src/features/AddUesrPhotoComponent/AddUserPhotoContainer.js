@@ -1,5 +1,5 @@
 import React from 'react';
-import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
+import { Back } from '../../asset/iconForSwipePage/IconOnProfile';
 import Button from '../../reuseComponent/Button';
 import AddPhotoCard from './AddPhotoCard';
 

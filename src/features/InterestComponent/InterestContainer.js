@@ -1,6 +1,5 @@
 import React from 'react';
-import { Back } from '../../asset/iconForSwipePage.js/IconOnProfile';
-import styled from 'styled-components';
+import { Back } from '../../asset/iconForSwipePage/IconOnProfile';
 import InterestBody from './interestBody';
 
 export default function InterestContainer() {
