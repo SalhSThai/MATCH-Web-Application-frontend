@@ -1,8 +1,9 @@
 import { Avatar } from 'flowbite-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SendIcon from '../../asset/logo/SendIcon';
 import { CommentIcon, LikeIcon } from '../../asset/SeeYourProfile/Icon';
-
+import iu from '../../asset/profileUser/iu.png';
 function UserPostFooter() {
   return (
     <>
@@ -22,6 +23,15 @@ function UserPostFooter() {
           <CommentIcon />
         </button>
       </div>
+      <div className="pt-1 pb-1 mx-4 bg-slate-200 rounded-xl w-full flex">
+        <Avatar rounded={true}  />
+        <div className='mx-3'>
+          <div>Username</div>
+          <div>Comment Content</div>
+          <small>timesAgo</small>
+        </div>
+      </div>
+
       <div className="w-full h-[50px] flex items-center gap-3 px-2">
         <Avatar rounded={true} />
         <input className="bg-[#ffeef0] w-full h-[30px] rounded-xl"></input>
