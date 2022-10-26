@@ -1,4 +1,4 @@
-import { Back } from '../asset/iconForSwipePage.js/IconOnProfile';
+import { Back } from '../asset/iconForSwipePage/IconOnProfile';
 import LogoutButton from '../components/userProfileComponents/LogoutButton';
 import UserInfo from '../components/userProfileComponents/UserInfo';
 

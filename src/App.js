@@ -40,12 +40,12 @@ function App() {
           <Route path='/interest' element={<InterestPage />} />
           <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
           <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/message' element={<MessagePage2 />} />
           <Route path='/userprofile' element={<UserProfilePage />} />
           <Route path='/matching' element={<AlertMatchPage />} />
         </Route>
         <Route path='/' element={<NavbarOnly />}>
           <Route path='/nearme' element={<NearMePage />} />
+          <Route path='/message' element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
