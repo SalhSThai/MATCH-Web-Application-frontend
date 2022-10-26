@@ -6,6 +6,8 @@ import MatchChatRoom from './components/MatchChatRoom';
 import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import useMeasure from 'react-use-measure';
+import Send from '../../asset/IconChatRoom/Send';
+import ChatModal from './components/ChatModal';
 
 
 // import FriendsCard from '../../ChatAppComponent/FriendsCard';
@@ -21,13 +23,13 @@ import useMeasure from 'react-use-measure';
 export default function ChatApplication() {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
-    const [ref , bounds] = useMeasure()
+    const [ref, bounds] = useMeasure()
     const [isConected, setIsConnected] = useState(false)
-    const [isOpenChat,setIsOpenChat] = useState(false);
-    const [isopenProfilePicture,setIsOpenProfilePicture] = useState(false)
-    const [userOnline,setUserOnline] = useState([])
-    
-    const myId  = state?.auth?.userInfo?.id ?? 1;
+    const [isOpenChat, setIsOpenChat] = useState(false);
+    const [isopenProfilePicture, setIsOpenProfilePicture] = useState(false)
+    const [userOnline, setUserOnline] = useState([])
+
+    const myId = state?.auth?.userInfo?.id ?? 1;
     const allChatRooms = state?.friends?.allChatRooms
     useEffect(() => {
         dispatch(thunkFetchFriends(myId));
@@ -37,32 +39,53 @@ export default function ChatApplication() {
             setIsConnected(true);
         });
 
-        socket.on('onlinefriends',(online)=>{
+        socket.on('onlinefriends', (online) => {
             setUserOnline(online)
         })
 
         return () => {
             socket.off('onlinefriends')
             setIsConnected(false);
-           return socket.disconnect();
+            return socket.disconnect();
         }
     }, []);
 
 
     function SlideMatchCard(props) {
-        const [{ y }, api] = useSpring(() => ({  y:0 }))
-        const bind = useDrag(({ offset: [ox, oy]}) => { api.start({ y: oy }) } , { bounds: { top:-(bounds.bottom-bounds.height), bottom: 0 }, rubberband: true } )
+        const [{ y }, api] = useSpring(() => ({ y: 0 }))
+        const bind = useDrag(({ offset: [ox, oy] }) => { api.start({ y: oy }) }, { bounds: { top: -(bounds.bottom - bounds.height), bottom: 0 }, rubberband: true })
         return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
     }
+    // function SlideChatCard(props) {
+    //     const [{ y }, api] = useSpring(() => ({ y: 0 }))
+    //     const bind = useDrag(({ active, offset: [ox, oy], movement: [mx, my], velocity: [vx, vy] }) => { api.start({ y: active ? my : 0 }); }, { bounds: { top: 0 }, rubberband: true })
+    //     return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
+    // }
 
-    return <div className='absolute top-[200px]  w-full grow '>
-        <div className={`relative w-full h-full p-3 overflow-y-scroll scrollbar-hide ${isOpenChat}`}>
+    const modalPopup = (e) => {
+        e.preventDefault();
+        console.log('click');
+        setIsOpenChat(p=>true);
+    }
+
+
+
+    return (<div className=' w-full grow'>
+        <div className={`relative w-full h-full  overflow-y-scroll scrollbar-hide `}>
+
+            {/* <h1 onClick={e => {
+                setIsOpenChat(p => !p);
+            }}>GO </h1> */}
+            {/* <SlideChatCard> */}
+               {isOpenChat? <ChatModal status={isOpenChat} setStatus={setIsOpenChat}/>:null}
+            {/* </SlideChatCard> */}
+
             <SlideMatchCard>
-            {allChatRooms?.map?.((i,d)=><MatchChatRoom key={d} friendsInfo={i} friendId={myId===i?.userLowerId ? i?.userHigherId:i?.userLowerId } openChat={e=>setIsOpenChat} userOnline={userOnline} openProfilePicture={e=>setIsOpenProfilePicture(true)}/>)}
+            {allChatRooms?.map?.((i,d)=><MatchChatRoom key={d} friendsInfo={i} friendId={myId===i?.userLowerId ? i?.userHigherId:i?.userLowerId } openChat={modalPopup} userOnline={userOnline} openProfilePicture={e=>setIsOpenProfilePicture(true)}/>)}
 
             </SlideMatchCard>
         </div>
-    </div>
+    </div>)
 }
 
 

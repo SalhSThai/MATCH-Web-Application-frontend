@@ -14,10 +14,17 @@
   25%{transform: translateX(4px)}
   50%{transform: translateX(-4px)}
   75%{transform: translateX(4px)}
-
-
 }
-
+.fadeup {
+  position:relative;  
+  animation:animatebottom 0.8s 
+  }
+  
+  @keyframes animatebottom{
+  from{
+  bottom:-700px;opacity:0} 
+  to{bottom:0;opacity:1}
+  }
 /* .scrollbar-hide::-webkit-scrollbar {
   display: none;
 } */
