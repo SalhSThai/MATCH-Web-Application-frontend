@@ -31,8 +31,8 @@ export default function SlidingMatch() {
     }
 
     return (
-        <div  className='w-full h-[180px] rounded-b-3xl absolute top-0 bg-gradient-to-b from-[#f24823] to-[#f46b26] shadow-lg overflow-hidden'>
-            <div className='w-full h-full  absolute top-0 overflow-hidden px-2 pt-2'>
+        <div  className='w-full h-[20%] rounded-b-3xl bg-gradient-to-b from-[#f24823] to-[#f46b26] shadow-[0_4px_4px_4px_rgba(0,0,0,0.2);] overflow-hidden z-[11]'>
+            <div className='w-full h-full   overflow-hidden px-2 pt-2'>
                 <SlideMatchCard >
                     <MatchSlideCard/>
                     <MatchCard ref={ref} index={0} />

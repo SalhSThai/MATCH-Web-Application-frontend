@@ -29,7 +29,6 @@ function App() {
     console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, []);
-  console.log(state);
 
   if (state?.auth?.userInfo?.role === 'member') {
     return (

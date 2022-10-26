@@ -5,7 +5,7 @@ export default function MessagePage(props) {
 
 
   return (
-    <div className='relative w-full h-full flex-col flex  '>
+    <div className=' w-full h-full flex-col flex  '>
       <SlidingMatch />
       <ChatApplication /> 
     </div>
