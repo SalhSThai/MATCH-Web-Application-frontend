@@ -2,7 +2,7 @@ import {
   LikeIcon,
   RejectIcon,
   SuperLikeIcon
-} from '../../asset/iconForSwipePage.js/IconOnProfile';
+} from '../../asset/iconForSwipePage/IconOnProfile';
 
 export default function SwipeBar() {
   return (

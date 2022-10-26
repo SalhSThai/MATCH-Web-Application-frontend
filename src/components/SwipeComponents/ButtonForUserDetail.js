@@ -1,4 +1,4 @@
-import { MoreUesrDetailIcon } from '../../asset/iconForSwipePage.js/IconOnProfile';
+import { MoreUesrDetailIcon } from '../../asset/iconForSwipePage/IconOnProfile';
 
 export default function ButtonForUserDetail({ handleClickUserDetail }) {
   return (
