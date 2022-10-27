@@ -20,6 +20,10 @@ const DivContainer = styled.div`
 
 
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
+/* If the screen size is 601px or more, set the font-size of <div> to 80px */
+  @media (min-width: 601px){
+
+  }
 `;
 
 export default function ContainerComponent({ children }) {
