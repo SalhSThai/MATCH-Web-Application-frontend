@@ -15,9 +15,8 @@ const DivContainer = styled.div`
   width: 390px;
   height: 100vh;
   overflow: hidden;
-  padding-left: 10px;
-  padding-right: 10px;
-
+  /* padding-left: 10px;
+  padding-right: 10px; */
 
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
 /* If the screen size is 601px or more, set the font-size of <div> to 80px */
