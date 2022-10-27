@@ -1,15 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMessageApi, friendsApi } from "../../api/friendsApi";
+import { addMessageApi, fetchChatMessageApi, friendsApi } from "../../api/friendsApi";
 
 
 const FriendsSlice = createSlice({
-    name: 'friends',
-    initialState: { allChatRooms: [] },
-    reducers: {
-        fetchFriends: (state, action) => {
-            state.allChatRooms = action.payload
-        },
+  name: 'friends',
+  initialState: { allChatRooms: [], currentRoomInfo: {}, recentChat: {}, recentTrigle: {shake:false,color:false} },
+  reducers: {
+    fetchFriends: (state, action) => {
+      state.allChatRooms = action.payload
+    },
+    fetchMessage: (state, action) => {
+      state.currentRoomInfo = action.payload
+    },
+    reduxRecentChat: (state, action) => {
+      state.recentChat = action.payload
+    },
+    reduxRecentTrigle: (state, action) => {
+      state.recentTrigle = action.payload
     }
+  }
 })
 
 
@@ -18,17 +27,25 @@ export const thunkFetchFriends = (userId) => async dispatch => {
     const res = await friendsApi(userId)
     dispatch(fetchFriends(res.data))
   } catch (error) {
-    
+
   }
 }
-export const thunkAddMessage = (message,senderId,chatRoomId) => async dispatch => {
+export const thunkFetchMessage = (roomId, friendId) => async dispatch => {
   try {
-    const res = await addMessageApi(message,senderId,chatRoomId)
+    const res = await fetchChatMessageApi(roomId, friendId)
+    dispatch(fetchMessage(res.data))
   } catch (error) {
-    
+
+  }
+}
+export const thunkAddMessage = (message, senderId, chatRoomId, time) => async dispatch => {
+  try {
+    const res = await addMessageApi(message, senderId, chatRoomId, time)
+  } catch (error) {
+
   }
 }
 
 export default FriendsSlice.reducer
-const { fetchFriends } = FriendsSlice.actions;
-export { fetchFriends }
+const { fetchFriends, fetchMessage,reduxRecentChat,reduxRecentTrigle } = FriendsSlice.actions;
+export { fetchFriends, fetchMessage,reduxRecentChat ,reduxRecentTrigle}
