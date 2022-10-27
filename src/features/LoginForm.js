@@ -6,6 +6,7 @@ import Button from '../reuseComponent/Button';
 import logo from '../asset/logo/match.png';
 import RegisterModal from './RegisterModal';
 import { useNavigate } from 'react-router-dom';
+import { thunkUpdateLocation } from '../redux/Slice/LocationSlice';
 
 export default function LoginForm({
   isRegisterShow,
@@ -27,7 +28,9 @@ export default function LoginForm({
     navigate('/');
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log('position', position);
+        const { latitude, longitude } = position.coords;
+        console.log('latitude: ', latitude, 'longitude: ', longitude);
+        dispatch(thunkUpdateLocation({ latitude, longitude }));
       },
       () => null
     );

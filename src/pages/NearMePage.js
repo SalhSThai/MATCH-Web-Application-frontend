@@ -1,7 +1,11 @@
 import { Avatar } from 'flowbite-react';
+import { useSelector } from 'react-redux';
 import LocationIcon from '../reuseComponent/LocationIcon';
 
 export default function NearMePage() {
+  const user = useSelector(({ auth: { userInfo } }) => userInfo);
+  // const location = useSelector();
+
   return (
     <div className='w-full h-full bg-match-dark relative'>
       <div className='flex flex-col justify-center h-20 mt-10 mx-5 px-5 bg-white rounded-xl gap-2'>
@@ -16,7 +20,16 @@ export default function NearMePage() {
       <div className='rounded-full bg-[#f1bdad] w-52 h-52 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'></div>
       <div className='rounded-full bg-[#f3dad3] w-36 h-36 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'></div>
       <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-match-dark rounded-full'>
-        <Avatar rounded='true' size='lg' />
+        {/* <Avatar
+          rounded='true'
+          size='lg'
+          src={user.profileImage ? URL.createObjectURL(user.profileImage) : ''}
+        /> */}
+        <Avatar
+          rounded='true'
+          size='lg'
+          img={user.profileImage ? user.profileImage : ''}
+        />
       </div>
       <div className='absolute top-1/3 left-1/4 border-2 border-white rounded-full'>
         <Avatar rounded='true' />

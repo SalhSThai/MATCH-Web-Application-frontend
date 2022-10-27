@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkRegister } from '../redux/Slice/AuthSlice';
+import { thunkUpdateLocation } from '../redux/Slice/LocationSlice';
 import Button from '../reuseComponent/Button';
 
 export default function RegisterForm() {
@@ -33,7 +34,9 @@ export default function RegisterForm() {
     navigate('/');
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log('position', position);
+        const { latitude, longitude } = position.coords;
+        console.log('latitude: ', latitude, 'longitude: ', longitude);
+        dispatch(thunkUpdateLocation({ latitude, longitude }));
       },
       () => null
     );
