@@ -1,23 +1,62 @@
 import { Avatar, Dropdown } from 'flowbite-react';
-import React from 'react';
+
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setCreatePost,
+  resetCreatePost,
+} from '../../redux/Slice/CreatePostSlice';
+import { CreatePost } from '../../redux/Slice/PostSlice';
 import {
   GridIcon,
   LogoutIcon,
-  SettingIcon
+  SettingIcon,
 } from '../../asset/UserDropdow/icon';
 
+import ShowMoreText from 'react-show-more-text';
 function UserPostHeader() {
+  const [expand, setExpand] = useState(false);
+  const onClick = () => {
+    setExpand(!expand);
+  };
+  const imageEl = useRef();
+  const user = useSelector(({ auth: { userInfo } }) => userInfo);
+  const dispatch = useDispatch();
+  const createPostInfo = useSelector(
+    ({ createPost: { CreatePostState } }) => CreatePostState
+  );
+
+  const handleOnClickSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      if (createPostInfo.image !== '') {
+        formData.append('image', createPostInfo.image);
+      }
+      if (createPostInfo.text !== '') {
+        console.log(createPostInfo.text);
+        formData.append('text', createPostInfo.text);
+      }
+
+      dispatch(CreatePost(formData));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(resetCreatePost());
+    }
+  };
+
   return (
     <>
       <div className=" flex justify-between items-center w-full py-2">
-        <Avatar rounded={true} />
+        <Avatar rounded={true} img={user.profileImage} />
 
         <Dropdown label="Setting">
           <Dropdown.Header>
             <span className="block text-sm">Username</span>
             <span className="block text-sm font-medium truncate">
-              useremail@gmail.com
+              {user.email}
             </span>
           </Dropdown.Header>
           <Dropdown.Item icon={GridIcon}>Dashboard</Dropdown.Item>
@@ -28,19 +67,61 @@ function UserPostHeader() {
           <Dropdown.Item icon={LogoutIcon}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
-      <textarea className="rounded-2xl bg-slate-200 w-full h-[150px] overflow-y-scroll scrollbar-hide mt-3" />
-      <div className="flex  w-[400px] items-center justify-around mt-3">
-        <button type="button">
-          <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
-            POST
-          </div>
-        </button>
-        <button type="button">
-          <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
-            IMAGE
-          </div>
-        </button>
-      </div>
+      <form onSubmit={handleOnClickSubmit}>
+        <textarea
+          className="rounded-2xl bg-slate-200 w-full h-[150px] overflow-y-scroll scrollbar-hide mt-3"
+          name="text"
+          value={createPostInfo.text}
+          onChange={(e) =>
+            dispatch(
+              setCreatePost({
+                name: e.target.name,
+                value: e.target.value,
+              })
+            )
+          }
+        />
+        <img
+          src={
+            createPostInfo?.image
+              ? URL.createObjectURL(createPostInfo?.image)
+              : ''
+          }
+          style={{
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        />
+        <div className="flex  w-[400px] items-center justify-around mt-3">
+          <button type="submit">
+            <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
+              POST
+            </div>
+          </button>
+          <input
+            type={'file'}
+            style={{ display: 'none' }}
+            name="image"
+            ref={imageEl}
+            onChange={(e) => {
+              if (e.target.files[0]) {
+                console.log(e.target.files[0]);
+                dispatch(
+                  setCreatePost({
+                    name: e.target.name,
+                    value: e.target.files[0],
+                  })
+                );
+              }
+            }}
+          />
+          <button type="button" onClick={() => imageEl.current.click()}>
+            <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
+              IMAGE
+            </div>
+          </button>
+        </div>
+      </form>
     </>
   );
 }
