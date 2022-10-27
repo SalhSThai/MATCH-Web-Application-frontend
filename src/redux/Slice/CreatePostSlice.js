@@ -7,9 +7,12 @@ const CreatePostSlice = createSlice({
     setCreatePost: (state, action) => {
       state.CreatePostState[action.payload.name] = action.payload.value;
     },
+    resetCreatePost: (state, action) => {
+      state.CreatePostState = { text: '', image: '' };
+    },
   },
 });
 
 export default CreatePostSlice.reducer;
-const { setCreatePost } = CreatePostSlice.actions;
-export { setCreatePost };
+const { setCreatePost, resetCreatePost } = CreatePostSlice.actions;
+export { setCreatePost, resetCreatePost };

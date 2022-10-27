@@ -4,7 +4,7 @@ import UserPostHeader from '../features/UserPost/UserPostHeader';
 
 function UserPostPage() {
   return (
-    <div className='max-h-full overflow-y-scroll scrollbar-hide'>
+    <div className="max-h-full overflow-y-scroll scrollbar-hide">
       <UserPostHeader />
       <UserPostBody />
     </div>

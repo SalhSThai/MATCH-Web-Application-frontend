@@ -13,4 +13,8 @@ export const store = configureStore({
     posts: PostReducer,
     createPost: CreatePostReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

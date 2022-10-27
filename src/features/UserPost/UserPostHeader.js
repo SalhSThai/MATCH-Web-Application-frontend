@@ -1,21 +1,51 @@
 import { Avatar, Dropdown } from 'flowbite-react';
-import React, { useRef } from 'react';
+
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setCreatePost,
+  resetCreatePost,
+} from '../../redux/Slice/CreatePostSlice';
+import { CreatePost } from '../../redux/Slice/PostSlice';
 import {
   GridIcon,
   LogoutIcon,
   SettingIcon,
 } from '../../asset/UserDropdow/icon';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCreatePost } from '../../redux/Slice/CreatePostSlice';
 
+import ShowMoreText from 'react-show-more-text';
 function UserPostHeader() {
+  const [expand, setExpand] = useState(false);
+  const onClick = () => {
+    setExpand(!expand);
+  };
   const imageEl = useRef();
   const user = useSelector(({ auth: { userInfo } }) => userInfo);
   const dispatch = useDispatch();
   const createPostInfo = useSelector(
     ({ createPost: { CreatePostState } }) => CreatePostState
   );
+
+  const handleOnClickSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      if (createPostInfo.image !== '') {
+        formData.append('image', createPostInfo.image);
+      }
+      if (createPostInfo.text !== '') {
+        console.log(createPostInfo.text);
+        formData.append('text', createPostInfo.text);
+      }
+
+      dispatch(CreatePost(formData));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(resetCreatePost());
+    }
+  };
 
   return (
     <>
@@ -37,7 +67,7 @@ function UserPostHeader() {
           <Dropdown.Item icon={LogoutIcon}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
-      <form>
+      <form onSubmit={handleOnClickSubmit}>
         <textarea
           className="rounded-2xl bg-slate-200 w-full h-[150px] overflow-y-scroll scrollbar-hide mt-3"
           name="text"
@@ -63,7 +93,7 @@ function UserPostHeader() {
           }}
         />
         <div className="flex  w-[400px] items-center justify-around mt-3">
-          <button type="button">
+          <button type="submit">
             <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
               POST
             </div>

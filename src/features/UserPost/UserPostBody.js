@@ -6,6 +6,7 @@ import { fetchMyPosts } from '../../redux/Slice/PostSlice';
 function UserPostBody() {
   const myPosts = useSelector(({ posts: { posts } }) => posts);
   const dispatch = useDispatch();
+  console.log(myPosts);
 
   useEffect(() => {
     dispatch(fetchMyPosts());

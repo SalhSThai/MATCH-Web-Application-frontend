@@ -48,3 +48,17 @@ export const fetchMyMatchPosts = () => {
     }
   };
 };
+export const CreatePost = (data) => {
+  return async (dispatch) => {
+    try {
+      await dispatch(setLoading(true));
+      const res = await postService.createPost(data);
+
+      dispatch(addPost(res.data.createdPost));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
