@@ -4,7 +4,7 @@ import UserPostFooter from './UserPostFooter';
 import iu from '../../asset/profileUser/iu.png';
 import ShowMoreText from 'react-show-more-text';
 
-export default function UserPostContent() {
+export default function UserPostContent({ post }) {
   const [expand, setExpand] = useState(false);
   const onClick = () => {
     setExpand(!expand);
@@ -13,9 +13,12 @@ export default function UserPostContent() {
   return (
     <>
       <div className="flex gap-3 items-center mt-2 py-2 px-3 ">
-        <Avatar rounded={true} />
+        <Avatar rounded={true} img={post.User.profileImage} />
         <div>
-          <div> USERNAME</div>
+          <div>
+            {' '}
+            {post.User.firstName} {post.User.lastName}
+          </div>
           <a className="text-xs text-gray-500">Times Ago</a>
         </div>
       </div>
@@ -29,14 +32,10 @@ export default function UserPostContent() {
           expanded={expand}
           width={400}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, odit
-          natus eligendi veniam et nobis quidem ratione tempore, laboriosam
-          voluptatum quos, quibusdam omnis error minus placeat tempora illo
-          expedita adipisci? 
-         
-        </ShowMoreText> 
+          {post.text}
+        </ShowMoreText>
       </div>
-      <img src={iu} />
+      <img src={post.image ? post.image : ''} />
       <UserPostFooter />
     </>
   );
