@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import * as postService from '../../api/postApi';
+import * as commentService from '../../api/commentApi';
+import * as likeService from '../../api/likeApi';
 
 const PostSlice = createSlice({
   name: 'Post',
@@ -14,11 +16,38 @@ const PostSlice = createSlice({
     addPost: (state, action) => {
       state.posts.unshift(action.payload);
     },
+    addComment: (state, action) => {
+      const idx = state.posts.findIndex((i) => i.id === action.payload.postId);
+      console.log(idx);
+      state.posts[idx]?.Comments.push(action.payload.content);
+    },
+    deleteLike: (state, action) => {
+      const idx = state.posts.findIndex((i) => i.id === action.payload.postId);
+
+      const likeidx = state.posts[idx]?.Likes.findIndex(
+        (i) => i.id === action.payload.likeId
+      );
+      console.log(likeidx);
+
+      state.posts[idx]?.Likes.splice(likeidx, 1);
+    },
+    addLike: (state, action) => {
+      const idx = state.posts.findIndex((i) => i.id === action.payload.postId);
+
+      state.posts[idx]?.Likes.push(action.payload);
+    },
   },
 });
 
 export default PostSlice.reducer;
-export const { setPosts, setLoading, addPost } = PostSlice.actions;
+export const {
+  setPosts,
+  setLoading,
+  addPost,
+  addComment,
+  addLike,
+  deleteLike,
+} = PostSlice.actions;
 
 export const fetchMyPosts = () => {
   return async (dispatch) => {
@@ -59,6 +88,63 @@ export const CreatePost = (data) => {
       console.log(err);
     } finally {
       dispatch(setLoading(false));
+    }
+  };
+};
+
+export const createComment = (data) => {
+  return async (dispatch) => {
+    await dispatch(setLoading(true));
+    const res = await commentService.createComment(data);
+
+    dispatch(
+      addComment({
+        postId: res.data.createCommentRes.postId,
+        content: res.data.createCommentRes,
+      })
+    );
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+export const toggleCommentthunk = (data) => {
+  return async (dispatch) => {
+    await dispatch(setLoading(true));
+    const res = await commentService.createComment(data);
+
+    dispatch(
+      addComment({
+        postId: res.data.createCommentRes.postId,
+        content: res.data.createCommentRes,
+      })
+    );
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+export const toggleLikethunk = (postId) => {
+  return async (dispatch) => {
+    await dispatch(setLoading(true));
+    const res = await likeService.toggleLikeByPostId(postId);
+
+    if (res.data?.message === 'unliked') {
+      console.log(res.data);
+      dispatch(
+        deleteLike({
+          likeId: res.data.isLike.id,
+          postId: res.data.isLike.postId,
+        })
+      );
+    } else {
+      dispatch(addLike(res.data.createdLikeRes));
+    }
+    try {
+    } catch (err) {
+      console.log(err);
     }
   };
 };
