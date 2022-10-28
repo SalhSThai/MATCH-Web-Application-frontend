@@ -25,7 +25,7 @@ export default function ChatAppModal(props) {
         setNewMessageTriger(false)
         socket.on('receiveMessage', (input) => {
             console.log(input, "input");
-            if (input?.from === friendsInfo?.id || input?.from === myId) {
+            if (input?.from === friendsInfo?.id ) {
                 recent(input?.message);
                 const newMessage = {
                     senderId: input?.from,

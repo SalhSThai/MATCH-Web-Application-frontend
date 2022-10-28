@@ -6,9 +6,12 @@
   display: none;
 }
 
+.newMessage{
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 1) 30%, rgba(127, 255, 212, 1) 50%, rgba(255, 255, 255, 1) 70%);
+
+}
 .shake{
-  background-color: aquamarine;
-  animation:shake .3s;
+  animation:shake .5s infinite;
 }
 @keyframes shake {
   25%{transform: translateX(4px)}
@@ -28,3 +31,9 @@
 /* .scrollbar-hide::-webkit-scrollbar {
   display: none;
 } */
+
+input:checked {
+  border: none;
+  outline: 2px solid deeppink;
+  
+}

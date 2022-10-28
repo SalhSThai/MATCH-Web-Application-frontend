@@ -3,7 +3,7 @@ import {
   loginApi,
   registerApi,
   rememberMeApi,
-  updateMeApi,
+  updateMeApi
 } from '../../api/authApi';
 import { addAccessToken, removeAccessToken } from '../../utils/localStorage';
 import { loading } from './LoadingSlice';
@@ -20,8 +20,8 @@ const authSlice = createSlice({
       removeAccessToken();
       state.loginState = false;
       state.userInfo = {};
-    },
-  },
+    }
+  }
 });
 
 export const thunkRegister = (registerInfo) => async (dispatch) => {
@@ -72,5 +72,6 @@ export const thunkUpdateUser = () => async (dispatch) => {
 };
 
 export default authSlice.reducer;
-const { login, register, rememberLogin, updateProfile } = authSlice.actions;
-export { login, register, rememberLogin, updateProfile };
+const { login, logout, register, rememberLogin, updateProfile } =
+  authSlice.actions;
+export { login, logout, register, rememberLogin, updateProfile };

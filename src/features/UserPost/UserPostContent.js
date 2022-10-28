@@ -1,7 +1,6 @@
 import { Avatar } from 'flowbite-react';
 import React, { useState } from 'react';
 import UserPostFooter from './UserPostFooter';
-import iu from '../../asset/profileUser/iu.png';
 import ShowMoreText from 'react-show-more-text';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
@@ -29,7 +28,7 @@ export default function UserPostContent({ post }) {
           </a>
         </div>
       </div>
-      <div className="bg-[#ff99e0] w-full  mt-3 py-3 px-2 ">
+      <div className="bg-[#ff99e0] w-full  mt-3 py-3 px-5 ">
         <ShowMoreText
           className="text-xs font-mali"
           lines={2}

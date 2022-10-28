@@ -5,9 +5,9 @@ export default function MessagePage(props) {
 
 
   return (
-    <div className=' w-full h-full flex-col flex  '>
+    <div className=' w-full h-full flex-col flex   '>
       <SlidingMatch />
-      <ChatApplication /> 
+      <ChatApplication />
     </div>
   )
 }
