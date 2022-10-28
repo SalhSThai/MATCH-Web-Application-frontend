@@ -5,21 +5,17 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCreatePost,
-  resetCreatePost,
+  resetCreatePost
 } from '../../redux/Slice/CreatePostSlice';
 import { CreatePost } from '../../redux/Slice/PostSlice';
+import { logout } from '../../redux/Slice/AuthSlice';
 import {
   GridIcon,
   LogoutIcon,
-  SettingIcon,
+  SettingIcon
 } from '../../asset/UserDropdow/icon';
 
-import ShowMoreText from 'react-show-more-text';
 function UserPostHeader() {
-  const [expand, setExpand] = useState(false);
-  const onClick = () => {
-    setExpand(!expand);
-  };
   const imageEl = useRef();
   const user = useSelector(({ auth: { userInfo } }) => userInfo);
   const dispatch = useDispatch();
@@ -64,7 +60,9 @@ function UserPostHeader() {
             <Dropdown.Item icon={SettingIcon}>Settings</Dropdown.Item>
           </Link>
           <Dropdown.Divider />
-          <Dropdown.Item icon={LogoutIcon}>Sign out</Dropdown.Item>
+          <Dropdown.Item icon={LogoutIcon} onClick={() => dispatch(logout())}>
+            Sign out
+          </Dropdown.Item>
         </Dropdown>
       </div>
       <form onSubmit={handleOnClickSubmit}>
@@ -76,7 +74,7 @@ function UserPostHeader() {
             dispatch(
               setCreatePost({
                 name: e.target.name,
-                value: e.target.value,
+                value: e.target.value
               })
             )
           }
@@ -89,7 +87,7 @@ function UserPostHeader() {
           }
           style={{
             backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <div className="flex  w-[400px] items-center justify-around mt-3">
@@ -109,7 +107,7 @@ function UserPostHeader() {
                 dispatch(
                   setCreatePost({
                     name: e.target.name,
-                    value: e.target.files[0],
+                    value: e.target.files[0]
                   })
                 );
               }

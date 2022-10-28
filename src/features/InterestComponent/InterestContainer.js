@@ -1,5 +1,6 @@
 import React from 'react';
 import { Back } from '../../asset/iconForSwipePage/IconOnProfile';
+import Button from '../../reuseComponent/Button';
 import InterestBody from './interestBody';
 
 export default function InterestContainer() {
@@ -16,6 +17,9 @@ export default function InterestContainer() {
         common.
       </div>
       <InterestBody />
+      <div className="mb-10">
+        <Button>Create Account</Button>
+      </div>
     </>
   );
 }
