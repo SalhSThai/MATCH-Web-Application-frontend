@@ -12,14 +12,14 @@ export default function UserPostContent() {
 
   return (
     <>
-      <div className="flex gap-3 items-center mt-2 py-2 px-3 ">
+      <div className="flex gap-3 items-center mt-2 py-2 px-5 ">
         <Avatar rounded={true} />
         <div>
           <div> USERNAME</div>
           <a className="text-xs text-gray-500">Times Ago</a>
         </div>
       </div>
-      <div className="bg-[#ff99e0] w-full  mt-3 py-3 px-2 ">
+      <div className="bg-[#ff99e0] w-full  mt-3 py-3 px-5 ">
         <ShowMoreText
           className="text-xs font-mali"
           lines={2}
