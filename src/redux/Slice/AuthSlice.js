@@ -71,7 +71,7 @@ export const thunkUpdateUser = () => async (dispatch) => {
   }
 };
 
-
 export default authSlice.reducer;
-const { login, logout, register, rememberLogin, updateProfile } = authSlice.actions;
+const { login, logout, register, rememberLogin, updateProfile } =
+  authSlice.actions;
 export { login, logout, register, rememberLogin, updateProfile };

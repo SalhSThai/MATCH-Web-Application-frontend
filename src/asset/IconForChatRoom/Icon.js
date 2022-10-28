@@ -8,10 +8,10 @@ function PhoneIcon() {
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      stroke-width='1'
+      strokeWidth='1'
       stroke='currentColor'
       fill='#fe5e75'
-      stroke-linecap='round'
+      strokeLinecap='round'
       stroke-linejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
@@ -28,10 +28,10 @@ function VideoIcon() {
       width='24'
       height='24'
       viewBox='0 0 24 24'
-      stroke-width='1'
+      strokeWidth='1'
       stroke='currentColor'
       fill='#fe5e75'
-      stroke-linecap='round'
+      strokeLinecap='round'
       stroke-linejoin='round'
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>

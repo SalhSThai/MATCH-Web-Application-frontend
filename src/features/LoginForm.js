@@ -1,18 +1,13 @@
 import { Checkbox, Label, TextInput } from 'flowbite-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkLogin } from '../redux/Slice/AuthSlice';
 import Button from '../reuseComponent/Button';
 import logo from '../asset/logo/match.png';
 import RegisterModal from './RegisterModal';
 import { useNavigate } from 'react-router-dom';
-import { thunkUpdateLocation } from '../redux/Slice/LocationSlice';
 
-export default function LoginForm({
-  isRegisterShow,
-  handleCloseRegister,
-  handleClickRegister
-}) {
+export default function LoginForm({ isRegisterShow, handleCloseRegister }) {
   const initialLogin = { username: '', password: '' };
   const [loginInfo, setLoginInfo] = useState(initialLogin);
 
@@ -21,19 +16,16 @@ export default function LoginForm({
 
   const navigate = useNavigate();
 
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    dispatch(thunkLogin(loginInfo));
-    console.log(state.auth.userInfo);
-    navigate('/');
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log('latitude: ', latitude, 'longitude: ', longitude);
-        dispatch(thunkUpdateLocation({ latitude, longitude }));
-      },
-      () => null
-    );
+  const handleSubmitForm = async (e) => {
+    try {
+      e.preventDefault();
+      await dispatch(thunkLogin(loginInfo));
+      console.log(state.auth.userInfo);
+      navigate('/');
+      console.log('state.auth.userInfo', state.auth.userInfo);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
