@@ -30,7 +30,9 @@ export default function ChatModal(props) {
             message,
             time
         }
+        
         socket.emit('sendMessage', MessageObj)
+
         dispatch(reduxRecentTrigle({shake:true,color:true}))
         dispatch(reduxRecentChat(MessageObj))
         dispatch(thunkAddMessage(message, myInfo?.id, friendsInfo?.roomId, time))

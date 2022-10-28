@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFriendLocationApi, updateLocationApi } from '../../api/locationApi';
+import { getFriendLocationApi, getFriendsNearMeApi, updateLocationApi } from '../../api/locationApi';
 
 const LocationSlice = createSlice({
   name: 'locations',
-  initialState: { location: [], friendNearMe: [] },
+  initialState: { location: [], friendNearMe: [] ,friendNearMeFirst: []},
   reducers: {
     fetchLocation: (state, action) => {
       state.location = action.payload;
@@ -11,6 +11,9 @@ const LocationSlice = createSlice({
     fetchFriendNearMe: (state, action) => {
       state.friendNearMe = action.payload;
       // console.log('state.friendNearMe', state.friendNearMe);
+    },
+    fetchFriendNearMeFirst: (state, action) => {
+      state.friendNearMeFirst = action.payload;
     }
   }
 });
@@ -22,7 +25,6 @@ export const thunkUpdateLocation =
       const res = await updateLocationApi({ latitude, longitude });
     } catch (error) {}
   };
-
 export const thunkFetchFriendsNearMe = () => async (dispatch) => {
   try {
     const res = await getFriendLocationApi();
@@ -30,7 +32,13 @@ export const thunkFetchFriendsNearMe = () => async (dispatch) => {
     // console.log('res.data', res.data);
   } catch (error) {}
 };
-
+export const thunkFetchFriendsNearMeFirst = () => async (dispatch) => {
+  try {
+    const res = await   getFriendsNearMeApi();
+    dispatch(fetchFriendNearMeFirst(res.data));
+    // console.log('res.data', res.data);
+  } catch (error) {}
+};
 export default LocationSlice.reducer;
-const { fetchLocation, fetchFriendNearMe } = LocationSlice.actions;
-export { fetchLocation, fetchFriendNearMe };
+const { fetchLocation, fetchFriendNearMe,fetchFriendNearMeFirst } = LocationSlice.actions;
+export { fetchLocation, fetchFriendNearMe,fetchFriendNearMeFirst };
