@@ -10,16 +10,6 @@ import Send from '../../asset/IconChatRoom/Send';
 import ChatModal from './components/ChatModal';
 
 
-// import FriendsCard from '../../ChatAppComponent/FriendsCard';
-// import userMeasure from './MessageContent';
-// import { useSprings, animated, config, useSpring } from '@react-spring/web'
-// import { useDrag } from '@use-gesture/react'
-// import { clamp } from "lodash";
-// import swap from 'lodash-move'
-// import styles from './styles.module.css'
-// import useMeasure from 'react-use-measure';
-
-
 export default function ChatApplication() {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
@@ -51,40 +41,30 @@ export default function ChatApplication() {
     }, []);
 
 
-    function SlideMatchCard(props) {
-        const [{ y }, api] = useSpring(() => ({ y: 0 }))
-        const bind = useDrag(({ offset: [ox, oy] }) => { api.start({ y: oy }) }, { bounds: { top: -(bounds.bottom - bounds.height), bottom: 0 }, rubberband: true })
-        return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
-    }
+    const [{ y }, api] = useSpring(() => ({ y: 0 }))
+    const bind = useDrag(({ offset: [ox, oy] }) => { api.start({ y: oy }) }, { bounds: { top: -(bounds.bottom - bounds.height), bottom: 0 }, rubberband: true })
+
+
     // function SlideChatCard(props) {
     //     const [{ y }, api] = useSpring(() => ({ y: 0 }))
     //     const bind = useDrag(({ active, offset: [ox, oy], movement: [mx, my], velocity: [vx, vy] }) => { api.start({ y: active ? my : 0 }); }, { bounds: { top: 0 }, rubberband: true })
     //     return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
     // }
 
-    const modalPopup = (e) => {
-        e.preventDefault();
-        console.log('click');
-        setIsOpenChat(p=>true);
+    const modalPopup = (rawInfo) => {
+        setChatRoom(p => rawInfo)
+        setIsOpenChat(p => true);
     }
-
-
-
-    return (<div className=' w-full grow'>
-        <div className={`relative w-full h-full  overflow-y-scroll scrollbar-hide `}>
-
-            {/* <h1 onClick={e => {
-                setIsOpenChat(p => !p);
-            }}>GO </h1> */}
-            {/* <SlideChatCard> */}
-               {isOpenChat? <ChatModal status={isOpenChat} setStatus={setIsOpenChat}/>:null}
-            {/* </SlideChatCard> */}
-
-            <SlideMatchCard>
-            {allChatRooms?.map?.((i,d)=><MatchChatRoom key={d} friendsInfo={i} friendId={myId===i?.userLowerId ? i?.userHigherId:i?.userLowerId } openChat={modalPopup} userOnline={userOnline} openProfilePicture={e=>setIsOpenProfilePicture(true)}/>)}
-
-            </SlideMatchCard>
-        </div>
+    const [chatRoom, setChatRoom] = useState({})
+    
+    return (
+        <div className={`relative w-full grow  overflow-y-scroll scrollbar-hide select-none`}>
+            {isOpenChat ? <ChatModal status={isOpenChat} setStatus={setIsOpenChat} friendsInfo={chatRoom} /> : null}
+            <animated.div ref={ref} className=" w-full h-full items" {...bind()} style={{ y }} >
+                {allChatRooms?.map?.((i, d) =>
+                    <MatchChatRoom key={d} friendsInfo={i} friendId={myId === i?.userLowerId ? i?.userHigherId : i?.userLowerId} openChat={modalPopup} userOnline={userOnline} openProfilePicture={e => setIsOpenProfilePicture(true)} />)}
+            </animated.div>
+           
     </div>)
 }
 
