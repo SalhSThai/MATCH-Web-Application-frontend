@@ -23,6 +23,10 @@ function UserPostHeader() {
     ({ createPost: { CreatePostState } }) => CreatePostState
   );
 
+  const handleGetInformation = (e) => {
+    e.preventDefault();
+  };
+
   const handleOnClickSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -56,9 +60,11 @@ function UserPostHeader() {
             </span>
           </Dropdown.Header>
           <Dropdown.Item icon={GridIcon}>Dashboard</Dropdown.Item>
-          <Link to="/userProfile">
-            <Dropdown.Item icon={SettingIcon}>Settings</Dropdown.Item>
-          </Link>
+          <>
+            <Dropdown.Item icon={SettingIcon} onClick={handleGetInformation}>
+              Settings
+            </Dropdown.Item>
+          </>
           <Dropdown.Divider />
           <Dropdown.Item icon={LogoutIcon} onClick={() => dispatch(logout())}>
             Sign out
