@@ -26,7 +26,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, []);
 

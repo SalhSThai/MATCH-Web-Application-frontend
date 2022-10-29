@@ -3,7 +3,7 @@ import { getFriendLocationApi, getFriendsNearMeApi, updateLocationApi } from '..
 
 const LocationSlice = createSlice({
   name: 'locations',
-  initialState: { location: [], friendNearMe: [] ,friendNearMeFirst: []},
+  initialState: { location: [], friendNearMe: [], friendNearMeFirst: [] },
   reducers: {
     fetchLocation: (state, action) => {
       state.location = action.payload;
@@ -20,25 +20,36 @@ const LocationSlice = createSlice({
 
 export const thunkUpdateLocation =
   ({ latitude, longitude }) =>
-  async (dispatch) => {
-    try {
-      const res = await updateLocationApi({ latitude, longitude });
-    } catch (error) {}
-  };
+    async (dispatch) => {
+      try {
+        const res = await updateLocationApi({ latitude, longitude });
+      } catch (error) { }
+    };
 export const thunkFetchFriendsNearMe = () => async (dispatch) => {
   try {
     const res = await getFriendLocationApi();
     dispatch(fetchFriendNearMe(res.data));
     // console.log('res.data', res.data);
-  } catch (error) {}
+  } catch (error) { }
 };
-export const thunkFetchFriendsNearMeFirst = () => async (dispatch) => {
+export const thunkFetchFriendsNearMeFirst = (setLoading = ()=>{}) => async (dispatch) => {
   try {
-    const res = await   getFriendsNearMeApi();
+    const res = await getFriendsNearMeApi();
     dispatch(fetchFriendNearMeFirst(res.data));
+    const delay = () => new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve()
+      },2000)
+    });
+    await delay()
+    console.log("object3");
+    
     // console.log('res.data', res.data);
-  } catch (error) {}
+  } catch (error) { }
+  finally {
+    setLoading(false)
+  }
 };
 export default LocationSlice.reducer;
-const { fetchLocation, fetchFriendNearMe,fetchFriendNearMeFirst } = LocationSlice.actions;
-export { fetchLocation, fetchFriendNearMe,fetchFriendNearMeFirst };
+const { fetchLocation, fetchFriendNearMe, fetchFriendNearMeFirst } = LocationSlice.actions;
+export { fetchLocation, fetchFriendNearMe, fetchFriendNearMeFirst };
