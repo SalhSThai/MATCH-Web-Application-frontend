@@ -6,6 +6,7 @@ import interestReducer from './Slice/IntetrestSlice';
 import locationReducer from './Slice/LocationSlice';
 import PostReducer from './Slice/PostSlice';
 import CreatePostReducer from './Slice/CreatePostSlice';
+import CommentReducer from './Slice/CommentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,9 @@ export const store = configureStore({
     locations: locationReducer,
     posts: PostReducer,
     createPost: CreatePostReducer,
+    comment: CommentReducer,
     interest: interestReducer
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

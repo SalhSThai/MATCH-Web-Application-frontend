@@ -15,6 +15,7 @@
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.2.0",
     "gapi-script": "^1.2.0",
+    "javascript-time-ago": "^2.5.7",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "lodash-move": "^1.1.1",
@@ -24,9 +25,11 @@
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "react-show-more-text": "^1.6.2",
+    "react-timeago": "^7.1.0",
     "react-use-measure": "^2.1.1",
     "socket.io-client": "^4.5.3",
     "styled-components": "^5.3.6",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
