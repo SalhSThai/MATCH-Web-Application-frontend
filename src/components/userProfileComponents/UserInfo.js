@@ -1,33 +1,74 @@
-import { Avatar, Label, Select, TextInput } from 'flowbite-react';
-import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { thunkUpdateUser } from '../../redux/Slice/AuthSlice';
-import Button from '../../reuseComponent/Button';
+import { Avatar, Label, Select, TextInput } from "flowbite-react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { information, thunkGetInformation } from "../../redux/Slice/AuthSlice";
+import Button from "../../reuseComponent/Button";
 
 export default function UserInfo() {
   const inputEl = useRef();
   const [fileInput, setFileInput] = useState(null);
 
   const initialUserInfo = {
-    firstName: '',
-    lastName: '',
-    emailOrMobile: '',
-    gender: 'Male',
-    occupation: '',
-    profileImage: '',
-    aboutMe: '',
-    interestLog: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    gender: "Male",
+    birthDate: "",
+    occupation: "",
+    profileImage: "",
+    aboutMe: "",
+    // interestLog: ''
   };
 
   const [userInfo, setUserInfo] = useState(initialUserInfo);
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state?.auth);
   const dispatch = useDispatch();
+  // dispatch(thunkGetInformation());
+  useEffect(() => {
+    const getOneUser = async () => {
+      dispatch(
+        thunkGetInformation(() => {
+          const { oneUser } = state?.getInformationState;
+          console.log(oneUser);
+          setUserInfo({
+            firstName: oneUser?.firstName,
+            lastName: oneUser?.lastName,
+            email: oneUser?.email,
+            gender: oneUser?.gender,
+            birthDate: oneUser?.birthDate,
+            occupation: oneUser?.occupation,
+            profileImage: oneUser?.profileImage,
+            aboutMe: oneUser?.aboutMe,
+          });
+        })
+      );
+      // const res = await userService.getInformation();
+      // const { oneUser } = res.data;
+      // console.log(state.getInformation, "hhhhhhhh");
+      // console.log(state?.getInformationState);
+      // const { oneUser } = state?.getInformationState;
+      // console.log(oneUser);
+      // setUserInfo({
+      //   firstName: oneUser?.firstName,
+      //   lastName: oneUser?.lastName,
+      //   email: oneUser?.email,
+      //   gender: oneUser?.gender,
+      //   birthDate: oneUser?.birthDate,
+      //   occupation: oneUser?.occupation,
+      //   profileImage: oneUser?.profileImage,
+      //   aboutMe: oneUser?.aboutMe,
+      // });
+    };
+    getOneUser();
+  }, [dispatch]);
+
+  const handleChangeInput = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log(userInfo);
-    dispatch(thunkUpdateUser(userInfo));
-    console.log(state.auth.userInfo);
+    // dispatch(thunkGetInformation(userInfo));
   };
 
   return (
@@ -48,7 +89,7 @@ export default function UserInfo() {
           type="file"
           className="hidden"
           ref={inputEl}
-          value={userInfo.profileImage}
+          // value={userInfo.profileImage}
           onChange={(e) => {
             if (e.target.files[0]) {
               setFileInput(e.target.files[0]);
@@ -65,11 +106,10 @@ export default function UserInfo() {
             id="small"
             type="text"
             sizing="sm"
-            value={userInfo.firstName}
+            name="firstName"
+            value={userInfo?.firstName}
             placeholder="First Name"
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, firstName: e.target.value })
-            }
+            onChange={handleChangeInput}
           />
         </div>
         <div>
@@ -80,11 +120,10 @@ export default function UserInfo() {
             id="small"
             type="text"
             sizing="sm"
+            name="lastName"
             value={userInfo.lastName}
             placeholder="Last Name"
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, lastName: e.target.value })
-            }
+            onChange={handleChangeInput}
           />
         </div>
         <div>
@@ -96,10 +135,9 @@ export default function UserInfo() {
             type="text"
             placeholder="Email"
             sizing="sm"
+            name="email"
             value={userInfo.emailOrMobile}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, emailOrMobile: e.target.value })
-            }
+            onChange={handleChangeInput}
           />
         </div>
         <div>
@@ -112,10 +150,9 @@ export default function UserInfo() {
             className=" w-full rounded-xl border-[#d6dadf] bg-[#f9fafb] resize-none"
             sizing="sm"
             placeholder="About me"
+            name="aboutMe"
             value={userInfo.aboutMe}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, aboutMe: e.target.value })
-            }
+            onChange={handleChangeInput}
           />
         </div>
         <div className="flex justify-between mt-2">
@@ -123,10 +160,10 @@ export default function UserInfo() {
             <Label htmlFor="Gender" value="Gender" />
             <Select
               id="Gender"
-              style={{ width: '150px', height: '40px' }}
-              onChange={(e) =>
-                setUserInfo({ ...userInfo, gender: e.target.value })
-              }
+              style={{ width: "150px", height: "40px" }}
+              name="gender"
+              value={userInfo.gender}
+              onChange={handleChangeInput}
             >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -139,13 +176,12 @@ export default function UserInfo() {
             <TextInput
               id="Age"
               type="text"
-              style={{ width: '150px', height: '40px' }}
+              style={{ width: "150px", height: "40px" }}
               sizing="sm"
               placeholder="Age"
-              // value={userInfo.occupation}
-              // onChange={(e) =>
-              //   setUserInfo({ ...userInfo, occupation: e.target.value })
-              // }
+              name="age"
+              value={userInfo.age}
+              onChange={handleChangeInput}
             />
           </div>
         </div>
@@ -158,10 +194,9 @@ export default function UserInfo() {
             type="text"
             sizing="sm"
             placeholder="Interest"
-            value={userInfo.interestLog}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, interestLog: e.target.value })
-            }
+            name="interestLog"
+            // value={userInfo.interestLog}
+            // onChange={handleChangeInput}
           />
         </div>
         <div>
@@ -173,10 +208,9 @@ export default function UserInfo() {
             type="text"
             sizing="sm"
             placeholder="Occupation"
+            name="occupation"
             value={userInfo.occupation}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, occupation: e.target.value })
-            }
+            onChange={handleChangeInput}
           />
         </div>
       </div>

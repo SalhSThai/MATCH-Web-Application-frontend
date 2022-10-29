@@ -1,19 +1,19 @@
-import { Avatar, Dropdown } from 'flowbite-react';
+import { Avatar, Dropdown } from "flowbite-react";
 
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   setCreatePost,
-  resetCreatePost
-} from '../../redux/Slice/CreatePostSlice';
-import { CreatePost } from '../../redux/Slice/PostSlice';
-import { logout } from '../../redux/Slice/AuthSlice';
+  resetCreatePost,
+} from "../../redux/Slice/CreatePostSlice";
+import { CreatePost } from "../../redux/Slice/PostSlice";
+import { logout, thunkGetInformation } from "../../redux/Slice/AuthSlice";
 import {
   GridIcon,
   LogoutIcon,
-  SettingIcon
-} from '../../asset/UserDropdow/icon';
+  SettingIcon,
+} from "../../asset/UserDropdow/icon";
 
 function UserPostHeader() {
   const imageEl = useRef();
@@ -27,12 +27,12 @@ function UserPostHeader() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      if (createPostInfo.image !== '') {
-        formData.append('image', createPostInfo.image);
+      if (createPostInfo.image !== "") {
+        formData.append("image", createPostInfo.image);
       }
-      if (createPostInfo.text !== '') {
+      if (createPostInfo.text !== "") {
         console.log(createPostInfo.text);
-        formData.append('text', createPostInfo.text);
+        formData.append("text", createPostInfo.text);
       }
 
       dispatch(CreatePost(formData));
@@ -74,7 +74,7 @@ function UserPostHeader() {
             dispatch(
               setCreatePost({
                 name: e.target.name,
-                value: e.target.value
+                value: e.target.value,
               })
             )
           }
@@ -83,11 +83,11 @@ function UserPostHeader() {
           src={
             createPostInfo?.image
               ? URL.createObjectURL(createPostInfo?.image)
-              : ''
+              : ""
           }
           style={{
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover'
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         />
         <div className="flex  w-[400px] items-center justify-around mt-3">
@@ -97,8 +97,8 @@ function UserPostHeader() {
             </div>
           </button>
           <input
-            type={'file'}
-            style={{ display: 'none' }}
+            type={"file"}
+            style={{ display: "none" }}
             name="image"
             ref={imageEl}
             onChange={(e) => {
@@ -107,7 +107,7 @@ function UserPostHeader() {
                 dispatch(
                   setCreatePost({
                     name: e.target.name,
-                    value: e.target.files[0]
+                    value: e.target.files[0],
                   })
                 );
               }

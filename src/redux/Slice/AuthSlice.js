@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   loginApi,
   registerApi,
   rememberMeApi,
-  updateMeApi
-} from '../../api/authApi';
-import { addAccessToken, removeAccessToken } from '../../utils/localStorage';
-import { loading } from './LoadingSlice';
+  getInformation,
+} from "../../api/authApi";
+import { addAccessToken, removeAccessToken } from "../../utils/localStorage";
+import { loading } from "./LoadingSlice";
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState: { loginState: false, userInfo: {} },
+  name: "auth",
+  initialState: { loginState: false, userInfo: {}, getInformationState: {} },
   reducers: {
     login: (state, action) => {
       state.loginState = true;
@@ -20,8 +20,11 @@ const authSlice = createSlice({
       removeAccessToken();
       state.loginState = false;
       state.userInfo = {};
-    }
-  }
+    },
+    information: (state, action) => {
+      state.getInformationState = action.payload;
+    },
+  },
 });
 
 export const thunkRegister = (registerInfo) => async (dispatch) => {
@@ -59,11 +62,12 @@ export const thunkRemember = () => async (dispatch) => {
     await dispatch(loading(false));
   }
 };
-export const thunkUpdateUser = () => async (dispatch) => {
+
+export const thunkGetInformation = () => async (dispatch) => {
   try {
     dispatch(loading(true));
-    const res = await updateMeApi();
-    dispatch(updateProfile(res.data.uesr.id));
+    const res = await getInformation();
+    dispatch(information(res.data));
   } catch (error) {
     throw error;
   } finally {
@@ -72,6 +76,6 @@ export const thunkUpdateUser = () => async (dispatch) => {
 };
 
 export default authSlice.reducer;
-const { login, logout, register, rememberLogin, updateProfile } =
+const { login, logout, register, rememberLogin, information } =
   authSlice.actions;
-export { login, logout, register, rememberLogin, updateProfile };
+export { login, logout, register, rememberLogin, information };
