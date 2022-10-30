@@ -4,7 +4,7 @@ import { addMessageApi, fetchChatMessageApi, friendsApi } from "../../api/friend
 
 const FriendsSlice = createSlice({
   name: 'friends',
-  initialState: { allChatRooms: [], currentRoomInfo: {}, recentChat: {}, recentTrigle: {shake:false,color:false} },
+  initialState: { allChatRooms: [], currentRoomInfo: {}, recentChat: {}, recentTrigle: {shake:false,color:false} ,count:0},
   reducers: {
     fetchFriends: (state, action) => {
       state.allChatRooms = action.payload
@@ -17,6 +17,12 @@ const FriendsSlice = createSlice({
     },
     reduxRecentTrigle: (state, action) => {
       state.recentTrigle = action.payload
+    },
+    reduxCount: (state, action) => {
+      state.count = state.count+action.payload
+    },
+    reduxResetCount: (state, action) => {
+      state.count = action.payload
     }
   }
 })
@@ -47,5 +53,5 @@ export const thunkAddMessage = (message, senderId, chatRoomId, time) => async di
 }
 
 export default FriendsSlice.reducer
-const { fetchFriends, fetchMessage,reduxRecentChat,reduxRecentTrigle } = FriendsSlice.actions;
-export { fetchFriends, fetchMessage,reduxRecentChat ,reduxRecentTrigle}
+const { fetchFriends, fetchMessage,reduxRecentChat,reduxRecentTrigle ,reduxCount,reduxResetCount} = FriendsSlice.actions;
+export { fetchFriends, fetchMessage,reduxRecentChat ,reduxRecentTrigle,reduxCount,reduxResetCount}

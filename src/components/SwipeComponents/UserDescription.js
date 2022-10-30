@@ -1,10 +1,11 @@
 import React from 'react';
 
-export default function UserDescription() {
+export default function UserDescription(props) {
+  const {username,occupation} = props
   return (
     <div>
-      <div className='text-white'>NAME,AGE</div>
-      <div className='text-white'>OCCUPATION</div>
+      <div className='text-white'>{username?.toUpperCase()}</div>
+      <div className='text-white'>{occupation}</div>
     </div>
   );
 }

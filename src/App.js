@@ -26,7 +26,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, []);
 
@@ -47,6 +46,7 @@ function App() {
         <Route path='/' element={<NavbarOnly />}>
           <Route path='/nearme' element={<NearMePage />} />
           <Route path='/message' element={<MessagePage2 />} />
+
         </Route>
       </Routes>
     );
