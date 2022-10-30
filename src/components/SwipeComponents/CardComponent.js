@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reduxCount, reduxResetCount } from '../../redux/Slice/FriendsSlice'
 
 export default function CardComponent(props) {
-    const { measure,length,info } = props
+    const { measure,length,info ,nope,setNope,match,setMatch} = props
     const [pic, setPic] = useState({})
     const [X, apiX] = useSpring(() => ({ x: 0 }))
     const [stateX, setStateX] = useState(false)
@@ -65,5 +65,6 @@ export default function CardComponent(props) {
                 {matchX === -1 ? <Nope /> : null}
             </div>
         </animated.div>
+        
     )
 }
