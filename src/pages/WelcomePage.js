@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthContainer from '../features/AuthContainer';
+import AuthContainer from '../components/loginComponents/AuthContainer';
 
 function WelcomePage() {
   return <AuthContainer />;
