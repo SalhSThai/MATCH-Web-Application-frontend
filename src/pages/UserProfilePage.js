@@ -1,5 +1,4 @@
 import { Back } from '../asset/iconForSwipePage/IconOnProfile';
-import LogoutButton from '../components/userProfileComponents/LogoutButton';
 import UserInfo from '../components/userProfileComponents/UserInfo';
 
 export default function UserProfilePage() {
@@ -11,7 +10,6 @@ export default function UserProfilePage() {
       </div>
       <div className='w-full px-10 max-h-full overflow-y-scroll scrollbar-hide'>
         <UserInfo />
-        <LogoutButton />
       </div>
     </>
   );
