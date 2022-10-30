@@ -1,39 +1,45 @@
-import React from 'react';
-import UserDescriptionContainer from './UserDescriptionContainer';
-import iu from '../../asset/profileUser/iu.png';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { thunkFetchFriendsNearMeFirst } from '../../redux/Slice/LocationSlice';
+import lodash from 'lodash'
+import useMeasure from 'react-use-measure'
+import CardComponent from './CardComponent';
+import SwipeBar from './SwipeBar';
 import { useSpring, animated } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react';
+import MyLoading from '../MyLoading';
 
-export default function UserCardForSwipe({
-  handleClickUserDetail,
-  handleCloseUserDetail,
-  isProfileShow
-}) {
-  const [{ x }, api] = useSpring(() => ({ x: 0 }));
 
-  const bind = useDrag(({ down, movement: [mx], velocity: [vx] }) => {
-    const trigger = vx > 0.2;
-    api.start({ x: down ? mx : 0, immediate: down });
-  });
+export default function UserCardForSwipe(props) {
+  const [ref, measure] = useMeasure()
+  const dispatch = useDispatch()
+  const friends = useSelector(state => state.locations.friendNearMeFirst);
+  const [arrFriends, setArrFriends] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [match,setMatch] = useState(false);
+  const [Nope,setNope] = useState(false);
+  useEffect(() => {
+    dispatch(thunkFetchFriendsNearMeFirst((p) => setLoading(p)))
+    return () => {
+    }
+  }, [])
+
+
+
+
+  useEffect(() => {
+    setArrFriends(p => lodash.shuffle(friends))
+  }, [friends])
+
 
   return (
-    <animated.div
-      className='rounded-3xl relative cursor-pointer'
-      {...bind()}
-      style={{ x }}
-    >
-      <UserDescriptionContainer
-        handleClickUserDetail={handleClickUserDetail}
-        handleCloseUserDetail={handleCloseUserDetail}
-        isProfileShow={isProfileShow}
-      />
-      <img
-        className='rounded-2xl -z-40'
-        src={iu}
-        alt='user card'
-        draggable='false'
-      />
-    </animated.div>
+    <div className='relative w-full h-full'>
+      {loading ? <MyLoading /> : null}
+      <div ref={ref} className=' w-full h-full  '>
+        {arrFriends ? arrFriends?.map?.((i, d) => <CardComponent key={i.id} measure={measure} length={arrFriends.length} info={i} setNope={e=>setNope(true)} Nope={Nope} match={match} setMatch={e=>setMatch(true)} />) : null}
+        <SwipeBar nope={e=>setNope(true)} match={e=>setMatch(true)}/>
+      </div>
+
+
+    </div>
   );
 }

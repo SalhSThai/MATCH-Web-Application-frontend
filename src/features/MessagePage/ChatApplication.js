@@ -24,7 +24,11 @@ export default function ChatApplication() {
     useEffect(() => {
         dispatch(thunkFetchFriends(myId));
         socket.auth = { myId }
+
+        
         socket.connect();
+
+
         socket.on('connect', () => {
             setIsConnected(true);
         });
