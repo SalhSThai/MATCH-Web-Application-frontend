@@ -7,15 +7,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ReDuxProvider from './redux/ReduxProvider';
 import { BrowserRouter } from 'react-router-dom';
-import ContainerComponent from './styled-component/ContainerComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ReDuxProvider>
     <BrowserRouter>
-      <ContainerComponent>
         <App />
-      </ContainerComponent>
     </BrowserRouter>
   </ReDuxProvider>
 );

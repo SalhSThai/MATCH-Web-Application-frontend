@@ -27,8 +27,12 @@ function App() {
 
   useEffect(() => {
     getAccessToken() && dispatch(thunkRemember());
-  }, []);
+  }, [dispatch]);
 
+
+
+
+  
   if (state?.auth?.userInfo?.role === 'member') {
     return (
       <Routes>
@@ -71,9 +75,7 @@ function App() {
   if (state?.auth?.userInfo?.role === 'admin') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
           <Route path='/' element={<AdminPage />} />
-        </Route>
       </Routes>
     );
   } else {
