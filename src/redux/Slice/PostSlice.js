@@ -97,12 +97,13 @@ export const createComment = (data) => {
     await dispatch(setLoading(true));
     const res = await commentService.createComment(data);
 
-    dispatch(
+    await dispatch(
       addComment({
         postId: res.data.createCommentRes.postId,
         content: res.data.createCommentRes,
       })
     );
+    await dispatch(setPosts({ loadingState: false, posts: [] }));
     try {
     } catch (err) {
       console.log(err);

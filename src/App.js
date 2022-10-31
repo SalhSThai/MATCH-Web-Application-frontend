@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {   
     console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
    if(id){ socket.auth = { id }
@@ -105,9 +105,7 @@ function App() {
   if (role === 'admin') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
           <Route path='/' element={<AdminPage />} />
-        </Route>
       </Routes>
     );
   } else {
