@@ -2,10 +2,10 @@ import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { reduxCount, reduxResetCount } from '../../redux/Slice/FriendsSlice'
+import { reduxCount, reduxResetCount, reduxSetCurrentSlice } from '../../redux/Slice/FriendsSlice'
 
 export default function CardComponent(props) {
-    const { measure,length,info ,nope,setNope,match,setMatch} = props
+    const { measure, length, info, handleSwipe, swipeRight, setSwipeRight, index } = props
     const [pic, setPic] = useState({})
     const [X, apiX] = useSpring(() => ({ x: 0 }))
     const [stateX, setStateX] = useState(false)
@@ -15,18 +15,53 @@ export default function CardComponent(props) {
     const dispatch = useDispatch()
     const Like = () => <div className={`absolute h-[80px] w-[150px] rounded-xl -rotate-45 left-0 top-[30px] flex justify-center items-center font-medium text-2xl border-green-400 border-[10px] text-green-400`}>LIKE</div>;
     const Nope = () => <div className={`absolute h-[80px] w-[150px] rounded-xl rotate-45 right-0 top-[30px] flex justify-center items-center font-medium text-2xl border-red-400 border-[10px] text-red-400`}>NOPE</div>;
-
     useEffect(() => {
-        stateX && dispatch(reduxCount(1));
-       if(stateX)setPic(p => { return { ...p, x: friends[Math.round(Math.random() * 19 + 1)]?.profileImage } });
+
+        if (stateX) setPic(p => { return { ...p, x: friends[Math.round(Math.random() * 19 + 1)]?.profileImage } });
     }, [stateX])
     useEffect(() => {
-        if (count >= length) {
-            dispatch(reduxResetCount(0));
+        if(  count === (index + 1)){
+            dispatch(reduxSetCurrentSlice(info))
+        }
+        if (count <= 0) {
+            dispatch(reduxResetCount(length));
             setStateX(p => false)
         }
     }, [count])
+    useEffect(() => {
+
+        if (swipeRight === '1' && (index + 1) === count) {
+            dispatch(reduxCount(1));
+
+            apiX.start({
+                to: async animate => {
+                    setMatchX(p => p = 1);
+                    await animate({ from: { x: 0, rotateZ: 0 }, to: { x: measure.width, rotateZ: 30 }, config: { duration: 800 } });
+                    setStateX(p => p = true);
+                    setMatchX(p => p = 0);
+                    await animate({ from: { x: measure.width }, to: { x: 0,rotateZ: 0  } });
+                }
+            });
+            setSwipeRight(false);
+        }
+        else if (swipeRight === '-1' && (index + 1) === count) {
+            dispatch(reduxCount(1));
+
+            apiX.start({
+                to: async animate => {
+                    setMatchX(p => p = -1);
+                    await animate({ from: { x: 0, rotateZ: 0 }, to: { x: -measure.width, rotateZ: -30 }, config: { duration: 800 } });
+                    setStateX(p => p = true);
+                    setMatchX(p => p = 0);
+                    await animate({ from: { x: measure.width }, to: { x: 0, rotateZ: 0 } });
+                }
+            });
+            setSwipeRight(false);
+        }
+        setSwipeRight(0)
+    }, [swipeRight])
     const bindX = useDrag(async ({ swipe: [swipeX], movement: [mx], offset: [ox], velocity: [vx], down, last }) => {
+
         if (mx > 100) setMatchX(1);
         else if (mx < -100) setMatchX(-1);
         else setMatchX(0);
@@ -34,27 +69,32 @@ export default function CardComponent(props) {
             apiX.stop()
             apiX.start({
                 to: async animate => {
-                    await animate({ to: { x: measure.width,rotateZ: 0 } });
+                    handleSwipe('1','swipe',info,matchX)
+
+                    dispatch(reduxCount(1));
+                    await animate({ to: { x: measure.width, rotateZ: 0 } });
                     setStateX(p => p = true)
                     setMatchX(p => p = 0);
                     await animate({ from: { x: measure.width }, to: { x: 0 } });
                 }
             })
+
         }
         else if ((vx * swipeX < -1) || (mx < -100 && !down)) {
             apiX.stop()
             apiX.start({
                 to: async animate => {
-                    await animate({ to: { x: -measure.width,rotateZ: 0 } });
+                    handleSwipe('-1','swipe',info)
+                    dispatch(reduxCount(1));
+                    await animate({ to: { x: -measure.width, rotateZ: 0 } });
                     setStateX(p => p = true)
                     setMatchX(p => p = 0);
                     await animate({ from: { x: -measure.width }, to: { x: 0 } });
-
                 }
             })
         }
         else {
-            apiX.start({ x: down ? mx : 0 ,rotateZ: mx/9})
+            apiX.start({ x: down ? mx : 0, rotateZ: mx / 9 })
         }
     });
 
@@ -65,6 +105,6 @@ export default function CardComponent(props) {
                 {matchX === -1 ? <Nope /> : null}
             </div>
         </animated.div>
-        
+
     )
 }

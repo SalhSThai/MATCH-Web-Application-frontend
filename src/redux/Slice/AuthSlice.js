@@ -10,7 +10,7 @@ import { loading } from './LoadingSlice';
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { loginState: false, userInfo: {} },
+  initialState: { loginState: false, userInfo: {}, online: false },
   reducers: {
     login: (state, action) => {
       state.loginState = true;
@@ -20,6 +20,9 @@ const authSlice = createSlice({
       removeAccessToken();
       state.loginState = false;
       state.userInfo = {};
+    },
+    online: (state, action) => {
+      state.online = action.payload
     }
   }
 });
@@ -72,6 +75,6 @@ export const thunkUpdateUser = () => async (dispatch) => {
 };
 
 export default authSlice.reducer;
-const { login, logout, register, rememberLogin, updateProfile } =
+const { login, logout,online, register, rememberLogin, updateProfile } =
   authSlice.actions;
-export { login, logout, register, rememberLogin, updateProfile };
+export { login, logout,online, register, rememberLogin, updateProfile };
