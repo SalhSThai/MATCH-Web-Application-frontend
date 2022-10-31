@@ -28,9 +28,9 @@ export default function UserPostContent({ post }) {
           </a>
         </div>
       </div>
-      <div className="bg-[#ff99e0] w-full  mt-3 py-3 px-5 ">
+      <div className=" w-full  mt-3 py-3 px-5 ">
         <ShowMoreText
-          className="text-xs font-mali"
+          className="text-base font-mali"
           lines={2}
           more={'Show More'}
           less={'Show Less'}

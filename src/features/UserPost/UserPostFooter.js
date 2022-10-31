@@ -10,7 +10,7 @@ import en from 'javascript-time-ago/locale/en';
 import {
   addComment,
   createComment,
-  toggleLikethunk,
+  toggleLikethunk
 } from '../../redux/Slice/PostSlice';
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
@@ -37,26 +37,28 @@ function UserPostFooter({ post }) {
   const handleOnClickLike = () => {
     dispatch(toggleLikethunk({ postId: post.id }));
   };
-
+  const IsLiked = post.Likes.find((items) => items.userId === userInfo.id);
   return (
     <>
       <div className="flex justify-between items-center mx-7 border-b-2">
         <button type="button">
-          <div className="mt-2 mb-2">
-            {post?.Likes?.length === 0 ? '' : post?.Likes?.length + 'Like'}{' '}
+          <div className="mt-2 mb-2 text-[#ed663e]">
+            {post?.Likes?.length === 0 ? '' : post?.Likes?.length + ' Like'}
           </div>
         </button>
         <button type="button">
-          <div className="mt-2 mb-2">
+          <div className="mt-2 mb-2 text-[#ed663e]">
             {post.Comments?.length === 0
               ? ''
-              : post.Comments?.length + 'Comments'}{' '}
+              : post.Comments?.length + ' Comments'}{' '}
           </div>
         </button>
       </div>
       <div className="flex justify-around items-center mt-1 mb-1 ">
         <button type="button" onClick={handleOnClickLike}>
-          <LikeIcon />
+          <div className={`${IsLiked ? ' text-[#ed663e]' : ' '}`}>
+            <LikeIcon />
+          </div>
         </button>
         <button type="button" onClick={() => setIsCommentShow((prev) => !prev)}>
           <CommentIcon />
