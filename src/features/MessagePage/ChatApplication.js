@@ -1,94 +1,69 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import socket from '../../config/socket';
 import { thunkFetchFriends } from '../../redux/Slice/FriendsSlice';
 import MatchChatRoom from './components/MatchChatRoom';
-import { useSpring, animated } from '@react-spring/web';
-import { useDrag } from '@use-gesture/react';
+import { useSpring, animated } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
 import useMeasure from 'react-use-measure';
-import Send from '../../asset/Icon/IconSend';
+import Send from '../../asset/IconChatRoom/Send';
 import ChatModal from './components/ChatModal';
 
+
 export default function ChatApplication() {
-  const state = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const [ref, bounds] = useMeasure();
-  const [isOpenChat, setIsOpenChat] = useState(false);
-  const [isopenProfilePicture, setIsOpenProfilePicture] = useState(false);
-  const [userOnline, setUserOnline] = useState([]);
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
+    const [ref, bounds] = useMeasure()
+    const [isOpenChat, setIsOpenChat] = useState(false);
+    const [isopenProfilePicture, setIsOpenProfilePicture] = useState(false)
+    const [userOnline, setUserOnline] = useState([])
 
-  const myId = state?.auth?.userInfo?.id ?? 1;
-  const allChatRooms = state?.friends?.allChatRooms;
-  useEffect(() => {
-    dispatch(thunkFetchFriends(myId));
+    const myId = state?.auth?.userInfo?.id ?? 1;
+    const allChatRooms = state?.friends?.allChatRooms
+    useEffect(() => {
+        dispatch(thunkFetchFriends(myId));
 
-    socket.on('onlinefriends', (online) => {
-      console.log(online);
-      setUserOnline(online);
-    });
+        socket.on('onlinefriends', (online) => {
+            console.log(online);
+            setUserOnline(online)
+        })
 
-    return () => {
-      socket.off('onlinefriends');
-      return socket.disconnect();
-    };
-  }, []);
+        return () => {
+            socket.off('onlinefriends')
+            return socket.disconnect();
+        }
+    }, []);
 
-  const [{ y }, api] = useSpring(() => ({ y: 0 }));
-  const bind = useDrag(
-    ({ offset: [ox, oy] }) => {
-      api.start({ y: oy });
-    },
-    {
-      bounds: { top: -(bounds.bottom - bounds.height), bottom: 0 },
-      rubberband: true
+
+    const [{ y }, api] = useSpring(() => ({ y: 0 }))
+    const bind = useDrag(({ offset: [ox, oy] }) => { api.start({ y: oy }) }, { bounds: { top: -(bounds.bottom - bounds.height), bottom: 0 }, rubberband: true })
+
+
+    // function SlideChatCard(props) {
+    //     const [{ y }, api] = useSpring(() => ({ y: 0 }))
+    //     const bind = useDrag(({ active, offset: [ox, oy], movement: [mx, my], velocity: [vx, vy] }) => { api.start({ y: active ? my : 0 }); }, { bounds: { top: 0 }, rubberband: true })
+    //     return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
+    // }
+
+    const modalPopup = (rawInfo) => {
+        setChatRoom(p => rawInfo)
+        setIsOpenChat(p => true);
     }
-  );
+    const [chatRoom, setChatRoom] = useState({})
 
-  // function SlideChatCard(props) {
-  //     const [{ y }, api] = useSpring(() => ({ y: 0 }))
-  //     const bind = useDrag(({ active, offset: [ox, oy], movement: [mx, my], velocity: [vx, vy] }) => { api.start({ y: active ? my : 0 }); }, { bounds: { top: 0 }, rubberband: true })
-  //     return <animated.div ref={ref} className="relative w-full h-full items" {...bind()} style={{ y }} >{props.children}</animated.div>
-  // }
+    return (
+        <div className={`relative w-full grow  overflow-y-scroll scrollbar-hide select-none`}>
+            {isOpenChat ? <ChatModal status={isOpenChat} setStatus={setIsOpenChat} friendsInfo={chatRoom} /> : null}
+            <animated.div ref={ref} className=" w-full h-full items" {...bind()} style={{ y }} >
+                {allChatRooms?.map?.((i, d) =>
+                    <MatchChatRoom key={d} friendsInfo={i} friendId={myId === i?.userLowerId ? i?.userHigherId : i?.userLowerId} openChat={modalPopup} userOnline={userOnline} openProfilePicture={e => setIsOpenProfilePicture(true)} />)}
+            </animated.div>
 
-  const modalPopup = (rawInfo) => {
-    setChatRoom((p) => rawInfo);
-    setIsOpenChat((p) => true);
-  };
-  const [chatRoom, setChatRoom] = useState({});
-
-  return (
-    <div
-      className={`relative w-full grow  overflow-y-scroll scrollbar-hide select-none`}
-    >
-      {isOpenChat ? (
-        <ChatModal
-          status={isOpenChat}
-          setStatus={setIsOpenChat}
-          friendsInfo={chatRoom}
-        />
-      ) : null}
-      <animated.div
-        ref={ref}
-        className=' w-full h-full items'
-        {...bind()}
-        style={{ y }}
-      >
-        {allChatRooms?.map?.((i, d) => (
-          <MatchChatRoom
-            key={d}
-            friendsInfo={i}
-            friendId={
-              myId === i?.userLowerId ? i?.userHigherId : i?.userLowerId
-            }
-            openChat={modalPopup}
-            userOnline={userOnline}
-            openProfilePicture={(e) => setIsOpenProfilePicture(true)}
-          />
-        ))}
-      </animated.div>
-    </div>
-  );
+        </div>)
 }
+
+
+
 
 /* 
 export default function ChatApplication() {
