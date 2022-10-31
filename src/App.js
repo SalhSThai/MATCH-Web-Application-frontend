@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
-import AdminPage from './pages/AdminPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
 import { online, thunkRemember } from './redux/Slice/AuthSlice';
@@ -20,42 +19,18 @@ import SeeYourProfilePage from './pages/SeeYourProfilePage';
 import AlertMatchPage from './pages/AlertMatchPage';
 import NavbarOnly from './layout/NavbarOnly';
 import NearMePage from './pages/NearMePage';
-import socket from './config/socket';
-import { thunkUpdateLocation } from './redux/Slice/LocationSlice';
 
 function App() {
-  const {role,id} = useSelector((state) => state?.auth?.userInfo);
+  const { role, id } = useSelector((state) => state?.auth?.userInfo);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {   
+  useEffect(() => {
     console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, [dispatch]);
 
-  useEffect(() => {
-   if(id){ socket.auth = { id }
-    socket.connect();
-    socket.on('connect', () => {
-      dispatch(online(true))
-    });
-    }
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log('latitude: ', latitude, 'longitude: ', longitude);
-        dispatch(thunkUpdateLocation({ latitude, longitude }));
-      }, () => null
-      
-    );
-
-    return () => {
-      socket.disconnect();
-      dispatch(online(false));
-    }
-  }, [id])
-
-  if (role === 'member') {
+  if (state?.auth?.userInfo?.role === 'member') {
     return (
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -72,7 +47,6 @@ function App() {
         <Route path='/' element={<NavbarOnly />}>
           <Route path='/nearme' element={<NearMePage />} />
           <Route path='/message' element={<MessagePage2 />} />
-
         </Route>
       </Routes>
     );
@@ -105,7 +79,12 @@ function App() {
   if (role === 'admin') {
     return (
       <Routes>
-          <Route path='/' element={<AdminPage />} />
+        <Route path='/' element={<AdminLayout />}>
+          <Route path='/' element={<HomePageAdmin />} />
+          <Route path='/message' element={<MessagePageAdmin />} />
+          <Route path='/interest' element={<InterestPageAdmin />} />
+          <Route path='/setting' element={<SettingPageAdmin />} />
+        </Route>
       </Routes>
     );
   } else {

@@ -1,4 +1,4 @@
-import { Back } from '../asset/iconForSwipePage/IconOnProfile';
+import { Back } from '../asset/Icon/IconForSwipePage';
 import UserInfo from '../components/userProfileComponents/UserInfo';
 
 export default function UserProfilePage() {
