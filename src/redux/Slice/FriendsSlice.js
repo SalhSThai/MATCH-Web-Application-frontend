@@ -55,11 +55,11 @@ export const thunkAddMessage = (message, senderId, chatRoomId, time) => async di
   }
 }
 
-export const thunkSwipe = (id,swipe) => async dispatch => {
+export const thunkSwipe = (id) => async dispatch => {
   try {
-    if(swipe==='1'){const res = await addSwipeApi(id)
+    const res = await addSwipeApi(id)
       console.log(res.data);
-    }
+    
   } catch (error) {
 
   }

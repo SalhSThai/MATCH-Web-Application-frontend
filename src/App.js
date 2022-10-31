@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
@@ -24,21 +24,28 @@ import socket from './config/socket';
 import { thunkUpdateLocation } from './redux/Slice/LocationSlice';
 
 function App() {
-  const {role,id} = useSelector((state) => state?.auth?.userInfo);
+  const { role, id } = useSelector((state) => state?.auth?.userInfo);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {   
+  useEffect(() => {
     console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, []);
 
   useEffect(() => {
-   if(id){ socket.auth = { id }
-    socket.connect();
-    socket.on('connect', () => {
-      dispatch(online(true))
-    });
+    // socketRef.current = socket
+
+  }, [])
+
+  useEffect(() => {
+    if (id) {
+      socket.connect();
+      socket.auth = { id }
+      console.log('connect');
+
+      socket.on('connect', () => {
+        dispatch(online(true))
+      });
     }
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -46,14 +53,15 @@ function App() {
         console.log('latitude: ', latitude, 'longitude: ', longitude);
         dispatch(thunkUpdateLocation({ latitude, longitude }));
       }, () => null
-      
+
     );
 
     return () => {
+      console.log('disconnect');
       socket.disconnect();
       dispatch(online(false));
     }
-  }, [id])
+  }, [id,socket])
 
   if (role === 'member') {
     return (
