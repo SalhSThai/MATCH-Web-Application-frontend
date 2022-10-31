@@ -96,6 +96,7 @@ export const createComment = (data) => {
   return async (dispatch) => {
     await dispatch(setLoading(true));
     const res = await commentService.createComment(data);
+    console.log(res.data);
 
     await dispatch(
       addComment({
@@ -103,7 +104,7 @@ export const createComment = (data) => {
         content: res.data.createCommentRes,
       })
     );
-    await dispatch(setPosts({ loadingState: false, posts: [] }));
+
     try {
     } catch (err) {
       console.log(err);
