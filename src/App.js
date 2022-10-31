@@ -22,57 +22,59 @@ import NavbarOnly from './layout/NavbarOnly';
 import NearMePage from './pages/NearMePage';
 import socket from './config/socket';
 import { thunkUpdateLocation } from './redux/Slice/LocationSlice';
+import SeeAllPostPage from './pages/SeeAllPostPage';
 
 function App() {
-  const {role,id} = useSelector((state) => state?.auth?.userInfo);
+  const { role, id } = useSelector((state) => state?.auth?.userInfo);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {   
+  useEffect(() => {
     console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, [dispatch]);
 
   useEffect(() => {
-   if(id){ socket.auth = { id }
-    socket.connect();
-    socket.on('connect', () => {
-      dispatch(online(true))
-    });
+    if (id) {
+      socket.auth = { id };
+      socket.connect();
+      socket.on('connect', () => {
+        dispatch(online(true));
+      });
     }
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         console.log('latitude: ', latitude, 'longitude: ', longitude);
         dispatch(thunkUpdateLocation({ latitude, longitude }));
-      }, () => null
-      
+      },
+      () => null
     );
 
     return () => {
       socket.disconnect();
       dispatch(online(false));
-    }
-  }, [id])
+    };
+  }, [id]);
 
   if (role === 'member') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/post' element={<UserPostPage />} />
-          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
-          <Route path='/matching' element={<AlertMatchPage />} />
-          <Route path='/likeyou' element={<WhosLikeMePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
+          <Route path="/matching" element={<AlertMatchPage />} />
+          <Route path="/likeyou" element={<WhosLikeMePage />} />
+          <Route path="/allpost" element={<SeeAllPostPage />} />
         </Route>
-        <Route path='/' element={<NavbarOnly />}>
-          <Route path='/nearme' element={<NearMePage />} />
-          <Route path='/message' element={<MessagePage2 />} />
-
+        <Route path="/" element={<NavbarOnly />}>
+          <Route path="/nearme" element={<NearMePage />} />
+          <Route path="/message" element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
@@ -80,23 +82,23 @@ function App() {
   if (role === 'goldmember') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
-          <Route path='/post' element={<UserPostPage />} />
-          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/matching' element={<AlertMatchPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/matching" element={<AlertMatchPage />} />
 
-          <Route path='/' element={<LayoutWhosLikeMe />}>
-            <Route path='/likeyou' element={<WhosLikeMePage />} />
-            <Route path='/youlike' element={<UserLikedPage />} />
+          <Route path="/" element={<LayoutWhosLikeMe />}>
+            <Route path="/likeyou" element={<WhosLikeMePage />} />
+            <Route path="/youlike" element={<UserLikedPage />} />
           </Route>
-          <Route path='/' element={<NavbarOnly />}>
-            <Route path='/nearme' element={<NearMePage />} />
-            <Route path='/message' element={<MessagePage2 />} />
+          <Route path="/" element={<NavbarOnly />}>
+            <Route path="/nearme" element={<NearMePage />} />
+            <Route path="/message" element={<MessagePage2 />} />
           </Route>
         </Route>
       </Routes>
@@ -105,15 +107,15 @@ function App() {
   if (role === 'admin') {
     return (
       <Routes>
-          <Route path='/' element={<AdminPage />} />
+        <Route path="/" element={<AdminPage />} />
       </Routes>
     );
   } else {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<WelcomePage />} />
-          <Route path='*' element={<WelcomePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="*" element={<WelcomePage />} />
         </Route>
       </Routes>
     );

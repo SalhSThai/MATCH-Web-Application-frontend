@@ -13,7 +13,7 @@ import {
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
-function UserPostFooter({ post }) {
+function SeeAllPostFooter({ post }) {
   const createCommentstate = useSelector(
     ({ comment: { createComment } }) => createComment
   );
@@ -35,7 +35,7 @@ function UserPostFooter({ post }) {
   const handleOnClickLike = () => {
     dispatch(toggleLikethunk({ postId: post.id }));
   };
-  const IsLiked = post.Likes.find((items) => items.userId === userInfo.id);
+  const IsLiked = post?.Likes?.find((items) => items.userId === userInfo.id);
   return (
     <>
       <div className="flex justify-between items-center mx-7 border-b-2">
@@ -104,4 +104,4 @@ function UserPostFooter({ post }) {
   );
 }
 
-export default UserPostFooter;
+export default SeeAllPostFooter;
