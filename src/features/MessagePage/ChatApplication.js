@@ -13,7 +13,6 @@ export default function ChatApplication() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [ref, bounds] = useMeasure();
-  const [isConected, setIsConnected] = useState(false);
   const [isOpenChat, setIsOpenChat] = useState(false);
   const [isopenProfilePicture, setIsOpenProfilePicture] = useState(false);
   const [userOnline, setUserOnline] = useState([]);
@@ -22,21 +21,14 @@ export default function ChatApplication() {
   const allChatRooms = state?.friends?.allChatRooms;
   useEffect(() => {
     dispatch(thunkFetchFriends(myId));
-    socket.auth = { myId };
-
-    socket.connect();
-
-    socket.on('connect', () => {
-      setIsConnected(true);
-    });
 
     socket.on('onlinefriends', (online) => {
+      console.log(online);
       setUserOnline(online);
     });
 
     return () => {
       socket.off('onlinefriends');
-      setIsConnected(false);
       return socket.disconnect();
     };
   }, []);

@@ -18,13 +18,15 @@ const LocationSlice = createSlice({
   }
 });
 
-export const thunkUpdateLocation =
-  ({ latitude, longitude }) =>
-    async (dispatch) => {
+export const thunkUpdateLocation =  ({ latitude, longitude }) =>    async (dispatch) => {
       try {
         const res = await updateLocationApi({ latitude, longitude });
       } catch (error) { }
     };
+
+
+
+    
 export const thunkFetchFriendsNearMe = () => async (dispatch) => {
   try {
     const res = await getFriendLocationApi();
@@ -42,7 +44,6 @@ export const thunkFetchFriendsNearMeFirst = (setLoading = ()=>{}) => async (disp
       },2000)
     });
     await delay()
-    console.log("object3");
     
     // console.log('res.data', res.data);
   } catch (error) { }

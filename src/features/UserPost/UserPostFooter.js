@@ -19,12 +19,20 @@ function UserPostFooter({ post }) {
   const createCommentstate = useSelector(
     ({ comment: { createComment } }) => createComment
   );
+  const userInfo = useSelector(({ auth: { userInfo } }) => userInfo);
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
   const [isCommentShow, setIsCommentShow] = useState(false);
 
-  const handleOnClickCreateComment = () => {
-    dispatch(createComment({ content: comment, postId: post.id }));
+  const handleOnClickCreateComment = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(createComment({ content: comment, postId: post.id }));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setComment('');
+    }
   };
   const handleOnClickLike = () => {
     dispatch(toggleLikethunk({ postId: post.id }));
@@ -35,14 +43,14 @@ function UserPostFooter({ post }) {
       <div className="flex justify-between items-center mx-7 border-b-2">
         <button type="button">
           <div className="mt-2 mb-2">
-            {post.Likes.length === 0 ? '' : post.Likes.length + 'Like'}{' '}
+            {post?.Likes?.length === 0 ? '' : post?.Likes?.length + 'Like'}{' '}
           </div>
         </button>
         <button type="button">
           <div className="mt-2 mb-2">
-            {post.Comments.length === 0
+            {post.Comments?.length === 0
               ? ''
-              : post.Comments.length + 'Comments'}{' '}
+              : post.Comments?.length + 'Comments'}{' '}
           </div>
         </button>
       </div>
@@ -61,7 +69,7 @@ function UserPostFooter({ post }) {
               className="pt-1 pb-1 mx-4 bg-slate-200 rounded-xl w-full flex"
               key={item.id}
             >
-              <Avatar rounded={true} img={item.User.profileImage} />
+              <Avatar rounded={true} img={item.User?.profileImage} />
               <div className="mx-3">
                 <div>
                   {item.User?.firstName} {item.User?.lastName}
@@ -78,7 +86,7 @@ function UserPostFooter({ post }) {
           ))}
 
           <div className="w-full h-[50px] flex items-center gap-3 px-2">
-            <Avatar rounded={true} />
+            <Avatar rounded={true} img={userInfo.profileImage} />
 
             <input
               className="bg-[#ffeef0] w-full h-[30px] rounded-xl"

@@ -5,7 +5,7 @@ import Layout from './layout/Layout';
 import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
-import { thunkRemember } from './redux/Slice/AuthSlice';
+import { online, thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
 import UserLikedPage from './pages/UserLikedPage';
@@ -19,17 +19,14 @@ import SeeYourProfilePage from './pages/SeeYourProfilePage';
 import AlertMatchPage from './pages/AlertMatchPage';
 import NavbarOnly from './layout/NavbarOnly';
 import NearMePage from './pages/NearMePage';
-import HomePageAdmin from './pages/Admin/HomePageAdmin';
-import AdminLayout from './layout/layoutForAdmin/AdminLayout';
-import MessagePageAdmin from './pages/Admin/MessagePageAdmin';
-import InterestPageAdmin from './pages/Admin/InterestPageAdmin';
-import SettingPageAdmin from './pages/Admin/SettingPageAdmin';
 
 function App() {
-  const state = useSelector((state) => state);
+  const { role, id } = useSelector((state) => state?.auth?.userInfo);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, [dispatch]);
 
@@ -54,7 +51,7 @@ function App() {
       </Routes>
     );
   }
-  if (state?.auth?.userInfo?.role === 'goldmember') {
+  if (role === 'goldmember') {
     return (
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -62,16 +59,24 @@ function App() {
           <Route path='/explore' element={<ExplorePage />} />
           <Route path='/interest' element={<InterestPage />} />
           <Route path='/userprofile' element={<UserProfilePage />} />
+          <Route path='/post' element={<UserPostPage />} />
+          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
+          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
+          <Route path='/matching' element={<AlertMatchPage />} />
 
           <Route path='/' element={<LayoutWhosLikeMe />}>
             <Route path='/likeyou' element={<WhosLikeMePage />} />
             <Route path='/youlike' element={<UserLikedPage />} />
           </Route>
+          <Route path='/' element={<NavbarOnly />}>
+            <Route path='/nearme' element={<NearMePage />} />
+            <Route path='/message' element={<MessagePage2 />} />
+          </Route>
         </Route>
       </Routes>
     );
   }
-  if (state?.auth?.userInfo?.role === 'admin') {
+  if (role === 'admin') {
     return (
       <Routes>
         <Route path='/' element={<AdminLayout />}>
