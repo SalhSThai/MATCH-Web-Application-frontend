@@ -6,7 +6,7 @@ import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
 import AdminPage from './pages/AdminPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
-import { thunkRemember } from './redux/Slice/AuthSlice';
+import { online, thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
 import UserLikedPage from './pages/UserLikedPage';
@@ -20,20 +20,42 @@ import SeeYourProfilePage from './pages/SeeYourProfilePage';
 import AlertMatchPage from './pages/AlertMatchPage';
 import NavbarOnly from './layout/NavbarOnly';
 import NearMePage from './pages/NearMePage';
+import socket from './config/socket';
+import { thunkUpdateLocation } from './redux/Slice/LocationSlice';
 
 function App() {
-  const state = useSelector((state) => state);
+  const {role,id} = useSelector((state) => state?.auth?.userInfo);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => {   
+    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, [dispatch]);
 
+  useEffect(() => {
+   if(id){ socket.auth = { id }
+    socket.connect();
+    socket.on('connect', () => {
+      dispatch(online(true))
+    });
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        console.log('latitude: ', latitude, 'longitude: ', longitude);
+        dispatch(thunkUpdateLocation({ latitude, longitude }));
+      }, () => null
+      
+    );
 
+    return () => {
+      socket.disconnect();
+      dispatch(online(false));
+    }
+  }, [id])
 
-
-  
-  if (state?.auth?.userInfo?.role === 'member') {
+  if (role === 'member') {
     return (
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -55,7 +77,7 @@ function App() {
       </Routes>
     );
   }
-  if (state?.auth?.userInfo?.role === 'goldmember') {
+  if (role === 'goldmember') {
     return (
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -63,16 +85,24 @@ function App() {
           <Route path='/explore' element={<ExplorePage />} />
           <Route path='/interest' element={<InterestPage />} />
           <Route path='/userprofile' element={<UserProfilePage />} />
+          <Route path='/post' element={<UserPostPage />} />
+          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
+          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
+          <Route path='/matching' element={<AlertMatchPage />} />
 
           <Route path='/' element={<LayoutWhosLikeMe />}>
             <Route path='/likeyou' element={<WhosLikeMePage />} />
             <Route path='/youlike' element={<UserLikedPage />} />
           </Route>
+          <Route path='/' element={<NavbarOnly />}>
+            <Route path='/nearme' element={<NearMePage />} />
+            <Route path='/message' element={<MessagePage2 />} />
+          </Route>
         </Route>
       </Routes>
     );
   }
-  if (state?.auth?.userInfo?.role === 'admin') {
+  if (role === 'admin') {
     return (
       <Routes>
           <Route path='/' element={<AdminPage />} />

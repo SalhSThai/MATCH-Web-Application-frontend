@@ -31,18 +31,20 @@ export default function MatchChatRoom(props) {
   }, [rawInfo])
 
   useEffect(() => {
-    const status = userOnline.includes(String(friendId));
-    setStatus((p) => status);
+   
     socket.on('receiveMessage', (MessageObj) => {
       console.log('receiveMessage', MessageObj)
       if (MessageObj?.senderId === friendId) {
         setRecentNewMessage(p => MessageObj)
       }
     })
-    return () => {socket.off('receiveMessage'); }
+    return () => { socket.off('receiveMessage'); }
   }, []);
 
-
+  useEffect(() => {
+    const status = userOnline.includes(String(friendId));
+    setStatus((p) => status);
+  }, [userOnline])
   useEffect(() => {
     if (recentChat?.senderId === myId && recentChat?.to === friendId) {
       setRecentNewMessage(p => recentChat)
@@ -50,10 +52,10 @@ export default function MatchChatRoom(props) {
   }, [recentChat])
 
   useEffect(() => {
-    const id = setTimeout(()=>{
+    const id = setTimeout(() => {
       setNewMessageAlert(false)
-    },3000)
-    return ()=> clearTimeout(id);
+    }, 3000)
+    return () => clearTimeout(id);
   }, [recentMessage])
 
 
