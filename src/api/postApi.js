@@ -2,6 +2,7 @@ import axios from '../config/axios';
 
 export const getAllMyPost = () => axios.get('/post/');
 export const getAllMyMatchPosts = () => axios.get('/post/mymatch');
+export const getAllUserPostById = (id) => axios.get(`/post/${id}`);
 export const getAllPosts = () => axios.get('/post/all');
 export const deletePostById = (postId) => axios.delete(`/post/${postId}`);
 export const createPost = (data) => axios.post('/post/', data);
