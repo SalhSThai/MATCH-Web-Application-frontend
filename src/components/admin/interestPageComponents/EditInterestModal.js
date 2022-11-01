@@ -1,6 +1,7 @@
 import Modal from '../../../reuseComponent/Modal';
+import CloseButton from './CloseButton';
 import EditImageContainer from './EditImageContainer';
-import EditInfoContainer from './EditInfoContainer';
+import EditInterestForm from './EditInterestForm';
 
 export default function EditInterestModal({
   isEditInterestShow,
@@ -10,9 +11,10 @@ export default function EditInterestModal({
 
   return (
     <Modal show={isEditInterestShow}>
-      <div className='bg-[#29437E] flex rounded-xl w-[60vw]'>
+      <div className='bg-[#29437E] relative flex rounded-xl w-[60vw]'>
         <EditImageContainer />
-        <EditInfoContainer handleCloseInterestCard={handleCloseInterestCard} />
+        <CloseButton handleCloseInterestCard={handleCloseInterestCard} />
+        <EditInterestForm />
       </div>
     </Modal>
   );
