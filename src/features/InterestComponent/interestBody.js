@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { thunkFetchInterest, interest } from '../../redux/Slice/IntetrestSlice';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkFetchInterest, interest } from "../../redux/Slice/IntetrestSlice";
 
-import InterestShow from './InterestShow';
+import InterestShow from "./InterestShow";
 
 function InterestBody() {
   const interest = useSelector((state) => state.interest);
