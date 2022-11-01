@@ -6,7 +6,7 @@ const DivContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 50%;
+  /* top: 50%; */
   left: 50%;
   transform: translateX(-50%);
   /* transform: translateY(-50%); */
@@ -19,9 +19,8 @@ const DivContainer = styled.div`
   padding-right: 10px; */
 
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
-/* If the screen size is 601px or more, set the font-size of <div> to 80px */
-  @media (min-width: 601px){
-
+  /* If the screen size is 601px or more, set the font-size of <div> to 80px */
+  @media (min-width: 601px) {
   }
 `;
 

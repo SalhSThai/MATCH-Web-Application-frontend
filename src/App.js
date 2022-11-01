@@ -100,10 +100,10 @@ function App() {
             <Route path='/likeyou' element={<WhosLikeMePage />} />
             <Route path='/youlike' element={<UserLikedPage />} />
           </Route>
-          <Route path='/' element={<NavbarOnly />}>
-            <Route path='/nearme' element={<NearMePage />} />
-            <Route path='/message' element={<MessagePage2 />} />
-          </Route>
+        </Route>
+        <Route path='/' element={<NavbarOnly />}>
+          <Route path='/nearme' element={<NearMePage />} />
+          <Route path='/message' element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
