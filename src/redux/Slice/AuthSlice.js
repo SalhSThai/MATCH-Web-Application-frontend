@@ -5,6 +5,7 @@ import {
   registerApi,
   rememberMeApi,
   getInformation,
+  updateUser,
 } from "../../api/authApi";
 import { addAccessToken, removeAccessToken } from "../../utils/localStorage";
 import { loading } from "./LoadingSlice";
@@ -68,6 +69,19 @@ export const thunkGetInformation = () => async (dispatch) => {
   try {
     dispatch(loading(true));
     const res = await getInformation();
+    dispatch(information(res.data.oneUser));
+  } catch (error) {
+    throw error;
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const thunkUpdateInformation = (input) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await updateUser(input);
+    console.log("res.data", res.data);
     dispatch(information(res.data));
   } catch (error) {
     throw error;
