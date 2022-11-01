@@ -14,9 +14,9 @@ export default function Modal(props) {
 }
 
 function ModalHeader(props) {
-  const { children, onClose, line } = props;
+  const { children, onClose, line,className } = props;
   return (
-    <div className='flex flex-col justify-start items-start w-full'>
+    <div className={`flex flex-col justify-start items-start w-full ${className}`}>
       <div className='flex justify-between  items-center p-10 '>
         {children}
         <XMask onClick={onClose} />

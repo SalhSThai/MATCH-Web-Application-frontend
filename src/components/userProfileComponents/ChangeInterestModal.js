@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import InterestShow from "../../features/InterestComponent/InterestShow";
-import { thunkFetchInterest } from "../../redux/Slice/IntetrestSlice";
-import Modal, { ModalHeader } from "../../reuseComponent/Modal";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import InterestShow from '../../features/InterestComponent/InterestShow';
+import { thunkFetchInterest } from '../../redux/Slice/IntetrestSlice';
+import Modal, { ModalHeader } from '../../reuseComponent/Modal';
 
 function ChangeInterestModal({ isModalShow, handleClose }) {
   const interest = useSelector((state) => state.interest);
@@ -15,13 +15,15 @@ function ChangeInterestModal({ isModalShow, handleClose }) {
   }, []);
   return (
     <Modal show={isModalShow}>
-      <ModalHeader onClose={handleClose}></ModalHeader>
+      <div className=" absolute top-0 left-0 w-full h-full">
+        <ModalHeader className={'bg-white'} onClose={handleClose}></ModalHeader>
 
-      <div className=" w-full h-screen bg-red-300 text-black overflow-y-scroll scrollbar-hide">
-        <div className="w-full gap-1.5 h-[40px] text-center flex flex-wrap mt-10">
-          {interest.allInterest?.map?.((items, index) => (
-            <InterestShow key={index} title={items.text} icon={items.icon} />
-          ))}
+        <div className=" w-full h-full bg-white text-black overflow-y-scroll scrollbar-hide">
+          <div className="w-full gap-1.5 h-[40px] text-center flex flex-wrap mt-10">
+            {interest.allInterest?.map?.((items, index) => (
+              <InterestShow key={index} title={items.text} icon={items.icon} />
+            ))}
+          </div>
         </div>
       </div>
     </Modal>
