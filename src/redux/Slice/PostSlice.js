@@ -35,8 +35,8 @@ const PostSlice = createSlice({
       const idx = state.posts.findIndex((i) => i.id === action.payload.postId);
 
       state.posts[idx]?.Likes.push(action.payload);
-    },
-  },
+    }
+  }
 });
 
 export default PostSlice.reducer;
@@ -46,7 +46,7 @@ export const {
   addPost,
   addComment,
   addLike,
-  deleteLike,
+  deleteLike
 } = PostSlice.actions;
 
 export const fetchMyPosts = () => {
@@ -77,6 +77,23 @@ export const fetchMyMatchPosts = () => {
     }
   };
 };
+
+export const fetchUserPostByid = (id) => {
+  return async (dispatch) => {
+    try {
+      await dispatch(setLoading(true));
+      console.log(id);
+      const res = await postService.getAllUserPostById(id.id);
+
+      dispatch(setPosts(res.data.allMyMatchPosts));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
+
 export const CreatePost = (data) => {
   return async (dispatch) => {
     try {
@@ -96,13 +113,15 @@ export const createComment = (data) => {
   return async (dispatch) => {
     await dispatch(setLoading(true));
     const res = await commentService.createComment(data);
+    console.log(res.data);
 
-    dispatch(
+    await dispatch(
       addComment({
         postId: res.data.createCommentRes.postId,
-        content: res.data.createCommentRes,
+        content: res.data.createCommentRes
       })
     );
+
     try {
     } catch (err) {
       console.log(err);
@@ -117,7 +136,7 @@ export const toggleCommentthunk = (data) => {
     dispatch(
       addComment({
         postId: res.data.createCommentRes.postId,
-        content: res.data.createCommentRes,
+        content: res.data.createCommentRes
       })
     );
     try {
@@ -136,7 +155,7 @@ export const toggleLikethunk = (postId) => {
       dispatch(
         deleteLike({
           likeId: res.data.isLike.id,
-          postId: res.data.isLike.postId,
+          postId: res.data.isLike.postId
         })
       );
     } else {

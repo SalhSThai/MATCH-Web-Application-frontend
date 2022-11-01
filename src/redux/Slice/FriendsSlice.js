@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMessageApi, fetchChatMessageApi, friendsApi } from "../../api/friendsApi";
+import { addMessageApi, addSwipeApi, fetchChatMessageApi, friendsApi } from "../../api/friendsApi";
 
 
 const FriendsSlice = createSlice({
   name: 'friends',
-  initialState: { allChatRooms: [], currentRoomInfo: {}, recentChat: {}, recentTrigle: {shake:false,color:false} },
+  initialState: { allChatRooms: [], currentRoomInfo: {}, recentChat: {}, recentTrigle: {shake:false,color:false} ,count:0,currentSlice:{}},
   reducers: {
     fetchFriends: (state, action) => {
       state.allChatRooms = action.payload
@@ -17,6 +17,15 @@ const FriendsSlice = createSlice({
     },
     reduxRecentTrigle: (state, action) => {
       state.recentTrigle = action.payload
+    },
+    reduxCount: (state, action) => {
+      state.count = state.count-action.payload
+    },
+    reduxResetCount: (state, action) => {
+      state.count = action.payload
+    },
+    reduxSetCurrentSlice: (state, action) => {
+      state.currentSlice = action.payload
     }
   }
 })
@@ -46,6 +55,16 @@ export const thunkAddMessage = (message, senderId, chatRoomId, time) => async di
   }
 }
 
+export const thunkSwipe = (id,swipe) => async dispatch => {
+  try {
+    if(swipe==='1'){const res = await addSwipeApi(id)
+      console.log(res.data);
+    }
+  } catch (error) {
+
+  }
+}
+
 export default FriendsSlice.reducer
-const { fetchFriends, fetchMessage,reduxRecentChat,reduxRecentTrigle } = FriendsSlice.actions;
-export { fetchFriends, fetchMessage,reduxRecentChat ,reduxRecentTrigle}
+const { fetchFriends, fetchMessage,reduxRecentChat,reduxRecentTrigle ,reduxCount,reduxResetCount,reduxSetCurrentSlice,} = FriendsSlice.actions;
+export { fetchFriends, fetchMessage,reduxRecentChat ,reduxRecentTrigle,reduxCount,reduxResetCount,reduxSetCurrentSlice}

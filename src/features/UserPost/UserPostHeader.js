@@ -12,8 +12,9 @@ import { logout, thunkGetInformation } from "../../redux/Slice/AuthSlice";
 import {
   GridIcon,
   LogoutIcon,
-  SettingIcon,
-} from "../../asset/UserDropdow/icon";
+  SettingIcon
+} from '../../asset/UserDropdow/icon';
+import Button from '../../reuseComponent/Button';
 
 function UserPostHeader() {
   const imageEl = useRef();
@@ -45,9 +46,11 @@ function UserPostHeader() {
 
   return (
     <>
-      <div className=" flex justify-between items-center w-full py-2">
+      <div className=" flex justify-around items-center w-full py-2">
         <Avatar rounded={true} img={user.profileImage} />
-
+        <Link to="/allpost">
+          <Button>All Post</Button>
+        </Link>
         <Dropdown label="Setting">
           <Dropdown.Header>
             <span className="block text-sm">Username</span>
@@ -55,7 +58,6 @@ function UserPostHeader() {
               {user.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item icon={GridIcon}>Dashboard</Dropdown.Item>
           <Link to="/userProfile">
             <Dropdown.Item icon={SettingIcon}>Settings</Dropdown.Item>
           </Link>

@@ -37,3 +37,11 @@ input:checked {
   outline: 2px solid deeppink;
   
 }
+
+.myprofile{
+  border-radius: 50px;
+background: #ffffff;
+background-size: cover;
+box-shadow:  13px 13px 26px #b5b5b5,
+             -13px -13px 26px #ffffff;
+}

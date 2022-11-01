@@ -1,10 +1,10 @@
 import { Checkbox, Label, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkLogin } from '../redux/Slice/AuthSlice';
-import Button from '../reuseComponent/Button';
-import logo from '../asset/logo/match.png';
-import RegisterModal from './RegisterModal';
+import { thunkLogin } from '../../redux/Slice/AuthSlice';
+import Button from '../../reuseComponent/Button';
+
+import RegisterModal from '../../features/RegisterModal';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm({ isRegisterShow, handleCloseRegister }) {
@@ -29,10 +29,7 @@ export default function LoginForm({ isRegisterShow, handleCloseRegister }) {
   };
 
   return (
-    <div className='flex flex-col w-[300px] '>
-      <div className='flex justify-center '>
-        <img className='h-20 w-20 ' src={logo} alt='logo'></img>
-      </div>
+    <>
       <div className='space-y-6 pb-2 w-full '>
         <h3 className='text-xl font-medium text-gray-900 dark:text-white'>
           Log in
@@ -59,7 +56,7 @@ export default function LoginForm({ isRegisterShow, handleCloseRegister }) {
             <TextInput
               id='password'
               type='password'
-              placeholder='xxxxxx'
+              placeholder='password'
               required={true}
               value={loginInfo.password}
               onChange={(e) =>
@@ -82,6 +79,6 @@ export default function LoginForm({ isRegisterShow, handleCloseRegister }) {
         />
       </div>
       <div className='border-b-2 border-gray-500 mb-[8px]'></div>
-    </div>
+   </>
   );
 }

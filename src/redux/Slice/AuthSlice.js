@@ -11,8 +11,9 @@ import { addAccessToken, removeAccessToken } from "../../utils/localStorage";
 import { loading } from "./LoadingSlice";
 
 const authSlice = createSlice({
-  name: "auth",
-  initialState: { loginState: false, userInfo: {}, getInformationState: {} },
+
+  name: 'auth',
+  initialState: { loginState: false, userInfo: {}, online: false,getInformationState: {} },
   reducers: {
     login: (state, action) => {
       state.loginState = true;
@@ -26,7 +27,10 @@ const authSlice = createSlice({
     information: (state, action) => {
       state.getInformationState = action.payload;
     },
-  },
+    online: (state, action) => {
+      state.online = action.payload
+    }
+  }
 });
 
 export const thunkRegister = (registerInfo) => async (dispatch) => {
@@ -91,6 +95,7 @@ export const thunkUpdateInformation = (input) => async (dispatch) => {
 };
 
 export default authSlice.reducer;
-const { login, logout, register, rememberLogin, information } =
+
+const { login, logout,online, register, rememberLogin,information, updateProfile } =
   authSlice.actions;
-export { login, logout, register, rememberLogin, information };
+export { login, logout,online, register, rememberLogin,information, updateProfile };
