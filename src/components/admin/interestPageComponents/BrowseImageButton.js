@@ -1,6 +1,13 @@
-export default function BrowseImageButton() {
+import { useRef } from 'react';
+
+export default function BrowseImageButton({ interestImage }) {
+  const inputEl = useRef();
+
   return (
-    <div className='absolute top-8 right-8 cursor-pointer'>
+    <div
+      className='absolute top-8 right-8 cursor-pointer'
+      onClick={() => inputEl.current.click()}
+    >
       <svg
         width='70'
         height='67'
@@ -18,6 +25,13 @@ export default function BrowseImageButton() {
           fill='white'
         />
       </svg>
+      <input
+        type='file'
+        id={interestImage}
+        name='interestIcon'
+        ref={inputEl}
+        className='hidden'
+      />
     </div>
   );
 }
