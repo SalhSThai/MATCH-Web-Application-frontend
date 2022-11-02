@@ -7,6 +7,7 @@ import locationReducer from './Slice/LocationSlice';
 import PostReducer from './Slice/PostSlice';
 import CreatePostReducer from './Slice/CreatePostSlice';
 import CommentReducer from './Slice/CommentSlice';
+import SwipeReducer from './Slice/SwipeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -17,8 +18,8 @@ export const store = configureStore({
     posts: PostReducer,
     createPost: CreatePostReducer,
     comment: CommentReducer,
-    interest: interestReducer
-
+    interest: interestReducer,
+    swipe: SwipeReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
