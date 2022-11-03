@@ -1,6 +1,6 @@
 export default function SubmitButton() {
   return (
-    <div role='button'>
+    <button type='submit'>
       <svg
         width='70'
         height='67'
@@ -16,6 +16,6 @@ export default function SubmitButton() {
           fill='white'
         />
       </svg>
-    </div>
+    </button>
   );
 }

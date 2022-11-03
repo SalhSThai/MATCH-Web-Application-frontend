@@ -1,6 +1,13 @@
-export default function BrowseImageButton() {
+import { useRef } from 'react';
+
+export default function BrowseImageButton({ setImageInput }) {
+  const inputEl = useRef();
+
   return (
-    <div className='absolute top-8 right-8 cursor-pointer'>
+    <div
+      className='absolute top-8 right-8 cursor-pointer'
+      onClick={() => inputEl.current.click()}
+    >
       <svg
         width='70'
         height='67'
@@ -18,6 +25,17 @@ export default function BrowseImageButton() {
           fill='white'
         />
       </svg>
+      <input
+        type='file'
+        name='interestImage'
+        ref={inputEl}
+        className='hidden'
+        onChange={(e) => {
+          if (e.target.files[0]) {
+            setImageInput(e.target.files[0]);
+          }
+        }}
+      />
     </div>
   );
 }
