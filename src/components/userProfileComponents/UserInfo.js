@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import ProfileImage from "./ProfileImage";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ProfileImage from './ProfileImage';
 import {
   thunkGetInformation,
-  thunkUpdateInformation,
-} from "../../redux/Slice/AuthSlice";
-import Button from "../../reuseComponent/Button";
-import TextInfo from "./TextInfo";
+  thunkUpdateInformation
+} from '../../redux/Slice/AuthSlice';
+import Button from '../../reuseComponent/Button';
+import TextInfo from './TextInfo';
 
 export default function UserInfo() {
-  const [fileInput, setFileInput] = useState(null);
-  const navigate = useNavigate();
-
   const initialUserInfo = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-    birthDate: "",
-    occupation: "",
-    profileImage: "",
-    aboutMe: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    gender: '',
+    birthDate: '',
+    occupation: '',
+    profileImage: '',
+    aboutMe: ''
     // interestLog: ''
   };
 
+  const [fileInput, setFileInput] = useState(null);
   const [userInfo, setUserInfo] = useState(initialUserInfo);
+
   const state = useSelector((state) => state?.auth);
   const oneUser = state?.getInformationState;
   const dispatch = useDispatch();
@@ -39,12 +37,12 @@ export default function UserInfo() {
     setUserInfo({
       firstName: oneUser?.firstName,
       lastName: oneUser?.lastName,
-      email: oneUser?.email || " ",
+      email: oneUser?.email || ' ',
       gender: oneUser?.gender,
       birthDate: oneUser?.birthDate,
       occupation: oneUser?.occupation,
       profileImage: oneUser?.profileImage,
-      aboutMe: oneUser?.aboutMe,
+      aboutMe: oneUser?.aboutMe
     });
 
     // console.log(userInfo);
@@ -62,14 +60,14 @@ export default function UserInfo() {
     // console.log(fileInput);
     // console.log(userInfo.profileImage);
     const formData = new FormData();
-    formData.append("firstName", userInfo.firstName);
-    formData.append("lastName", userInfo.lastName);
-    formData.append("email", userInfo.email);
-    formData.append("gender", userInfo.gender);
-    formData.append("birthDate", userInfo.birthDate);
-    formData.append("occupation", userInfo.occupation);
-    formData.append("profileImage", fileInput);
-    formData.append("aboutMe", userInfo.aboutMe);
+    formData.append('firstName', userInfo.firstName);
+    formData.append('lastName', userInfo.lastName);
+    formData.append('email', userInfo.email);
+    formData.append('gender', userInfo.gender);
+    formData.append('birthDate', userInfo.birthDate);
+    formData.append('occupation', userInfo.occupation);
+    formData.append('profileImage', fileInput);
+    formData.append('aboutMe', userInfo.aboutMe);
     dispatch(thunkUpdateInformation(formData));
     // console.log(fileInput);
     // setFileInput(null);
@@ -78,7 +76,7 @@ export default function UserInfo() {
 
   return (
     <form
-      className="w-full items-center flex flex-col"
+      className='w-full items-center flex flex-col'
       onSubmit={handleSubmitForm}
     >
       <ProfileImage
@@ -87,7 +85,7 @@ export default function UserInfo() {
         userInfo={userInfo}
       />
       <TextInfo userInfo={userInfo} handleChangeInput={handleChangeInput} />
-      <Button type="submit">Confirm Edit Profile</Button>
+      <Button type='submit'>Confirm Edit Profile</Button>
     </form>
   );
 }
