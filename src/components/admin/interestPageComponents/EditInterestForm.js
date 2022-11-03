@@ -9,7 +9,8 @@ export default function EditInterestForm({
   icon,
   description,
   iconInput,
-  setIconInput
+  setIconInput,
+  handleChangeInput
 }) {
   const inputEl = useRef();
 
@@ -22,9 +23,10 @@ export default function EditInterestForm({
       </label>
       <input
         type='text'
-        id='interestName'
-        name='interestName'
+        id='title'
+        name='title'
         value={title}
+        onChange={handleChangeInput}
         className='border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[50px] w-[80%] px-5'
       />
       <br />
@@ -35,22 +37,20 @@ export default function EditInterestForm({
         className='cursor-pointer border border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[50px] w-20 h-20 flex justify-center items-center'
         onClick={() => inputEl.current.click()}
       >
-        {icon ? (
-          iconInput ? (
-            <img
-              src={URL.createObjectURL(iconInput)}
-              alt='icon'
-              className='rounded-xl mt-3 text-xs'
-            />
-          ) : (
-            <img src={icon} alt='icon' className='rounded-xl mt-3 text-xs' />
-          )
+        {iconInput ? (
+          <img
+            src={URL.createObjectURL(iconInput)}
+            alt='icon'
+            className='rounded-xl mt-3 text-xs'
+          />
+        ) : icon ? (
+          <img src={icon} alt='icon' className='rounded-xl mt-3 text-xs' />
         ) : (
           <AddIcon />
         )}
         <input
           type='file'
-          name='interestIcon'
+          name='icon'
           ref={inputEl}
           className='hidden'
           onChange={(e) => {
@@ -66,9 +66,10 @@ export default function EditInterestForm({
       </label>
       <textarea
         type='text'
-        id='interestDescription'
-        name='interestDescription'
+        id='description'
+        name='description'
         value={description}
+        onChange={handleChangeInput}
         className='border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[20px] w-[100%] h-40 resize-none'
       />
       <div className='w-full flex justify-center items-center gap-20 pt-16'>

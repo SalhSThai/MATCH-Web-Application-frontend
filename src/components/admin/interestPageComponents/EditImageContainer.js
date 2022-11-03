@@ -19,20 +19,18 @@ export default function EditImageContainer({
 
   return (
     <div className='w-1/2 h-sfull relative'>
-      {interestImage ? (
-        imageInput ? (
-          <div
-            className='rounded-l-xl h-full bg-cover'
-            style={{
-              backgroundImage: `url('${URL.createObjectURL(imageInput)}')`
-            }}
-          ></div>
-        ) : (
-          <div
-            className='rounded-l-xl h-full bg-cover'
-            style={{ backgroundImage: `url('${interestImage}')` }}
-          ></div>
-        )
+      {imageInput ? (
+        <div
+          className='rounded-l-xl h-full bg-cover'
+          style={{
+            backgroundImage: `url('${URL.createObjectURL(imageInput)}')`
+          }}
+        ></div>
+      ) : interestImage ? (
+        <div
+          className='rounded-l-xl h-full bg-cover'
+          style={{ backgroundImage: `url('${interestImage}')` }}
+        ></div>
       ) : (
         <div className='w-full h-full flex justify-center items-center text-white bg-[#26263e] rounded-l-xl'>
           Please add image

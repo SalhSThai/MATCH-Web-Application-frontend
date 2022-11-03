@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  thunkCreateInterest,
   thunkFetchInterest,
   thunkUpdateInterest
 } from '../../../redux/Slice/IntetrestSlice';
@@ -48,14 +49,18 @@ export default function InterestModal({
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('title', interestInfo.title);
+    formData.append('text', interestInfo.title);
     formData.append('icon', iconInput ? iconInput : interestInfo.icon);
     formData.append(
       'interestImage',
       imageInput ? imageInput : interestInfo.interestImage
     );
     formData.append('description', interestInfo.description);
-    dispatch(thunkUpdateInterest(formData, id));
+    if (id) {
+      dispatch(thunkUpdateInterest(formData, id));
+    } else {
+      dispatch(thunkCreateInterest(formData));
+    }
   };
 
   return (
