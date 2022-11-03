@@ -4,9 +4,16 @@ import { AddIcon } from '../../../asset/Icon/IconForAdminInterestPage';
 import DeleteButton from './DeleteButton';
 import SubmitButton from './SubmitButton';
 
-export default function EditInterestForm({ title, icon, description }) {
+export default function EditInterestForm({
+  title,
+  icon,
+  description,
+  iconInput,
+  setIconInput
+}) {
   const inputEl = useRef();
-  const [fileInput, setFileInput] = useState(null);
+
+  console.log('iconInput', iconInput);
 
   return (
     <div className='flex flex-col justify-center h-full p-12 w-[50%]'>
@@ -29,24 +36,28 @@ export default function EditInterestForm({ title, icon, description }) {
         onClick={() => inputEl.current.click()}
       >
         {icon ? (
-          fileInput ? (
+          iconInput ? (
             <img
-              src={URL.createObjectURL(icon)}
+              src={URL.createObjectURL(iconInput)}
               alt='icon'
-              className='rounded-xl mt-3'
+              className='rounded-xl mt-3 text-xs'
             />
           ) : (
-            <img src={icon} alt='icon' className='rounded-xl mt-3 ' />
+            <img src={icon} alt='icon' className='rounded-xl mt-3 text-xs' />
           )
         ) : (
           <AddIcon />
         )}
         <input
           type='file'
-          id={icon}
           name='interestIcon'
           ref={inputEl}
           className='hidden'
+          onChange={(e) => {
+            if (e.target.files[0]) {
+              setIconInput(e.target.files[0]);
+            }
+          }}
         />
       </div>
       <br />

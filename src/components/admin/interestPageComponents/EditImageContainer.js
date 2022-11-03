@@ -13,15 +13,19 @@ export default function EditImageContainer({
 
   useEffect(() => {
     dispatch(thunkFetchInterest());
-  }, []);
+  }, [imageInput]);
+
+  console.log('imageInput', imageInput);
 
   return (
-    <div className='w-1/2 h-[80vh] relative'>
+    <div className='w-1/2 h-sfull relative'>
       {interestImage ? (
         imageInput ? (
           <div
             className='rounded-l-xl h-full bg-cover'
-            style={{ backgroundImage: `url('${imageInput}')` }}
+            style={{
+              backgroundImage: `url('${URL.createObjectURL(imageInput)}')`
+            }}
           ></div>
         ) : (
           <div
