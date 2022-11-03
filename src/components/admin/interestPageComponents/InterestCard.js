@@ -19,16 +19,17 @@ export default function InterestCard({
         className='w-48 h-60 bg-[#29437E] rounded-xl flex flex-col justify-between cursor-pointer'
         onClick={handleClickInterestCard}
       >
-        <div className='w-full h-full object-contain'>
-          <img
-            src={interestImage}
-            alt='Interest picture'
-            className='rounded-t-xl h-full'
-          />
-        </div>
-        <div className='px-5 py-3 flex justify-between items-center'>
+        <div
+          className='rounded-t-xl h-full bg-cover'
+          style={{
+            backgroundImage: `url('${interestImage}')`
+          }}
+        ></div>
+        <div className='px-5 py-3 flex justify-between items-center align-middle'>
           <div className='text-white text-2xl'>{title}</div>
-          <img src={icon} className='w-10 rounded-xl' />
+          <div className='w-8 h-8 flex justify-center items-center'>
+            <img src={icon} className='w-10 rounded-xl' />
+          </div>
         </div>
       </div>
       <InterestModal
