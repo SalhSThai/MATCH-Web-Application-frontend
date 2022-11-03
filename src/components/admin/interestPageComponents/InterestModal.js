@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  thunkCreateInterest,
   thunkFetchInterest,
   thunkUpdateInterest
 } from '../../../redux/Slice/IntetrestSlice';
@@ -30,22 +31,16 @@ export default function InterestModal({
   const [iconInput, setIconInput] = useState(null);
   const [imageInput, setImageInput] = useState(null);
 
-  const state = useSelector((state) => state?.interest);
-  const newInput = state?.getInformationState;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(thunkFetchInterest());
-  }, []);
-
-  useEffect(() => {
     setInterestInfo({
-      title: newInput?.title,
-      icon: newInput?.icon,
-      interestImage: newInput?.interestImage,
-      description: newInput?.description
+      title: title,
+      icon: icon,
+      interestImage: interestImage,
+      description: description
     });
-  }, [newInput]);
+  }, []);
 
   const handleChangeInput = (e) => {
     setInterestInfo({ ...interestInfo, [e.target.name]: e.target.value });
@@ -54,11 +49,18 @@ export default function InterestModal({
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('title', interestInfo.title);
-    formData.append('icon', setIconInput);
-    formData.append('interestImage', setImageInput);
+    formData.append('text', interestInfo.title);
+    formData.append('icon', iconInput ? iconInput : interestInfo.icon);
+    formData.append(
+      'interestImage',
+      imageInput ? imageInput : interestInfo.interestImage
+    );
     formData.append('description', interestInfo.description);
-    dispatch(thunkUpdateInterest(id, formData));
+    if (id) {
+      dispatch(thunkUpdateInterest(formData, id));
+    } else {
+      dispatch(thunkCreateInterest(formData));
+    }
   };
 
   return (
@@ -67,17 +69,17 @@ export default function InterestModal({
         <CloseButton handleCloseInterestCard={handleCloseInterestCard} />
         <form className='flex w-full h-full' onSubmit={handleSubmitForm}>
           <EditImageContainer
-            interestImage={interestImage}
+            interestImage={interestInfo?.interestImage}
             imageInput={imageInput}
             setImageInput={setImageInput}
           />
           <EditInterestForm
-            title={title}
-            icon={icon}
-            description={description}
-            interestInfo={interestInfo}
+            title={interestInfo?.title}
+            icon={interestInfo?.icon}
+            description={interestInfo?.description}
             handleChangeInput={handleChangeInput}
             setIconInput={setIconInput}
+            iconInput={iconInput}
           />
         </form>
       </div>

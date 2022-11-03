@@ -26,8 +26,8 @@ export default function InterestCard({
             className='rounded-t-xl h-full'
           />
         </div>
-        <div className='px-6 py-3 flex justify-between items-center'>
-          <div className='text-white font-semibold text-2xl'>{title}</div>
+        <div className='px-5 py-3 flex justify-between items-center'>
+          <div className='text-white text-2xl'>{title}</div>
           <img src={icon} className='w-10 rounded-xl' />
         </div>
       </div>
