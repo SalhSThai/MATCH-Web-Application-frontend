@@ -10,7 +10,8 @@ export default function EditInterestForm({
   description,
   iconInput,
   setIconInput,
-  handleChangeInput
+  handleChangeInput,
+  id
 }) {
   const inputEl = useRef();
 
@@ -73,7 +74,7 @@ export default function EditInterestForm({
         className='border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[20px] w-[100%] h-40 resize-none'
       />
       <div className='w-full flex justify-center items-center gap-20 pt-16'>
-        <DeleteButton />
+        <DeleteButton id={id} />
         <SubmitButton />
       </div>
     </div>

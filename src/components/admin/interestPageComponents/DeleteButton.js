@@ -1,6 +1,16 @@
-export default function DeleteButton() {
+import { useDispatch } from 'react-redux';
+import { thunkDeleteInterest } from '../../../redux/Slice/IntetrestSlice';
+
+export default function DeleteButton({ id }) {
+  const dispatch = useDispatch();
+
+  const handleClickDelete = (e) => {
+    e.preventDefault();
+    dispatch(thunkDeleteInterest(id));
+  };
+
   return (
-    <div role='button'>
+    <div role='button' onClick={handleClickDelete}>
       <svg
         width='70'
         height='67'

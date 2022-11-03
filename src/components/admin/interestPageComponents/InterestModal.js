@@ -80,6 +80,7 @@ export default function InterestModal({
             handleChangeInput={handleChangeInput}
             setIconInput={setIconInput}
             iconInput={iconInput}
+            id={id}
           />
         </form>
       </div>
