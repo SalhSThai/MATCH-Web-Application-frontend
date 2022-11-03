@@ -64,21 +64,21 @@ function App() {
   if (role === 'member') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/post' element={<UserPostPage />} />
-          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
-          <Route path='/matching' element={<AlertMatchPage />} />
-          <Route path='/likeyou' element={<WhosLikeMePage />} />
-          <Route path='/allpost' element={<SeeAllPostPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
+          <Route path="/matching" element={<AlertMatchPage />} />
+          <Route path="/likeyou" element={<WhosLikeMePage />} />
+          <Route path="/allpost" element={<SeeAllPostPage />} />
         </Route>
-        <Route path='/' element={<NavbarOnly />}>
-          <Route path='/nearme' element={<NearMePage />} />
-          <Route path='/message' element={<MessagePage2 />} />
+        <Route path="/" element={<NavbarOnly />}>
+          <Route path="/nearme" element={<NearMePage />} />
+          <Route path="/message" element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
@@ -86,24 +86,25 @@ function App() {
   if (role === 'goldmember') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
-          <Route path='/post' element={<UserPostPage />} />
-          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/matching' element={<AlertMatchPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
+          <Route path="/matching" element={<AlertMatchPage />} />
+          <Route path="/allpost" element={<SeeAllPostPage />} />
 
-          <Route path='/' element={<LayoutWhosLikeMe />}>
-            <Route path='/likeyou' element={<WhosLikeMePage />} />
-            <Route path='/youlike' element={<UserLikedPage />} />
+          <Route path="/" element={<LayoutWhosLikeMe />}>
+            <Route path="/likeyou" element={<WhosLikeMePage />} />
+            <Route path="/youlike" element={<UserLikedPage />} />
           </Route>
         </Route>
-        <Route path='/' element={<NavbarOnly />}>
-          <Route path='/nearme' element={<NearMePage />} />
-          <Route path='/message' element={<MessagePage2 />} />
+        <Route path="/" element={<NavbarOnly />}>
+          <Route path="/nearme" element={<NearMePage />} />
+          <Route path="/message" element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
@@ -111,20 +112,20 @@ function App() {
   if (role === 'admin') {
     return (
       <Routes>
-        <Route path='/' element={<AdminLayout />}>
-          <Route path='/' element={<HomePageAdmin />} />
-          <Route path='/message' element={<MessagePageAdmin />} />
-          <Route path='/interest' element={<InterestPageAdmin />} />
-          <Route path='/setting' element={<SettingPageAdmin />} />
+        <Route path="/" element={<AdminLayout />}>
+          <Route path="/" element={<HomePageAdmin />} />
+          <Route path="/message" element={<MessagePageAdmin />} />
+          <Route path="/interest" element={<InterestPageAdmin />} />
+          <Route path="/setting" element={<SettingPageAdmin />} />
         </Route>
       </Routes>
     );
   } else {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<WelcomePage />} />
-          <Route path='*' element={<WelcomePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="*" element={<WelcomePage />} />
         </Route>
       </Routes>
     );

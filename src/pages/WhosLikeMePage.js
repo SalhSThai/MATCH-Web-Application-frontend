@@ -16,7 +16,6 @@ export default function WhosLikeMePage() {
     dispatch(thunkFetchAllSwipedMe());
   }, []);
 
-
   if (state?.auth?.userInfo?.role === 'goldmember') {
     return (
       <div className="grid grid-cols-2 grid-flow-row gap-3 p-3 max-h-full overflow-y-scroll scrollbar-hide">

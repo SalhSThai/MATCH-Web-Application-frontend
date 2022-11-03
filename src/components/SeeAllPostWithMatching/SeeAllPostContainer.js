@@ -14,7 +14,7 @@ function SeeAllPostContainer() {
   return (
     <div className=" w-full h-full mt-4 rounded-2xl">
       {allPosts?.map((item, index) => (
-        <SeeAllPostContent key={item.id} post={item} />
+        <SeeAllPostContent key={item?.id} post={item} />
       ))}
     </div>
   );
