@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import InterestCard from '../../../components/admin/interestPageComponents/InterestCard';
 import { thunkFetchInterest } from '../../../redux/Slice/IntetrestSlice';
 
-export default function InterestList() {
+export default function InterestList({ id }) {
   const interest = useSelector((state) => state.interest);
   const dispatch = useDispatch();
+  console.log('interest', interest);
 
   useEffect(() => {
     dispatch(thunkFetchInterest());
@@ -16,6 +17,7 @@ export default function InterestList() {
       {interest.allInterest?.map?.((items, index) => (
         <InterestCard
           key={index}
+          id={items.id}
           title={items.text}
           icon={items.icon}
           interestImage={items.interestImage}

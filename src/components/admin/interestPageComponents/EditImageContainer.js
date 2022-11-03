@@ -4,8 +4,11 @@ import { useDispatch } from 'react-redux';
 import { thunkFetchInterest } from '../../../redux/Slice/IntetrestSlice';
 import BrowseImageButton from './BrowseImageButton';
 
-export default function EditImageContainer({ interestImage, interestInfo }) {
-  const [fileInput, setFileInput] = useState(null);
+export default function EditImageContainer({
+  interestImage,
+  imageInput,
+  setImageInput
+}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,10 +18,10 @@ export default function EditImageContainer({ interestImage, interestInfo }) {
   return (
     <div className='w-1/2 h-[80vh] relative'>
       {interestImage ? (
-        fileInput ? (
+        imageInput ? (
           <div
             className='rounded-l-xl h-full bg-cover'
-            style={{ backgroundImage: `url('${fileInput}')` }}
+            style={{ backgroundImage: `url('${imageInput}')` }}
           ></div>
         ) : (
           <div
@@ -31,7 +34,10 @@ export default function EditImageContainer({ interestImage, interestInfo }) {
           Please add image
         </div>
       )}
-      <BrowseImageButton interestImage={interestImage} />
+      <BrowseImageButton
+        interestImage={interestImage}
+        setImageInput={setImageInput}
+      />
     </div>
   );
 }

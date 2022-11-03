@@ -2,6 +2,7 @@ import { useState } from 'react';
 import InterestModal from './InterestModal';
 
 export default function InterestCard({
+  id,
   title,
   icon,
   interestImage,
@@ -33,6 +34,7 @@ export default function InterestCard({
       <InterestModal
         isEditInterestShow={isEditInterestShow}
         handleCloseInterestCard={handleCloseInterestCard}
+        id={id}
         title={title}
         icon={icon}
         interestImage={interestImage}

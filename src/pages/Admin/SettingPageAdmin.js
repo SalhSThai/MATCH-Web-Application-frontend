@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputInfo from '../../components/admin/settingPageComponents/InputInfo';
 import ProfileImage from '../../components/userProfileComponents/ProfileImage';
 import {
+  logout,
   thunkGetInformation,
   thunkUpdateInformation
 } from '../../redux/Slice/AuthSlice';
-import Button from '../../reuseComponent/Button';
 
 export default function SettingPageAdmin() {
   const [fileInput, setFileInput] = useState(null);
@@ -86,10 +86,18 @@ export default function SettingPageAdmin() {
         />
         <InputInfo userInfo={userInfo} handleChangeInput={handleChangeInput} />
         <button
-          className='bg-match-dark rounded-xl py-3 px-5 text-white font-semibold'
+          className='bg-match-dark hover:bg-opacity-80  rounded-xl py-3 px-5 text-white font-semibold'
           type='submit'
         >
           Confirm Edit Profile
+        </button>
+        <br />
+        <button
+          className='bg-[#29437E] hover:bg-opacity-80 rounded-xl py-3 px-5 text-white font-semibold'
+          type='submit'
+          onClick={() => dispatch(logout())}
+        >
+          Log out
         </button>
       </form>
     </div>

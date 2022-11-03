@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export default function BrowseImageButton({ interestImage }) {
+export default function BrowseImageButton({ setImageInput }) {
   const inputEl = useRef();
 
   return (
@@ -27,10 +27,14 @@ export default function BrowseImageButton({ interestImage }) {
       </svg>
       <input
         type='file'
-        id={interestImage}
-        name='interestIcon'
+        name='interestImage'
         ref={inputEl}
         className='hidden'
+        onChange={(e) => {
+          if (e.target.files[0]) {
+            setImageInput(e.target.files[0]);
+          }
+        }}
       />
     </div>
   );

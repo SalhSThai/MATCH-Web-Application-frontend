@@ -13,6 +13,7 @@ import EditInterestForm from './EditInterestForm';
 export default function InterestModal({
   isEditInterestShow,
   handleCloseInterestCard,
+  id,
   title,
   icon,
   interestImage,
@@ -26,6 +27,8 @@ export default function InterestModal({
   };
 
   const [interestInfo, setInterestInfo] = useState(initialInterestInfo);
+  const [iconInput, setIconInput] = useState(null);
+  const [imageInput, setImageInput] = useState(null);
 
   const state = useSelector((state) => state?.interest);
   const newInput = state?.getInformationState;
@@ -52,10 +55,10 @@ export default function InterestModal({
     e.preventDefault();
     const formData = new FormData();
     formData.append('title', interestInfo.title);
-    formData.append('icon', interestInfo.icon);
-    formData.append('interestImage', interestInfo.interestImage);
+    formData.append('icon', setIconInput);
+    formData.append('interestImage', setImageInput);
     formData.append('description', interestInfo.description);
-    dispatch(thunkUpdateInterest(formData));
+    dispatch(thunkUpdateInterest(id, formData));
   };
 
   return (
@@ -65,7 +68,8 @@ export default function InterestModal({
         <form className='flex w-full h-full' onSubmit={handleSubmitForm}>
           <EditImageContainer
             interestImage={interestImage}
-            interestInfo={interestInfo}
+            imageInput={imageInput}
+            setImageInput={setImageInput}
           />
           <EditInterestForm
             title={title}
@@ -73,6 +77,7 @@ export default function InterestModal({
             description={description}
             interestInfo={interestInfo}
             handleChangeInput={handleChangeInput}
+            setIconInput={setIconInput}
           />
         </form>
       </div>
