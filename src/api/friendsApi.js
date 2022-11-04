@@ -6,5 +6,7 @@ export const fetchChatMessageApi = (roomId,friendsId) => axios.post('/chat/getMe
 export const addMessageApi = (message,senderId,chatRoomId,time) => axios.post('/chat/addMessage',{message,senderId,chatRoomId,time});  
 export const addSwipeApi = (id) => axios.post('/swipe/createSwipe',{id});  
 
+export const fetchMatchApi = () => axios.get('/swipe/myMatch');  
+export const createChatRoomApi = (matchFriendsId) => axios.post('/chat/createRoom',{id:matchFriendsId});  
 
 

@@ -6,7 +6,7 @@ import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
 import AdminPage from './pages/AdminPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
-import { online, thunkRemember } from './redux/Slice/AuthSlice';
+import { online, setOnlineFriends, thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
 import UserLikedPage from './pages/UserLikedPage';
@@ -34,6 +34,7 @@ function App() {
 
   useEffect(() => {
     // socketRef.current = socket
+    
 
   }, [])
 
@@ -47,6 +48,10 @@ function App() {
         dispatch(online(true))
       });
     }
+    socket.on('onlinefriends', (online) => {
+      dispatch(setOnlineFriends(online))
+      
+    })
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -58,6 +63,7 @@ function App() {
 
     return () => {
       console.log('disconnect');
+      socket.off('onlinefriends');
       socket.disconnect();
       dispatch(online(false));
     }

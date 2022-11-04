@@ -8,6 +8,7 @@ import { useDrag } from '@use-gesture/react'
 import useMeasure from 'react-use-measure';
 import Send from '../../asset/IconChatRoom/Send';
 import ChatModal from './components/ChatModal';
+import lodash from 'lodash'
 
 
 export default function ChatApplication() {
@@ -19,21 +20,17 @@ export default function ChatApplication() {
     const [userOnline, setUserOnline] = useState([])
 
     const myId = state?.auth?.userInfo?.id ?? 1;
-    const allChatRooms = state?.friends?.allChatRooms
+    const allChatRooms = state?.friends?.allChatRooms ?? [];
+    const onlineUserId = state?.auth?.onlineFriendsArr ?? [];
     useEffect(() => {
-        dispatch(thunkFetchFriends(myId));
-
-        socket.on('onlinefriends', (online) => {
-            console.log(online);
-            setUserOnline(online)
-        })
-
-        return () => {
-            socket.off('onlinefriends')
-            return socket.disconnect();
-        }
+        dispatch(thunkFetchFriends(myId)); 
     }, []);
+    useEffect(()=>{
+        setUserOnline(onlineUserId)
+    },[onlineUserId])
 
+const arr = [1,2,3,4,5,6,7,8];
+console.log(lodash.clamp(2,-13,15));
 
     const [{ y }, api] = useSpring(() => ({ y: 0 }))
     const bind = useDrag(({ offset: [ox, oy] }) => { api.start({ y: oy }) }, { bounds: { top: -(bounds.bottom - bounds.height), bottom: 0 }, rubberband: true })

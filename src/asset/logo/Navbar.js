@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function HomeIcon() {
+function HomeIcon({state}) {
+
   return (
     <svg
+    
       xmlns='http://www.w3.org/2000/svg'
-      className='icon icon-tabler icon-tabler-home'
+      className={`icon icon-tabler icon-tabler-home ${state==='/' ? ` shadowTest ` : null}`}
       width='30'
       height='30'
       viewBox='0 0 24 24'
@@ -22,34 +25,31 @@ function HomeIcon() {
   );
 }
 
-function ExploreIcon() {
+function ExploreIcon({state}) {
+  console.log(state);
   return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='icon icon-tabler icon-tabler-list-search'
-      width='30'
-      height='30'
-      viewBox='0 0 24 24'
-      strokeWidth='2'
-      stroke='currentColor'
-      fill='none'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-      <circle cx='15' cy='15' r='4'></circle>
-      <path d='M18.5 18.5l2.5 2.5'></path>
-      <path d='M4 6h16'></path>
-      <path d='M4 12h4'></path>
-      <path d='M4 18h4'></path>
+    <svg className={`${state ==='/explore' ? ` shadowTest ` : null}`} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_221_3050)">
+        <path d="M5 5H12.5V12.5H5V5Z" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M17.5 5H25V12.5H17.5V5Z" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M5 17.5H12.5V25H5V17.5Z" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M24 23.7995C24.6206 23.1305 25 22.2345 25 21.25C25 19.1789 23.3211 17.5 21.25 17.5C19.1789 17.5 17.5 19.1789 17.5 21.25C17.5 23.3211 19.1789 25 21.25 25C22.3365 25 23.3151 24.5379 24 23.7995ZM24 23.7995C27 26 27 26 27 26" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+      <defs>
+        <clipPath id="clip0_221_3050">
+          <rect width="30" height="30" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
+
+
   );
 }
-function WhosLikeMeIcon() {
+function WhosLikeMeIcon({state}) {
   return (
     <svg
+    className={`${state  ==='/likeyou'? ` shadowTest ` : null}`}
       xmlns='http://www.w3.org/2000/svg'
-      className='icon icon-tabler icon-tabler-hearts'
       width='30'
       height='30'
       viewBox='0 0 24 24'
@@ -65,11 +65,11 @@ function WhosLikeMeIcon() {
     </svg>
   );
 }
-function ChatIcon() {
+function ChatIcon({state}) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      className='icon icon-tabler icon-tabler-message-circle-2'
+      className={`${state ==='/message' ? ` shadowTest ` : null}`}
       width='30'
       height='30'
       viewBox='0 0 24 24'
@@ -84,11 +84,11 @@ function ChatIcon() {
     </svg>
   );
 }
-function UserProfilesIcon() {
+function UserProfilesIcon({state}) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      className='icon icon-tabler icon-tabler-user-circle'
+      className={`${state  ==='/post'? ` shadowTest ` : null}`}
       width='30'
       height='30'
       viewBox='0 0 24 24'

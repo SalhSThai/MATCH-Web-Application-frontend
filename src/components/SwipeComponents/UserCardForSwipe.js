@@ -9,6 +9,8 @@ import { useSpring, animated } from '@react-spring/web';
 import MyLoading from '../MyLoading';
 import { reduxCount, thunkSwipe } from '../../redux/Slice/FriendsSlice';
 import socket from '../../config/socket'
+import UserDescription from './UserDescription';
+import ButtonForUserDetail from './ButtonForUserDetail';
 
 export default function UserCardForSwipe(props) {
   const [ref, measure] = useMeasure()
@@ -36,17 +38,17 @@ export default function UserCardForSwipe(props) {
     }
     console.log(info, swipe);
     if (swipe === '1') {
-      socket.emit('swipeRight',{to:info?.id,from:myId})
+      socket.emit('swipeRight', { to: info?.id, from: myId })
       // dispatch(thunkSwipe(info?.id))
     }
   }
 
-
   return (
-    <div className='relative w-full h-full'>
+    <div ref={ref} className='relative w-full h-full px-4'>
       {loading ? <MyLoading /> : null}
-      <div ref={ref} className=' w-full h-full  '>
+      <div  className='relative w-full h-full '>
         {arrFriends ? arrFriends?.map?.((i, d) => <CardComponent key={i.id} index={d} measure={measure} length={arrFriends.length} info={i} handleSwipe={handleSwipe} swipeRight={swipeRight} setSwipeRight={setSwipeRight} />) : null}
+
         <SwipeBar handleSwipe={handleSwipe} />
       </div>
 
