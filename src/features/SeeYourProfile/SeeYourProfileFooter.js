@@ -1,5 +1,5 @@
 import { Avatar } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import SendIcon from '../../asset/logo/SendIcon';
 import { CommentIcon, LikeIcon } from '../../asset/SeeYourProfile/Icon';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 function SeeYourProfileFooter({ post }) {
+  const inputEl = useRef();
   const createCommentstate = useSelector(
     ({ comment: { createComment } }) => createComment
   );
@@ -44,7 +45,7 @@ function SeeYourProfileFooter({ post }) {
             {post?.Likes?.length === 0 ? '' : post?.Likes?.length + ' Like'}
           </div>
         </button>
-        <button type="button">
+        <button type="button" onClick={() => inputEl.current.click()}>
           <div className="mt-2 mb-2 text-[#ed663e]">
             {post.Comments?.length === 0
               ? ''
@@ -58,7 +59,11 @@ function SeeYourProfileFooter({ post }) {
             <LikeIcon />
           </div>
         </button>
-        <button type="button" onClick={() => setIsCommentShow((prev) => !prev)}>
+        <button
+          type="button"
+          onClick={() => setIsCommentShow((prev) => !prev)}
+          ref={inputEl}
+        >
           <CommentIcon />
         </button>
       </div>
@@ -66,16 +71,16 @@ function SeeYourProfileFooter({ post }) {
         <>
           {post.Comments.map((item) => (
             <div
-              className="mt-3 mb-3 bg-slate-200 rounded-xl w-full h-[100px] flex "
+              className="mt-3 mb-3 bg-slate-200 rounded-xl w-full h-[70px] flex "
               key={item.id}
             >
               <Avatar rounded={true} img={item.User?.profileImage} />
-              <div className="mx-3 text-lg mt-2">
-                <div className="font-mali">
+              <div className="mx-3 text-sm mt-1">
+                <div className="text-sm">
                   {item.User?.firstName} {item.User?.lastName}
                 </div>
-                <div className="text-xl">{item.content}</div>
-                <small className='text-slate-400'>
+                <div className="text-sm">{item.content}</div>
+                <small className="text-slate-400">
                   {timeAgo.format(
                     new Date(item.createdAt) - 30 * 1000,
                     'mini-now'
@@ -87,18 +92,24 @@ function SeeYourProfileFooter({ post }) {
 
           <div className="w-full h-[50px] flex items-center gap-3 px-2">
             <Avatar rounded={true} img={userInfo.profileImage} />
-
             <input
               className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
               onChange={(e) => dispatch(setComment(e.target.value))}
               value={comment}
             ></input>
-
             <SendIcon onClick={handleOnClickCreateComment} />
           </div>
         </>
       ) : (
-        ''
+        <div className="w-full h-[50px] flex items-center gap-3 px-2">
+          <Avatar rounded={true} img={userInfo.profileImage} />
+          <input
+            className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
+            onChange={(e) => dispatch(setComment(e.target.value))}
+            value={comment}
+          ></input>
+          <SendIcon onClick={handleOnClickCreateComment} />
+        </div>
       )}
     </>
   );

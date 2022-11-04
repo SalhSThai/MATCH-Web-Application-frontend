@@ -10,7 +10,6 @@ function UserPostBody() {
   useEffect(() => {
     dispatch(fetchMyPosts());
   }, []);
-  console.log(myPosts);
 
   return (
     <div className=" w-full h-full mt-4 rounded-2xl">

@@ -1,20 +1,17 @@
-import { Avatar, Dropdown } from "flowbite-react";
+import { Avatar, Dropdown } from 'flowbite-react';
 
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   setCreatePost,
-  resetCreatePost,
-} from "../../redux/Slice/CreatePostSlice";
-import { CreatePost } from "../../redux/Slice/PostSlice";
-import { logout, thunkGetInformation } from "../../redux/Slice/AuthSlice";
-import {
-  GridIcon,
-  LogoutIcon,
-  SettingIcon
-} from '../../asset/UserDropdow/icon';
+  resetCreatePost
+} from '../../redux/Slice/CreatePostSlice';
+import { CreatePost } from '../../redux/Slice/PostSlice';
+import { logout } from '../../redux/Slice/AuthSlice';
+import { LogoutIcon, SettingIcon } from '../../asset/UserDropdow/icon';
 import Button from '../../reuseComponent/Button';
+import { SeeAllIcon } from '../../asset/SeeAll/Icon';
 
 function UserPostHeader() {
   const imageEl = useRef();
@@ -28,12 +25,12 @@ function UserPostHeader() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      if (createPostInfo.image !== "") {
-        formData.append("image", createPostInfo.image);
+      if (createPostInfo.image !== '') {
+        formData.append('image', createPostInfo.image);
       }
-      if (createPostInfo.text !== "") {
+      if (createPostInfo.text !== '') {
         console.log(createPostInfo.text);
-        formData.append("text", createPostInfo.text);
+        formData.append('text', createPostInfo.text);
       }
 
       dispatch(CreatePost(formData));
@@ -43,17 +40,16 @@ function UserPostHeader() {
       dispatch(resetCreatePost());
     }
   };
-
   return (
     <>
-      <div className=" flex justify-around items-center w-full py-2">
+      <div className=" flex justify-between items-center w-full py-2">
         <Avatar rounded={true} img={user.profileImage} />
         <Link to="/allpost">
-          <Button>All Post</Button>
+          <SeeAllIcon />
         </Link>
-        <Dropdown label="Setting">
+        <Dropdown label="Edit">
           <Dropdown.Header>
-            <span className="block text-sm">Username</span>
+            <span className="block text-sm">{user.username}</span>
             <span className="block text-sm font-medium truncate">
               {user.email}
             </span>
@@ -68,39 +64,41 @@ function UserPostHeader() {
         </Dropdown>
       </div>
       <form onSubmit={handleOnClickSubmit}>
-        <textarea
-          className="rounded-2xl bg-slate-200 w-full h-[150px] overflow-y-scroll scrollbar-hide mt-3"
-          name="text"
-          value={createPostInfo.text}
-          onChange={(e) =>
-            dispatch(
-              setCreatePost({
-                name: e.target.name,
-                value: e.target.value,
-              })
-            )
-          }
-        />
+        <div className="w-full flex justify-center items-center">
+          <textarea
+            className="rounded-2xl bg-slate-200 w-[90%] h-[150px] overflow-y-scroll scrollbar-hide"
+            name="text"
+            value={createPostInfo.text}
+            onChange={(e) =>
+              dispatch(
+                setCreatePost({
+                  name: e.target.name,
+                  value: e.target.value
+                })
+              )
+            }
+          />
+        </div>
         <img
           src={
             createPostInfo?.image
               ? URL.createObjectURL(createPostInfo?.image)
-              : ""
+              : ''
           }
           style={{
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover'
           }}
+          alt=""
         />
-        <div className="flex  w-[400px] items-center justify-around mt-3">
-          <button type="submit">
-            <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
-              POST
-            </div>
-          </button>
+        <div className="flex w-[400px] items-center justify-evenly mb-5">
+          <Button className="font-bold rounded-2xl w-[100px] h-[25px] flex justify-center">
+            POST
+          </Button>
+
           <input
-            type={"file"}
-            style={{ display: "none" }}
+            type={'file'}
+            style={{ display: 'none' }}
             name="image"
             ref={imageEl}
             onChange={(e) => {
@@ -109,17 +107,19 @@ function UserPostHeader() {
                 dispatch(
                   setCreatePost({
                     name: e.target.name,
-                    value: e.target.files[0],
+                    value: e.target.files[0]
                   })
                 );
               }
             }}
           />
-          <button type="button" onClick={() => imageEl.current.click()}>
-            <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
-              IMAGE
-            </div>
-          </button>
+
+          <Button
+            className="font-bold rounded-2xl w-[100px] h-[25px] flex justify-center"
+            onClick={() => imageEl.current.click()}
+          >
+            IMAGE
+          </Button>
         </div>
       </form>
     </>

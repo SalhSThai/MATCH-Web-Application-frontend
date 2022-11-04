@@ -1,19 +1,16 @@
 import { Avatar } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import SendIcon from '../../asset/logo/SendIcon';
 import { CommentIcon, LikeIcon } from '../../asset/SeeYourProfile/Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
-import {
-  addComment,
-  createComment,
-  toggleLikethunk
-} from '../../redux/Slice/PostSlice';
+import { createComment, toggleLikethunk } from '../../redux/Slice/PostSlice';
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 function UserPostFooter({ post }) {
+  const inputEl = useRef();
   const createCommentstate = useSelector(
     ({ comment: { createComment } }) => createComment
   );
@@ -41,24 +38,30 @@ function UserPostFooter({ post }) {
       <div className="flex justify-between items-center mx-7 border-b-2">
         <button type="button">
           <div className="mt-2 mb-2 text-[#ed663e]">
-            {post?.Likes?.length === 0 ? '' : post?.Likes?.length + ' Like'}
+            {post?.Likes?.length === 0
+              ? '0 Like'
+              : post?.Likes?.length + ' Likes'}
           </div>
         </button>
-        <button type="button">
+        <button type="button" onClick={() => inputEl.current.click()}>
           <div className="mt-2 mb-2 text-[#ed663e]">
             {post.Comments?.length === 0
-              ? ''
-              : post.Comments?.length + ' Comments'}{' '}
+              ? '0 Comments'
+              : post.Comments?.length + ' Comments'}
           </div>
         </button>
       </div>
-      <div className="flex justify-around items-center mt-1 mb-1 ">
+      <div className="flex justify-around items-center mt-1 mb-1">
         <button type="button" onClick={handleOnClickLike}>
           <div className={`${IsLiked ? ' text-[#ed663e]' : ' '}`}>
             <LikeIcon />
           </div>
         </button>
-        <button type="button" onClick={() => setIsCommentShow((prev) => !prev)}>
+        <button
+          type="button"
+          onClick={() => setIsCommentShow((prev) => !prev)}
+          ref={inputEl}
+        >
           <CommentIcon />
         </button>
       </div>
@@ -66,16 +69,16 @@ function UserPostFooter({ post }) {
         <>
           {post.Comments.map((item) => (
             <div
-              className="pt-1 pb-1 mx-4 bg-slate-200 rounded-xl w-full flex"
+              className="mt-3 mb-3 bg-slate-200 rounded-xl w-full h-[70px] flex "
               key={item.id}
             >
               <Avatar rounded={true} img={item.User?.profileImage} />
-              <div className="mx-3">
-                <div>
+              <div className="mx-3 text-sm mt-1">
+                <div className="text-sm">
                   {item.User?.firstName} {item.User?.lastName}
                 </div>
-                <div>{item.content}</div>
-                <small>
+                <div className="text-sm">{item.content}</div>
+                <small className="text-slate-400">
                   {timeAgo.format(
                     new Date(item.createdAt) - 30 * 1000,
                     'mini-now'
@@ -84,7 +87,6 @@ function UserPostFooter({ post }) {
               </div>
             </div>
           ))}
-
           <div className="w-full h-[50px] flex items-center gap-3 px-2">
             <Avatar rounded={true} img={userInfo.profileImage} />
 
@@ -98,7 +100,17 @@ function UserPostFooter({ post }) {
           </div>
         </>
       ) : (
-        ''
+        <div className="w-full h-[50px] flex items-center gap-3 px-2">
+          <Avatar rounded={true} img={userInfo.profileImage} />
+
+          <input
+            className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
+            onChange={(e) => dispatch(setComment(e.target.value))}
+            value={comment}
+          ></input>
+
+          <SendIcon onClick={handleOnClickCreateComment} />
+        </div>
       )}
     </>
   );

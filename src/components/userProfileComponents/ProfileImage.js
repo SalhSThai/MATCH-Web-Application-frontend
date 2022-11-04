@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 function ProfileImage({ setFileInput, fileInput, userInfo, setUserInfo }) {
   const inputEl = useRef();
@@ -14,13 +14,13 @@ function ProfileImage({ setFileInput, fileInput, userInfo, setUserInfo }) {
         <img
           src={URL.createObjectURL(fileInput)}
           alt="userImage1"
-          className="w-[10rem] h-[10rem] rounded-full mt-3"
+          className="object-cover w-[10rem] h-[10rem] rounded-full mt-3"
         />
       ) : (
         <img
           src={userInfo?.profileImage}
           alt="userImage2"
-          className="w-[10rem] h-[10rem] rounded-full mt-3 "
+          className="object-cover w-[10rem] h-[10rem] rounded-full mt-3 "
         />
       )}
       <input
