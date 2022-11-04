@@ -21,7 +21,7 @@ export default function ChatModal(props) {
     useEffect(() => {
         dispatch(thunkFetchMessage(friendsInfo?.roomId, friendsInfo?.id))
     }, [])
-
+console.log('chatModal');
     const sendMessageFn = (message) => {
         const time = dateFormat(new Date(), 'H:MM TT')
         const MessageObj = {
@@ -62,7 +62,7 @@ export default function ChatModal(props) {
 
 
     return (
-        <animated.div className="absolute w-full h-full z-[12]   " style={springStyle} >
+        <animated.div className="absolute w-full h-full z-[12]    " style={springStyle} >
             <animated.div className='relative w-full h-full flex flex-col fadeup' style={{ y }} >
                 <ChatModalHeader bind={bind} friendsInfo={friendsInfo} />
                 <ChatModalBody friendsInfo={friendsInfo}  />

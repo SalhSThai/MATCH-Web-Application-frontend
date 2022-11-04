@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
-import { online, thunkRemember } from './redux/Slice/AuthSlice';
+import { online, setOnlineFriends, thunkRemember } from './redux/Slice/AuthSlice';
 import { getAccessToken } from './utils/localStorage';
 import WhosLikeMePage from './pages/WhosLikeMePage';
 import UserLikedPage from './pages/UserLikedPage';
@@ -32,34 +32,43 @@ function App() {
   const { role, id } = useSelector((state) => state?.auth?.userInfo);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
-    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, [dispatch]);
 
   useEffect(() => {
+    // socketRef.current = socket
+    
+
+  }, [])
+
+  useEffect(() => {
     if (id) {
-      socket.auth = { id };
+      socket.auth = { id }
       socket.connect();
+
       socket.on('connect', () => {
-        dispatch(online(true));
+        dispatch(online(true))
       });
     }
+    socket.on('onlinefriends', (online) => {
+      dispatch(setOnlineFriends(online))
+      
+    })
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        console.log('latitude: ', latitude, 'longitude: ', longitude);
         dispatch(thunkUpdateLocation({ latitude, longitude }));
-      },
-      () => null
+      }, () => null
+
     );
 
     return () => {
+      socket.off('onlinefriends');
       socket.disconnect();
       dispatch(online(false));
-    };
-  }, [id]);
+    }
+  }, [id,socket])
 
   if (role === 'member') {
     return (
