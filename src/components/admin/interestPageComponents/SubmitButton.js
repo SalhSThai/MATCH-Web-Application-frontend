@@ -1,6 +1,6 @@
-export default function SubmitButton() {
+export default function SubmitButton({ handleCloseInterestCard }) {
   return (
-    <button type='submit'>
+    <button type='submit' onClick={handleCloseInterestCard}>
       <svg
         width='70'
         height='67'
