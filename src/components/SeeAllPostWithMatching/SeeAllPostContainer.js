@@ -11,7 +11,7 @@ function SeeAllPostContainer() {
     dispatch(fetchMyMatchPosts());
   }, []);
   return (
-    <div className=" w-full h-full mt-4 rounded-2xl">
+    <div className=" w-full h-full mt-4 rounded-2xl overflow-y-scroll scrollbar-hide">
       {allPosts?.map((item, index) => (
         <SeeAllPostContent key={item?.id} post={item} />
       ))}

@@ -109,7 +109,7 @@ function TextInfo({ userInfo = {}, handleChangeInput }) {
           onChange={handleChangeInput}
         />
       </div>
-      <div className="border-4 border-teal-400 w-[135px] mt-2 flex justify-center items-center">
+      <div className="border-4 rounded-3xl border-zinc-400 w-[135px] mt-2 flex justify-center items-center">
         <button onClick={handleClick}>Change Interest</button>
       </div>
       <ChangeInterestModal

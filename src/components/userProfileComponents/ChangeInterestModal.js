@@ -7,11 +7,9 @@ import Modal, { ModalHeader } from '../../reuseComponent/Modal';
 function ChangeInterestModal({ isModalShow, handleClose }) {
   const interest = useSelector((state) => state.interest);
   const dispatch = useDispatch();
-  console.log(interest);
 
   useEffect(() => {
     dispatch(thunkFetchInterest());
-    //   console.log(interest);
   }, []);
   return (
     <Modal show={isModalShow}>
