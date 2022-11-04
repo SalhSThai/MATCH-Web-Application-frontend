@@ -72,7 +72,7 @@ export default function MatchChatRoom(props) {
 
   }
   return (
-    <div className={`relative w-full h-[100px] bg-slate-500  flex overflow-hidden ${newMessageAlert ? ' shake ' : null} ${newMessageStay ? ' newMessage ' : null}`}>
+    <div className={`relative w-full h-[100px] bg-white  flex overflow-hidden ${newMessageAlert ? ' shake ' : null} ${newMessageStay ? ' newMessage ' : null}`}>
       {/* //!========================================================================Profile Image */}
       <Link className='p-1' to={`/seepost/${friendId}`} > 
         <div 

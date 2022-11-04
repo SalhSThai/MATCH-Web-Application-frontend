@@ -51,7 +51,7 @@ console.log(lodash.clamp(2,-13,15));
     return (
         <div className={`relative w-full grow  overflow-y-scroll scrollbar-hide select-none`}>
             {isOpenChat ? <ChatModal status={isOpenChat} setStatus={setIsOpenChat} friendsInfo={chatRoom} /> : null}
-            <animated.div ref={ref} className=" w-full h-full items" {...bind()} style={{ y }} >
+            <animated.div ref={ref} className=" w-full h-full items " {...bind()} style={{ y }} >
                 {allChatRooms?.map?.((i, d) =>
                     <MatchChatRoom key={d} friendsInfo={i} friendId={myId === i?.userLowerId ? i?.userHigherId : i?.userLowerId} openChat={modalPopup} userOnline={userOnline} openProfilePicture={e => setIsOpenProfilePicture(true)} />)}
             </animated.div>

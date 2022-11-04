@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import AlertMatchContainer from '../features/Match/AlertMatchContainer';
 
 const DivContainer = styled.div`
-  background-color: whitesmoke;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
