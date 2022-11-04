@@ -1,14 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 import {
   loginApi,
   registerApi,
   rememberMeApi,
-  updateMeApi
-} from '../../api/authApi';
-import { addAccessToken, removeAccessToken } from '../../utils/localStorage';
-import { loading } from './LoadingSlice';
+  getInformation,
+  updateUser,
+} from "../../api/authApi";
+import { addAccessToken, removeAccessToken } from "../../utils/localStorage";
+import { loading } from "./LoadingSlice";
 
 const authSlice = createSlice({
+
   name: 'auth',
   initialState: { loginState: false, userInfo: {}, online: false ,onlineFriends:{},onlineFriendsArr:[]},
   reducers: {
@@ -20,6 +23,9 @@ const authSlice = createSlice({
       removeAccessToken();
       state.loginState = false;
       state.userInfo = {};
+    },
+    information: (state, action) => {
+      state.getInformationState = action.payload;
     },
     online: (state, action) => {
       state.online = action.payload
@@ -66,11 +72,25 @@ export const thunkRemember = () => async (dispatch) => {
     await dispatch(loading(false));
   }
 };
-export const thunkUpdateUser = () => async (dispatch) => {
+
+export const thunkGetInformation = () => async (dispatch) => {
   try {
     dispatch(loading(true));
-    const res = await updateMeApi();
-    dispatch(updateProfile(res.data.uesr.id));
+    const res = await getInformation();
+    dispatch(information(res.data.oneUser));
+  } catch (error) {
+    throw error;
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const thunkUpdateInformation = (input) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await updateUser(input);
+    console.log("res.data", res.data);
+    dispatch(information(res.data));
   } catch (error) {
     throw error;
   } finally {
@@ -79,6 +99,6 @@ export const thunkUpdateUser = () => async (dispatch) => {
 };
 
 export default authSlice.reducer;
-const { login, logout,online, register, rememberLogin, updateProfile ,setOnlineFriends} =
+const { login, logout,online, register, rememberLogin, updateProfile ,setOnlineFriends,information} =
   authSlice.actions;
-export { login, logout,online, register, rememberLogin, updateProfile ,setOnlineFriends};
+export { login, logout,online, register, rememberLogin, updateProfile ,setOnlineFriends,information};

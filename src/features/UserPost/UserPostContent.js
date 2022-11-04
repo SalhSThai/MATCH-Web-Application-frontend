@@ -14,7 +14,7 @@ export default function UserPostContent({ post }) {
   };
 
   return (
-    <>
+    <div className=" border border-groove">
       <div className="flex gap-3 items-center mt-2 py-2 px-3 ">
         <Avatar rounded={true} img={post.User.profileImage} />
         <div>
@@ -28,9 +28,9 @@ export default function UserPostContent({ post }) {
           </a>
         </div>
       </div>
-      <div className="bg-[#ff99e0] w-full  mt-3 py-3 px-5 ">
+      <div className=" w-full  mt-3 py-3 px-5 ">
         <ShowMoreText
-          className="text-xs font-mali"
+          className="text-base font-mali"
           lines={2}
           more={'Show More'}
           less={'Show Less'}
@@ -41,8 +41,8 @@ export default function UserPostContent({ post }) {
           {post.text}
         </ShowMoreText>
       </div>
-      <img src={post.image ? post.image : ''} />
+      <img  alt="" src={post.image ? post.image : ''} />
       <UserPostFooter post={post} />
-    </>
+    </div>
   );
 }

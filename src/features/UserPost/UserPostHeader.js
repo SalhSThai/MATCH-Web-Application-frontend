@@ -1,6 +1,6 @@
 import { Avatar, Dropdown } from 'flowbite-react';
 
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -9,11 +9,9 @@ import {
 } from '../../redux/Slice/CreatePostSlice';
 import { CreatePost } from '../../redux/Slice/PostSlice';
 import { logout } from '../../redux/Slice/AuthSlice';
-import {
-  GridIcon,
-  LogoutIcon,
-  SettingIcon
-} from '../../asset/UserDropdow/icon';
+import { LogoutIcon, SettingIcon } from '../../asset/UserDropdow/icon';
+import Button from '../../reuseComponent/Button';
+import { SeeAllIcon } from '../../asset/SeeAll/Icon';
 
 function UserPostHeader() {
   const imageEl = useRef();
@@ -42,20 +40,20 @@ function UserPostHeader() {
       dispatch(resetCreatePost());
     }
   };
-
   return (
     <>
       <div className=" flex justify-between items-center w-full py-2">
         <Avatar rounded={true} img={user.profileImage} />
-
-        <Dropdown label="Setting">
+        <Link to="/allpost">
+          <SeeAllIcon />
+        </Link>
+        <Dropdown label="Edit">
           <Dropdown.Header>
-            <span className="block text-sm">Username</span>
+            <span className="block text-sm">{user.username}</span>
             <span className="block text-sm font-medium truncate">
               {user.email}
             </span>
           </Dropdown.Header>
-          <Dropdown.Item icon={GridIcon}>Dashboard</Dropdown.Item>
           <Link to="/userProfile">
             <Dropdown.Item icon={SettingIcon}>Settings</Dropdown.Item>
           </Link>
@@ -66,19 +64,21 @@ function UserPostHeader() {
         </Dropdown>
       </div>
       <form onSubmit={handleOnClickSubmit}>
-        <textarea
-          className="rounded-2xl bg-slate-200 w-full h-[150px] overflow-y-scroll scrollbar-hide mt-3"
-          name="text"
-          value={createPostInfo.text}
-          onChange={(e) =>
-            dispatch(
-              setCreatePost({
-                name: e.target.name,
-                value: e.target.value
-              })
-            )
-          }
-        />
+        <div className="w-full flex justify-center items-center">
+          <textarea
+            className="rounded-2xl bg-slate-200 w-[90%] h-[150px] overflow-y-scroll scrollbar-hide"
+            name="text"
+            value={createPostInfo.text}
+            onChange={(e) =>
+              dispatch(
+                setCreatePost({
+                  name: e.target.name,
+                  value: e.target.value
+                })
+              )
+            }
+          />
+        </div>
         <img
           src={
             createPostInfo?.image
@@ -89,13 +89,13 @@ function UserPostHeader() {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
           }}
+          alt=""
         />
-        <div className="flex  w-[400px] items-center justify-around mt-3">
-          <button type="submit">
-            <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
-              POST
-            </div>
-          </button>
+        <div className="flex w-[400px] items-center justify-evenly mb-5">
+          <Button className="font-bold rounded-2xl w-[100px] h-[25px] flex justify-center">
+            POST
+          </Button>
+
           <input
             type={'file'}
             style={{ display: 'none' }}
@@ -113,11 +113,13 @@ function UserPostHeader() {
               }
             }}
           />
-          <button type="button" onClick={() => imageEl.current.click()}>
-            <div className="font-bold rounded-2xl bg-slate-500 w-[100px] h-[25px] flex justify-center">
-              IMAGE
-            </div>
-          </button>
+
+          <Button
+            className="font-bold rounded-2xl w-[100px] h-[25px] flex justify-center"
+            onClick={() => imageEl.current.click()}
+          >
+            IMAGE
+          </Button>
         </div>
       </form>
     </>

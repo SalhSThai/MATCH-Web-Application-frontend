@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import LayoutWhosLikeMe from './layout/layoutForGoldmember/LayoutWhosLikeMe';
-import AdminPage from './pages/AdminPage';
 import SwipePage from './pages/SwipePage';
 import WelcomePage from './pages/WelcomePage';
 import { online, setOnlineFriends, thunkRemember } from './redux/Slice/AuthSlice';
@@ -22,6 +21,12 @@ import NavbarOnly from './layout/NavbarOnly';
 import NearMePage from './pages/NearMePage';
 import socket from './config/socket';
 import { thunkUpdateLocation } from './redux/Slice/LocationSlice';
+import SeeAllPostPage from './pages/SeeAllPostPage';
+import AdminLayout from './layout/layoutForAdmin/AdminLayout';
+import MessagePageAdmin from './pages/Admin/MessagePageAdmin';
+import HomePageAdmin from './pages/Admin/HomePageAdmin';
+import InterestPageAdmin from './pages/Admin/InterestPageAdmin';
+import SettingPageAdmin from './pages/Admin/SettingPageAdmin';
 
 function App() {
   const { role, id } = useSelector((state) => state?.auth?.userInfo);
@@ -40,8 +45,8 @@ function App() {
 
   useEffect(() => {
     if (id) {
-      socket.connect();
       socket.auth = { id }
+      socket.connect();
       console.log('connect');
 
       socket.on('connect', () => {
@@ -72,21 +77,21 @@ function App() {
   if (role === 'member') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/post' element={<UserPostPage />} />
-          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
-          <Route path='/matching' element={<AlertMatchPage />} />
-          <Route path='/likeyou' element={<WhosLikeMePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
+          <Route path="/matching" element={<AlertMatchPage />} />
+          <Route path="/likeyou" element={<WhosLikeMePage />} />
+          <Route path="/allpost" element={<SeeAllPostPage />} />
         </Route>
-        <Route path='/' element={<NavbarOnly />}>
-          <Route path='/nearme' element={<NearMePage />} />
-          <Route path='/message' element={<MessagePage2 />} />
-
+        <Route path="/" element={<NavbarOnly />}>
+          <Route path="/nearme" element={<NearMePage />} />
+          <Route path="/message" element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
@@ -94,24 +99,25 @@ function App() {
   if (role === 'goldmember') {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<SwipePage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/interest' element={<InterestPage />} />
-          <Route path='/userprofile' element={<UserProfilePage />} />
-          <Route path='/post' element={<UserPostPage />} />
-          <Route path='/seepost/:id' element={<SeeYourProfilePage />} />
-          <Route path='/addphoto' element={<AddPhotoOnRegisPage />} />
-          <Route path='/matching' element={<AlertMatchPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/post" element={<UserPostPage />} />
+          <Route path="/seepost/:id" element={<SeeYourProfilePage />} />
+          <Route path="/interest" element={<InterestPage />} />
+          <Route path="/addphoto" element={<AddPhotoOnRegisPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/userprofile" element={<UserProfilePage />} />
+          <Route path="/matching" element={<AlertMatchPage />} />
+          <Route path="/allpost" element={<SeeAllPostPage />} />
 
-          <Route path='/' element={<LayoutWhosLikeMe />}>
-            <Route path='/likeyou' element={<WhosLikeMePage />} />
-            <Route path='/youlike' element={<UserLikedPage />} />
+          <Route path="/" element={<LayoutWhosLikeMe />}>
+            <Route path="/likeyou" element={<WhosLikeMePage />} />
+            <Route path="/youlike" element={<UserLikedPage />} />
           </Route>
-          <Route path='/' element={<NavbarOnly />}>
-            <Route path='/nearme' element={<NearMePage />} />
-            <Route path='/message' element={<MessagePage2 />} />
-          </Route>
+        </Route>
+        <Route path="/" element={<NavbarOnly />}>
+          <Route path="/nearme" element={<NearMePage />} />
+          <Route path="/message" element={<MessagePage2 />} />
         </Route>
       </Routes>
     );
@@ -119,15 +125,20 @@ function App() {
   if (role === 'admin') {
     return (
       <Routes>
-          <Route path='/' element={<AdminPage />} />
+        <Route path="/" element={<AdminLayout />}>
+          <Route path="/" element={<HomePageAdmin />} />
+          <Route path="/message" element={<MessagePageAdmin />} />
+          <Route path="/interest" element={<InterestPageAdmin />} />
+          <Route path="/setting" element={<SettingPageAdmin />} />
+        </Route>
       </Routes>
     );
   } else {
     return (
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route path='/' element={<WelcomePage />} />
-          <Route path='*' element={<WelcomePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="*" element={<WelcomePage />} />
         </Route>
       </Routes>
     );

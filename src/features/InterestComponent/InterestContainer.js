@@ -1,23 +1,23 @@
 import React from 'react';
-import { Back } from '../../asset/iconForSwipePage/IconOnProfile';
+import { Back } from '../../asset/Icon/IconForSwipePage';
 import Button from '../../reuseComponent/Button';
 import InterestBody from './interestBody';
 
 export default function InterestContainer() {
   return (
     <>
-      <div className="flex w-full py-3 px-4 gap-3">
-        <button type="button">
+      <div className='flex w-full py-3 px-4 gap-3'>
+        <button type='button'>
           <Back />
         </button>
-        <div className="font-bold text-2xl">SELECT YOUR INTEREST</div>
+        <div className='font-bold text-2xl'>SELECT YOUR INTEREST</div>
       </div>
-      <div className="font-medium text-lg px-3">
+      <div className='font-medium text-lg px-3'>
         Select your interests to match with users who have similar things in
         common.
       </div>
       <InterestBody />
-      <div className="mb-10">
+      <div className='mb-10'>
         <Button>Create Account</Button>
       </div>
     </>

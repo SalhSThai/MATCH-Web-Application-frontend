@@ -6,7 +6,6 @@ import { fetchMyPosts } from '../../redux/Slice/PostSlice';
 function UserPostBody() {
   const myPosts = useSelector(({ posts: { posts } }) => posts);
   const dispatch = useDispatch();
-  console.log(myPosts);
 
   useEffect(() => {
     dispatch(fetchMyPosts());
@@ -14,7 +13,7 @@ function UserPostBody() {
 
   return (
     <div className=" w-full h-full mt-4 rounded-2xl">
-      {myPosts.map((item, index) => (
+      {myPosts?.map((item, index) => (
         <UserPostContent key={item.id} post={item} />
       ))}
     </div>
