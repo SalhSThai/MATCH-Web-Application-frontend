@@ -11,7 +11,8 @@ export default function EditInterestForm({
   iconInput,
   setIconInput,
   handleChangeInput,
-  id
+  id,
+  handleCloseInterestCard
 }) {
   const inputEl = useRef();
 
@@ -75,7 +76,7 @@ export default function EditInterestForm({
       />
       <div className='w-full flex justify-center items-center gap-20 pt-16'>
         <DeleteButton id={id} />
-        <SubmitButton />
+        <SubmitButton handleCloseInterestCard={handleCloseInterestCard} />
       </div>
     </div>
   );

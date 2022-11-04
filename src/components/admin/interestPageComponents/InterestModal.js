@@ -74,6 +74,7 @@ export default function InterestModal({
             setImageInput={setImageInput}
           />
           <EditInterestForm
+            handleCloseInterestCard={handleCloseInterestCard}
             title={interestInfo?.title}
             icon={interestInfo?.icon}
             description={interestInfo?.description}

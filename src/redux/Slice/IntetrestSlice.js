@@ -16,6 +16,9 @@ const InterestSlice = createSlice({
     },
     information: (state, action) => {
       state.getInformationState = action.payload;
+    },
+    addAllInterest: (state, action) => {
+      state.allInterest.push(action.payload);
     }
   }
 });
@@ -36,7 +39,7 @@ export const thunkCreateInterest = (input) => async (dispatch) => {
   try {
     dispatch(loading(true));
     const res = await createInterest(input);
-    dispatch(information(res.data));
+    dispatch(addAllInterest(res.data));
   } catch (error) {
     throw error;
   } finally {
@@ -48,7 +51,7 @@ export const thunkUpdateInterest = (input, interestId) => async (dispatch) => {
   try {
     dispatch(loading(true));
     const res = await updateInterest(input, interestId);
-    dispatch(information(res.data));
+    dispatch(addAllInterest(res.data));
   } catch (error) {
     throw error;
   } finally {
@@ -69,5 +72,5 @@ export const thunkDeleteInterest = (interestId) => async (dispatch) => {
 };
 
 export default InterestSlice.reducer;
-const { fetchInterest, information } = InterestSlice.actions;
-export { fetchInterest, information };
+const { fetchInterest, information, addAllInterest } = InterestSlice.actions;
+export { fetchInterest, information, addAllInterest };
