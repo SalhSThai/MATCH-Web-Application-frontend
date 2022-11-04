@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import AlertMatchContainer from '../features/Match/AlertMatchContainer';
 
 const DivContainer = styled.div`
   background-color: white;
@@ -25,5 +26,8 @@ const DivContainer = styled.div`
 `;
 
 export default function ContainerComponent({ children }) {
-  return <DivContainer>{children}</DivContainer>;
+  return <DivContainer>
+    {children}
+    <AlertMatchContainer />
+  </DivContainer>;
 }

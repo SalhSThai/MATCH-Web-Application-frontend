@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
-import socket from '../../../config/socket';
+// import socket from '../../../config/socket';
 import { thunkFetchFriends } from '../../../redux/Slice/FriendsSlice';
 import FriendsCard from '../../ChatAppComponent/FriendsCard';
 import userMeasure from './MessageContent';
@@ -25,13 +25,13 @@ function MessageList() {
 
     useEffect(() => {
         dispatch(thunkFetchFriends(userId));
-        socket.auth = { userId }
-        socket.connect();
+        // socket.auth = { userId }
+        // socket.connect();
         // socket.on('connect', () => {
         //     setIsConnected(true);
         // });
         return () => {
-            socket.disconnect();
+            // socket.disconnect();
             // setIsConnected(false);
         }
     }, []);
