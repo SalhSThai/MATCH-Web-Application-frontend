@@ -33,7 +33,6 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('remember');
     getAccessToken() && dispatch(thunkRemember());
   }, [dispatch]);
 
@@ -47,7 +46,6 @@ function App() {
     if (id) {
       socket.auth = { id }
       socket.connect();
-      console.log('connect');
 
       socket.on('connect', () => {
         dispatch(online(true))
@@ -60,14 +58,12 @@ function App() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        console.log('latitude: ', latitude, 'longitude: ', longitude);
         dispatch(thunkUpdateLocation({ latitude, longitude }));
       }, () => null
 
     );
 
     return () => {
-      console.log('disconnect');
       socket.off('onlinefriends');
       socket.disconnect();
       dispatch(online(false));

@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 function HomeIcon({state}) {
 
@@ -26,7 +24,6 @@ function HomeIcon({state}) {
 }
 
 function ExploreIcon({state}) {
-  console.log(state);
   return (
     <svg className={`${state ==='/explore' ? ` shadowTest ` : null}`} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_221_3050)">
