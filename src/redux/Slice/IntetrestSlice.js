@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllInterest, updateInterest } from '../../api/interestApi';
+import {
+  createInterest,
+  deleteInterest,
+  getAllInterest,
+  updateInterest
+} from '../../api/interestApi';
 import { loading } from './LoadingSlice';
 
 const InterestSlice = createSlice({
@@ -27,10 +32,34 @@ export const thunkFetchInterest = () => async (dispatch) => {
   }
 };
 
+export const thunkCreateInterest = (input) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await createInterest(input);
+    dispatch(information(res.data));
+  } catch (error) {
+    throw error;
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
 export const thunkUpdateInterest = (input, interestId) => async (dispatch) => {
   try {
     dispatch(loading(true));
     const res = await updateInterest(input, interestId);
+    dispatch(information(res.data));
+  } catch (error) {
+    throw error;
+  } finally {
+    dispatch(loading(false));
+  }
+};
+
+export const thunkDeleteInterest = (interestId) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await deleteInterest(interestId);
     dispatch(information(res.data));
   } catch (error) {
     throw error;

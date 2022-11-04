@@ -4,9 +4,18 @@ import { AddIcon } from '../../../asset/Icon/IconForAdminInterestPage';
 import DeleteButton from './DeleteButton';
 import SubmitButton from './SubmitButton';
 
-export default function EditInterestForm({ title, icon, description }) {
+export default function EditInterestForm({
+  title,
+  icon,
+  description,
+  iconInput,
+  setIconInput,
+  handleChangeInput,
+  id
+}) {
   const inputEl = useRef();
-  const [fileInput, setFileInput] = useState(null);
+
+  console.log('iconInput', iconInput);
 
   return (
     <div className='flex flex-col justify-center h-full p-12 w-[50%]'>
@@ -15,9 +24,10 @@ export default function EditInterestForm({ title, icon, description }) {
       </label>
       <input
         type='text'
-        id='interestName'
-        name='interestName'
+        id='title'
+        name='title'
         value={title}
+        onChange={handleChangeInput}
         className='border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[50px] w-[80%] px-5'
       />
       <br />
@@ -28,25 +38,27 @@ export default function EditInterestForm({ title, icon, description }) {
         className='cursor-pointer border border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[50px] w-20 h-20 flex justify-center items-center'
         onClick={() => inputEl.current.click()}
       >
-        {icon ? (
-          fileInput ? (
-            <img
-              src={URL.createObjectURL(icon)}
-              alt='icon'
-              className='rounded-xl mt-3'
-            />
-          ) : (
-            <img src={icon} alt='icon' className='rounded-xl mt-3 ' />
-          )
+        {iconInput ? (
+          <img
+            src={URL.createObjectURL(iconInput)}
+            alt='icon'
+            className='rounded-xl mt-3 text-xs'
+          />
+        ) : icon ? (
+          <img src={icon} alt='icon' className='rounded-xl mt-3 text-xs' />
         ) : (
           <AddIcon />
         )}
         <input
           type='file'
-          id={icon}
-          name='interestIcon'
+          name='icon'
           ref={inputEl}
           className='hidden'
+          onChange={(e) => {
+            if (e.target.files[0]) {
+              setIconInput(e.target.files[0]);
+            }
+          }}
         />
       </div>
       <br />
@@ -55,13 +67,14 @@ export default function EditInterestForm({ title, icon, description }) {
       </label>
       <textarea
         type='text'
-        id='interestDescription'
-        name='interestDescription'
+        id='description'
+        name='description'
         value={description}
+        onChange={handleChangeInput}
         className='border-1 border-slate-500 rounded-xl p-3 bg-[#29437E] text-white text-[20px] w-[100%] h-40 resize-none'
       />
       <div className='w-full flex justify-center items-center gap-20 pt-16'>
-        <DeleteButton />
+        <DeleteButton id={id} />
         <SubmitButton />
       </div>
     </div>
