@@ -13,11 +13,16 @@ function ExploreBody() {
   }, []);
   return (
     <div>
-      <div className="grid grid-cols-2 grid-flow-row gap-3 p-3 ">
+      <div className="grid grid-cols-2 grid-flow-row gap-2 py-2  ">
         {interest.allInterest?.map?.((items, index) => (
           <Link to="/">
             <button type="button">
-              <InterestCard key={index} text={items.text} icon={items.icon} />
+              <InterestCard
+                key={index}
+                text={items.text}
+                icon={items.interestImage}
+                description={items.description}
+              />
             </button>
           </Link>
         ))}

@@ -10,7 +10,7 @@ export default function MyLoading() {
         setMyLogo(p => profileImage)
     }, [profileImage])
     return (
-        <div className='absolute top-0 left-0 w-full h-full z-[5] bg-white'>
+        <div className='absolute bottom-0 left-0 w-full h-full z-[5] bg-white '>
             <div className=' w-full h-full flex justify-center items-center '>
                 <div className={` rounded-full  h-[100px] w-[100px]   myprofile`} style={{ backgroundImage: `url(${mylogo})` }}>
                 <animated.div className=' rounded-full  h-[100px] w-[100px] border-[3px] flex justify-center items-center border-red-400' style={spring}>

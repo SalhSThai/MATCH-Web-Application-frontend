@@ -74,12 +74,10 @@ export default function MatchChatRoom(props) {
   return (
     <div className={`relative w-full h-[100px] bg-white  flex overflow-hidden ${newMessageAlert ? ' shake ' : null} ${newMessageStay ? ' newMessage ' : null}`}>
       {/* //!========================================================================Profile Image */}
-      <Link
-        to={`/seepost/${friendId}`}
-        className={`h-aut aspect-square  rounded-full m-2 overflow-hidden border-[3px] ${status ? ' border-green-300 ' : ' border-red-300 '
-          }`}
-      >
-        <img src={friendsInfo?.profileImage} />
+      <Link className='p-1' to={`/seepost/${friendId}`} > 
+        <div 
+        className={`h-full aspect-square  rounded-full overflow-hidden border-[3px] bg-cover bg-center ${status ? ' border-green-300 ' : ' border-red-300 ' }`} 
+        style={{backgroundImage:`url(${friendsInfo?.profileImage})`}}  /> 
       </Link>
       {/* //!=========================================================================Profile Image */}
       {/* //!=========================================================================Username Block Message */}

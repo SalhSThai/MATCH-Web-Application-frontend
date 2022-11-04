@@ -13,7 +13,7 @@ import { loading } from "./LoadingSlice";
 const authSlice = createSlice({
 
   name: 'auth',
-  initialState: { loginState: false, userInfo: {}, online: false,getInformationState: {} },
+  initialState: { loginState: false, userInfo: {}, online: false ,onlineFriends:{},onlineFriendsArr:[]},
   reducers: {
     login: (state, action) => {
       state.loginState = true;
@@ -29,6 +29,10 @@ const authSlice = createSlice({
     },
     online: (state, action) => {
       state.online = action.payload
+    },
+    setOnlineFriends: (state, action) => {
+      state.onlineFriends = action.payload;
+      state.onlineFriendsArr=Object.keys(action.payload)
     }
   }
 });
@@ -95,7 +99,6 @@ export const thunkUpdateInformation = (input) => async (dispatch) => {
 };
 
 export default authSlice.reducer;
-
-const { login, logout,online, register, rememberLogin,information, updateProfile } =
+const { login, logout,online, register, rememberLogin, updateProfile ,setOnlineFriends,information} =
   authSlice.actions;
-export { login, logout,online, register, rememberLogin,information, updateProfile };
+export { login, logout,online, register, rememberLogin, updateProfile ,setOnlineFriends,information};

@@ -45,3 +45,7 @@ background-size: cover;
 box-shadow:  13px 13px 26px #b5b5b5,
              -13px -13px 26px #ffffff;
 }
+
+.shadowTest{
+  filter: drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.5));
+}

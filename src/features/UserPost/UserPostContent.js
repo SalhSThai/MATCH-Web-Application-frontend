@@ -14,7 +14,7 @@ export default function UserPostContent({ post }) {
   };
 
   return (
-    <>
+    <div className=" border border-groove">
       <div className="flex gap-3 items-center mt-2 py-2 px-3 ">
         <Avatar rounded={true} img={post.User.profileImage} />
         <div>
@@ -41,8 +41,8 @@ export default function UserPostContent({ post }) {
           {post.text}
         </ShowMoreText>
       </div>
-      <img src={post.image ? post.image : ''} />
+      <img  alt="" src={post.image ? post.image : ''} />
       <UserPostFooter post={post} />
-    </>
+    </div>
   );
 }

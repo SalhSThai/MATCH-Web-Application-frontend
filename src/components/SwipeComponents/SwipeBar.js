@@ -7,7 +7,7 @@ import {
 export default function SwipeBar(props) {
   const {handleSwipe} = props
   return (
-    <div className='absolute bottom-0 w-full z-[3] h-[100px]  bg-gradient-to-t from-[rgba(0,0,0,1)] to-[rgba(0,0,0,0)]'>
+    <div className='absolute bottom-0 w-full z-[3] h-[100px] '>
 
       <div className=' flex justify-center gap-10 w-full items-end'>
         <div

@@ -8,17 +8,21 @@ import SwipeBar from './SwipeBar';
 import { useSpring, animated } from '@react-spring/web';
 import MyLoading from '../MyLoading';
 import { reduxCount, thunkSwipe } from '../../redux/Slice/FriendsSlice';
-
+import socket from '../../config/socket'
+import UserDescription from './UserDescription';
+import ButtonForUserDetail from './ButtonForUserDetail';
 
 export default function UserCardForSwipe(props) {
   const [ref, measure] = useMeasure()
   const dispatch = useDispatch()
   const friends = useSelector(state => state.locations.friendNearMeFirst);
+  const state = useSelector(state => state);
+  const myId = state?.auth?.userInfo?.id ?? 1;
   const [arrFriends, setArrFriends] = useState([]);
   const [loading, setLoading] = useState(true)
-  const [match,setMatch] = useState(false);
-  const [nope,setNope] = useState(false);
-  const [swipeRight,setSwipeRight] = useState(null)
+  const [match, setMatch] = useState(false);
+  const [nope, setNope] = useState(false);
+  const [swipeRight, setSwipeRight] = useState(null)
   useEffect(() => {
     dispatch(thunkFetchFriendsNearMeFirst((p) => setLoading(p)))
     return () => {
@@ -28,22 +32,24 @@ export default function UserCardForSwipe(props) {
     setArrFriends(p => lodash.shuffle(friends))
   }, [friends])
 
-  const handleSwipe= (swipe,type,info)=>{
-    if(type==='btn'){
+  const handleSwipe = (swipe, type, info) => {
+    if (type === 'btn') {
       setSwipeRight(swipe);
     }
-    console.log(info,swipe);
-    dispatch(thunkSwipe(info?.id,swipe))
-
+    console.log(info, swipe);
+    if (swipe === '1') {
+      socket.emit('swipeRight', { to: info?.id, from: myId })
+      // dispatch(thunkSwipe(info?.id))
+    }
   }
 
-
   return (
-    <div className='relative w-full h-full'>
+    <div ref={ref} className='relative w-full h-full px-4'>
       {loading ? <MyLoading /> : null}
-      <div ref={ref} className=' w-full h-full  '>
-        {arrFriends ? arrFriends?.map?.((i, d) => <CardComponent key={i.id} index={d} measure={measure} length={arrFriends.length} info={i} handleSwipe={handleSwipe} swipeRight={swipeRight}  setSwipeRight={setSwipeRight}/>) : null}
-        <SwipeBar handleSwipe={handleSwipe}/>
+      <div  className='relative w-full h-full '>
+        {arrFriends ? arrFriends?.map?.((i, d) => <CardComponent key={i.id} index={d} measure={measure} length={arrFriends.length} info={i} handleSwipe={handleSwipe} swipeRight={swipeRight} setSwipeRight={setSwipeRight} />) : null}
+
+        <SwipeBar handleSwipe={handleSwipe} />
       </div>
 
 

@@ -3,11 +3,14 @@ import { useDrag } from '@use-gesture/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxCount, reduxResetCount, reduxSetCurrentSlice } from '../../redux/Slice/FriendsSlice'
+import UserDescription from './UserDescription'
 
 export default function CardComponent(props) {
     const { measure, length, info, handleSwipe, swipeRight, setSwipeRight, index } = props
     const [pic, setPic] = useState({})
-    const [X, apiX] = useSpring(() => ({ x: 0 }))
+    
+    const [X, apiX] = useSpring(() => ({ x: 0 ,rotateZ: 0,opacity: 1}))
+
     const [stateX, setStateX] = useState(false)
     const [matchX, setMatchX] = useState(0)
     const count = useSelector(state => state.friends.count)
@@ -39,7 +42,9 @@ export default function CardComponent(props) {
                     await animate({ from: { x: 0, rotateZ: 0 }, to: { x: measure.width, rotateZ: 30 }, config: { duration: 800 } });
                     setStateX(p => p = true);
                     setMatchX(p => p = 0);
-                    await animate({ from: { x: measure.width }, to: { x: 0,rotateZ: 0  } });
+                    await animate({ from: { x: measure.width,opacity: 0 }, to: { x: 0,rotateZ: 0  } });
+                    await animate({  to: { opacity: 1} });
+
                 }
             });
             setSwipeRight(false);
@@ -53,7 +58,9 @@ export default function CardComponent(props) {
                     await animate({ from: { x: 0, rotateZ: 0 }, to: { x: -measure.width, rotateZ: -30 }, config: { duration: 800 } });
                     setStateX(p => p = true);
                     setMatchX(p => p = 0);
-                    await animate({ from: { x: measure.width }, to: { x: 0, rotateZ: 0 } });
+                    await animate({ from: { x: measure.width,opacity: 0 }, to: { x: 0, rotateZ: 0 } });
+                    await animate({  to: { opacity: 1} });
+
                 }
             });
             setSwipeRight(false);
@@ -72,38 +79,46 @@ export default function CardComponent(props) {
                     handleSwipe('1','swipe',info,matchX)
 
                     dispatch(reduxCount(1));
-                    await animate({ to: { x: measure.width, rotateZ: 0 } });
+                    await animate({ to: { x: measure.width, rotateZ: 0 ,opacity: 0} });
                     setStateX(p => p = true)
                     setMatchX(p => p = 0);
-                    await animate({ from: { x: measure.width }, to: { x: 0 } });
+                    await animate({ from: { x: measure.width,opacity: 0 }, to: { x: 0,opacity: 1 } });
+                    await animate({  to: { opacity: 1} });
+
                 }
             })
 
         }
         else if ((vx * swipeX < -1) || (mx < -100 && !down)) {
+
             apiX.stop()
             apiX.start({
                 to: async animate => {
                     handleSwipe('-1','swipe',info)
                     dispatch(reduxCount(1));
-                    await animate({ to: { x: -measure.width, rotateZ: 0 } });
+                    await animate({ to: { x: -measure.width, rotateZ: 0,opacity: 1 } });
                     setStateX(p => p = true)
                     setMatchX(p => p = 0);
-                    await animate({ from: { x: -measure.width }, to: { x: 0 } });
+                    await animate({ from: { x: -measure.width,opacity: 0 }, to: { x: 0 ,opacity: 0} });
+                    await animate({  to: { opacity: 1} });
+
                 }
             })
         }
         else {
-            apiX.start({ x: down ? mx : 0, rotateZ: mx / 9 })
+
+            apiX.start({ x: down ? mx : 0, rotateZ:down?(mx/9):0 })
         }
     });
 
     return (
-        <animated.div className={`absolute w-full h-full bg-center bg-cover rounded-xl ${stateX ? ' z-[1] ' : ' z-[2] '}`} {...bindX()} style={{ ...X, backgroundImage: `url(${info?.profileImage})` }}>
+        <animated.div className={`absolute w-full h-full bg-center bg-cover rounded-xl cursor-grab ${stateX ? ' z-[1] ' : ' z-[2] '}`} {...bindX()} style={{ ...X, backgroundImage: `url(${info?.profileImage})` }}>
             <div className='relative w-full h-full'>
                 {matchX === 1 ? <Like /> : null}
                 {matchX === -1 ? <Nope /> : null}
             </div>
+        <UserDescription info={info}/>
+
         </animated.div>
 
     )
