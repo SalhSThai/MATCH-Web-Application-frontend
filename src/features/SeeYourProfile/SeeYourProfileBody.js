@@ -15,7 +15,7 @@ function SeeYourProfileBody() {
   }, []);
   return (
     <div className=" w-full mt-4 h-full overflow-y-scroll scrollbar-hide">
-      <Link to="/post">
+      <Link to="/allpost">
         <button type="button">
           <Back />
         </button>
