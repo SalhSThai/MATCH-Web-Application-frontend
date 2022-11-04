@@ -5,7 +5,7 @@ export default function XMask(props) {
   return (
     <div role="button" className="h-[30px] w-[30px] mx-5 fixed right-0 z-[1]" onClick={onClick}>
       <svg
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6 text-black"
         viewBox="0 0 24 24"
         strokeWidth="2"
         stroke="currentColor"
