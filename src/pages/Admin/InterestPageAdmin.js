@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
 import InterestHeader from '../../components/admin/interestPageComponents/InterestHeader';
 import InterestList from '../../components/admin/interestPageComponents/InterestList';
 

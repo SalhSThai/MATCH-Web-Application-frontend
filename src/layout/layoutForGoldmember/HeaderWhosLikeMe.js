@@ -15,7 +15,7 @@ export default function Header() {
           setMeLiked(false);
         }}
         className={`font-mali font-extralight ${
-          LikedMe ? ' font-bold text-green-300' : ''
+          LikedMe ? ' font-bold text-fuchsia-400' : ''
         }`}
       >
         <Link to="/likeyou" type="button">
@@ -29,7 +29,7 @@ export default function Header() {
           setLikedMe(false);
         }}
         className={`font-mali font-extralight ${
-          MeLiked ? ' font-bold text-green-300' : ''
+          MeLiked ? ' font-bold text-fuchsia-400' : ''
         }`}
       >
         <Link to="/youlike" type="button">

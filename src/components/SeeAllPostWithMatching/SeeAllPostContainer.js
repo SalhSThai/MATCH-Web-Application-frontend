@@ -10,7 +10,6 @@ function SeeAllPostContainer() {
   useEffect(() => {
     dispatch(fetchMyMatchPosts());
   }, []);
-  console.log(allPosts);
   return (
     <div className=" w-full h-full mt-4 rounded-2xl">
       {allPosts?.map((item, index) => (
