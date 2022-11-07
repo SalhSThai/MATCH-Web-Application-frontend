@@ -40,9 +40,12 @@ export default function SlidingMatch() {
 
     useEffect(() => { console.log(friendsArr); }, [friendsArr])
 
+
     const handleCreateRoom = ({ matchId, matchFriends }) => {
-        const frinedsIdArr = friendsArr.map(i=>i.matchFriends.id)
+        const frinedsIdArr = allChatRooms.map(i=>i?.matchFriends?.id)
+        console.log('frinedsIdArr', frinedsIdArr)
         const check = frinedsIdArr.includes(matchFriends.id)
+        console.log('check', check)
         if(!check){dispatch(thunkCreateRoom({userId:myId,matchFriendsId:matchFriends.id}))}
     }
 

@@ -39,7 +39,7 @@ const FriendsSlice = createSlice({
 
 export const thunkFetchFriends = (userId) => async dispatch => {
   try {
-    const res = await friendsApi(userId)
+    const res = await friendsApi(userId) 
     console.log(res.data);
     dispatch(fetchFriends(res.data))
   } catch (error) {
@@ -83,8 +83,10 @@ export const thunkFetchMatch = () => async dispatch => {
 }
 export const thunkCreateRoom = ({ userId, matchFriendsId }) => async dispatch => {
   try {
+    console.log(matchFriendsId);
     await createChatRoomApi(matchFriendsId)
     const res = await friendsApi(userId)
+    console.log(res.data);
     dispatch(fetchFriends(res.data))
 
     console.log(res.data);
