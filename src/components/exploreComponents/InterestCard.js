@@ -9,7 +9,7 @@ export default function InterestCard({ text, icon, description }) {
       ></div>
       <div className="py-1 justify-between items-center align-middle">
         <div className="text-white text-2xl font-mali">{text}</div>
-        <div className="text-white text-2xl font-mali">{description}</div>
+        <div className="text-white text-xl">{description}</div>
       </div>
     </div>
     // <div className="relative flex h-56">
