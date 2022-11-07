@@ -91,7 +91,7 @@ function UserPostFooter({ post }) {
             <Avatar rounded={true} img={userInfo.profileImage} />
 
             <input
-              className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
+              className="bg-[#ffeef0] w-full h-[30px] rounded-xl pl-2"
               onChange={(e) => dispatch(setComment(e.target.value))}
               value={comment}
             ></input>
@@ -104,7 +104,7 @@ function UserPostFooter({ post }) {
           <Avatar rounded={true} img={userInfo.profileImage} />
 
           <input
-            className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
+            className="bg-[#ffeef0] w-full h-[30px] rounded-xl pl-2"
             onChange={(e) => dispatch(setComment(e.target.value))}
             value={comment}
           ></input>

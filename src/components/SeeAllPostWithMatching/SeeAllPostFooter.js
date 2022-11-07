@@ -92,7 +92,7 @@ function SeeAllPostFooter({ post }) {
           <div className="w-full h-[50px] flex items-center gap-3 px-2">
             <Avatar rounded={true} img={userInfo.profileImage} />
             <input
-              className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
+              className="bg-[#ffeef0] w-full h-[30px] rounded-xl pl-2"
               onChange={(e) => dispatch(setComment(e.target.value))}
               value={comment}
             ></input>
@@ -103,7 +103,7 @@ function SeeAllPostFooter({ post }) {
         <div className="w-full h-[50px] flex items-center gap-3 px-2">
           <Avatar rounded={true} img={userInfo.profileImage} />
           <input
-            className="bg-[#ffeef0] w-full h-[30px] rounded-xl"
+            className="bg-[#ffeef0] w-full h-[30px] rounded-xl pl-2"
             onChange={(e) => dispatch(setComment(e.target.value))}
             value={comment}
           ></input>

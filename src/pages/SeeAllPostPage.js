@@ -4,9 +4,7 @@ import SeeAllPostContainer from '../components/SeeAllPostWithMatching/SeeAllPost
 function SeeAllPostPage() {
   return (
     <>
-      <div className="max-h-full overflow-y-scroll scrollbar-hide">
-        <SeeAllPostContainer />
-      </div>
+      <SeeAllPostContainer />
     </>
   );
 }
